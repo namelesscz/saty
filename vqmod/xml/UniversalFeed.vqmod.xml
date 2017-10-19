@@ -1,0 +1,51 @@
+<modification>
+	<id>Universal Feed</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>NetGate.cz</author>
+
+	<file name="catalog/controller/startup/seo_url.php">
+        <operation>
+            <search position="before"><![CDATA[
+				if ($url[0] == 'information_id') {
+            ]]></search>
+            <add><![CDATA[
+					// UNIVERSAL_FEED start
+					if ($url[0] == 'universal_feed_id') {
+						$this->request->get['universal_feed_id'] = $url[1];
+						
+						$query->row['query'] = null;
+					}
+					// UNIVERSAL_FEED end
+            ]]></add>
+        </operation>
+		<operation>
+            <search position="before"><![CDATA[
+				} elseif (isset($this->request->get['information_id'])) {
+            ]]></search>
+            <add><![CDATA[
+			// UNIVERSAL_FEED start
+			} elseif (isset($this->request->get['universal_feed_id'])) {
+				$this->request->get['route'] = 'extension/feed/universal_feed';
+			// UNIVERSAL_FEED end
+            ]]></add>
+        </operation>
+		<operation>
+            <search position="before"><![CDATA[
+				} elseif ($key == 'path') {
+            ]]></search>
+            <add><![CDATA[
+					// UNIVERSAL_FEED start
+					} elseif ($data['route'] == 'feed/universal_feed' && $key == 'universal_feed_id') {
+						$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = '" . $this->db->escape($key . '=' . (int)$value) . "'");
+
+						if ($query->num_rows) {
+							$url .= '/' . $query->row['keyword'];
+
+							unset($data[$key]);
+						}
+			// UNIVERSAL_FEED end
+            ]]></add>
+        </operation>
+	</file>
+</modification>

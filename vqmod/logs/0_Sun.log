@@ -1,0 +1,12 @@
+---------- Date: 2016-09-18 18:50:46 ~ IP : ::1 ----------
+REQUEST URI : /2.3.0.2/admin/index.php?route=common/dashboard&token=aRcBRR2p6bu7Y6ZVyHr6o0oDgneWmqax
+VQMod::_parseMods - INVALID XML FILE: : Unescaped '&lt;' not allowed in attributes values in file:/L:/2.3.0.2/vqmod/xml/aaa.xml, line: 9
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-09-18 18:51:02 ~ IP : ::1 ----------
+REQUEST URI : /2.3.0.2/admin/index.php?route=common/dashboard&token=aRcBRR2p6bu7Y6ZVyHr6o0oDgneWmqax
+VQMod::_parseMods - INVALID XML FILE: : Unescaped '&lt;' not allowed in attributes values in file:/L:/2.3.0.2/vqmod/xml/aaa.xml, line: 9
+----------------------------------------------------------------------
+
+
