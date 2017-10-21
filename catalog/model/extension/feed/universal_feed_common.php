@@ -139,7 +139,7 @@ class ModelExtensionFeedUniversalFeedCommon extends Model {
 	}
 
 	public function getProductVariants($product_id, $product_data, $only_in_stock) {
-		$sql = "SELECT pov.option_id, pov.option_value_id, pov.quantity, pov.price, pov.price_prefix, pov.weight, pov.weight_prefix,
+		$sql = "SELECT pov.option_id, pov.option_value_id, pov.quantity, pov.price, pov.price_prefix, pov.weight, pov.weight_prefix,pov.option_sku,
 			(SELECT name FROM " . DB_PREFIX . "option_description od WHERE od.option_id = pov.option_id AND od.language_id = " . (int)$this->config->get('config_language_id') . ") AS name,
 			(SELECT name FROM " . DB_PREFIX . "option_value_description ovd WHERE ovd.option_value_id = pov.option_value_id AND ovd.language_id = " . (int)$this->config->get('config_language_id') . ") AS value
 			FROM " . DB_PREFIX . "product_option_value pov WHERE pov.product_id = " . (int)$product_id . " AND pov.option_id IN (SELECT option_id FROM `" . DB_PREFIX . "option` o WHERE o.type IN ('radio', 'checkbox', 'select', 'image'))";
@@ -159,7 +159,8 @@ class ModelExtensionFeedUniversalFeedCommon extends Model {
 				'option_id'       => $row['option_id'],
 				'option_value_id' => $row['option_value_id'],
 				'variant_name'    => $row['name'],
-				'variant_value'   => $row['value']
+				'variant_value'   => $row['value'],
+				'variant_sku'     => $row['option_sku']
 			);
 
 			$data['product']['quantity'] = $row['quantity'];
@@ -277,7 +278,7 @@ class ModelExtensionFeedUniversalFeedCommon extends Model {
 				'desc'   => $this->language->get('field_URL_desc'),
 				'method' => 'URL',
 				'params' => array(
-					'product' => array('product_id')
+					'product' => array('product_id'),
 				)
 			),
 			'IMGURL' => array(
@@ -451,10 +452,15 @@ class ModelExtensionFeedUniversalFeedCommon extends Model {
 	public function tagURL($params, $setting) {
 		if ($setting == '0') {
 			$url = HTTPS_SERVER . 'index.php?route=product/product&product_id=' . $params['product']['product_id'];
+			if(array_key_exists('variant',$params) && array_key_exists('option_sku',$params['variant'])){
+				$url .= '&optioddn_value_id='.$params['variant']['product_option_value_id'];
+			}
 		} else {
 			$url = $this->url->link('product/product', 'product_id=' . $params['product']['product_id']);
+			if(array_key_exists('variant',$params) && array_key_exists('option_sku',$params['variant'])){
+				$url .= '-'.$params['variant']['option_sku'];
+			}
 		}
-
 		return str_replace('&amp;', '&', $this->parseValue($url));
 	}
 

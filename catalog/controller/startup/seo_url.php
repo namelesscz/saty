@@ -16,13 +16,16 @@ class ControllerStartupSeoUrl extends Controller {
 			}
 
 			$last_one = array_pop($parts);
-			$query = $this->db->query('SELECT product_option_value_id FROM ' . DB_PREFIX . "product_option_value WHERE option_sku='". $this->db->escape($last_one)."'");
+			$a        = explode('-',$last_one);
+			$sku     = array_pop($a);
+			$query = $this->db->query('SELECT product_option_value_id FROM ' . DB_PREFIX . "product_option_value WHERE option_sku='". $this->db->escape($sku)."'");
 			if ($query->num_rows) {
 				$this->request->get['option_value_id'] =  $query->row['product_option_value_id'];
+				$last_one = implode('-',$a);
 			}
 			else {
-				$parts[] = $last_one;
 			}
+			$parts[] = $last_one;
 
 
 			foreach ($parts as $part) {
