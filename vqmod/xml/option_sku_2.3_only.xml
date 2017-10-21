@@ -1,0 +1,217 @@
+<modification>
+	<id>Option SKU 2.3</id>
+	<version>2.3</version>
+	<vqmver>2.6.x</vqmver>
+	<author>Inception System</author>
+	
+	<file name="admin/language/en-gb/catalog/product.php">
+		<operation>
+			<search position="before"><![CDATA[ $_['entry_option_value']     = 'Option Value'; ]]></search>
+			<add><![CDATA[ $_['entry_option_sku']       = 'Option SKU'; ]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+			<search position="before"><![CDATA[ $data['entry_option_value'] = $this->language->get('entry_option_value'); ]]></search>
+			<add><![CDATA[ $data['entry_option_sku'] = $this->language->get('entry_option_sku'); ]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[ 'quantity'                => $product_option_value['quantity'], ]]></search>
+			<add><![CDATA[ 'option_sku'                => $product_option_value['option_sku'], ]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/view/template/catalog/product_form.tpl">
+		<operation>
+			<search position="after"><![CDATA[ <tr id="option-value-row<?php echo $option_value_row; ?>"> ]]></search>
+			<add><![CDATA[ <td class="text-right"><input type="text" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][option_sku]" value="<?php echo $product_option_value['option_sku']; ?>" placeholder="<?php echo $entry_option_sku; ?>" class="form-control" /></td> ]]></add>
+		</operation>
+		<operation>
+			<search position="after" offset="4"><![CDATA[ <?php if ($product_option['type'] == 'select' || $product_option['type'] == 'radio' || $product_option['type'] == 'checkbox' || $product_option['type'] == 'image') { ?> ]]></search>
+			<add><![CDATA[ <td class="text-left"><?php echo $entry_option_sku; ?></td> ]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[ html += '        <td class="text-left"><?php echo $entry_option_value; ?></td>'; ]]></search>
+			<add><![CDATA[ html += '        <td class="text-left"><?php echo $entry_option_sku; ?></td>'; ]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[ html  = '<tr id="option-value-row' + option_value_row + '">'; ]]></search>
+			<add><![CDATA[ html += '  <td class="text-right"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][option_sku]" value="" placeholder="<?php echo $entry_option_sku; ?>" class="form-control" /></td>'; ]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/model/catalog/product.php">
+		<operation>
+			<search position="replace"><![CDATA[ $this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value SET product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', option_value_id = '" . (int)$product_option_value['option_value_id'] . "', quantity = '" . (int)$product_option_value['quantity'] . "', subtract = '" . (int)$product_option_value['subtract'] . "', price = '" . (float)$product_option_value['price'] . "', price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "', points = '" . (int)$product_option_value['points'] . "', points_prefix = '" . $this->db->escape($product_option_value['points_prefix']) . "', weight = '" . (float)$product_option_value['weight'] . "', weight_prefix = '" . $this->db->escape($product_option_value['weight_prefix']) . "'"); ]]></search>
+			<add><![CDATA[ $this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value SET product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', option_value_id = '" . (int)$product_option_value['option_value_id'] . "', option_sku = '" . $product_option_value['option_sku'] . "', quantity = '" . (int)$product_option_value['quantity'] . "', subtract = '" . (int)$product_option_value['subtract'] . "', price = '" . (float)$product_option_value['price'] . "', price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "', points = '" . (int)$product_option_value['points'] . "', points_prefix = '" . $this->db->escape($product_option_value['points_prefix']) . "', weight = '" . (float)$product_option_value['weight'] . "', weight_prefix = '" . $this->db->escape($product_option_value['weight_prefix']) . "'"); ]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[ $this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value SET product_option_value_id = '" . (int)$product_option_value['product_option_value_id'] . "', product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', option_value_id = '" . (int)$product_option_value['option_value_id'] . "', quantity = '" . (int)$product_option_value['quantity'] . "', subtract = '" . (int)$product_option_value['subtract'] . "', price = '" . (float)$product_option_value['price'] . "', price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "', points = '" . (int)$product_option_value['points'] . "', points_prefix = '" . $this->db->escape($product_option_value['points_prefix']) . "', weight = '" . (float)$product_option_value['weight'] . "', weight_prefix = '" . $this->db->escape($product_option_value['weight_prefix']) . "'"); ]]></search>
+			<add><![CDATA[ $this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value SET product_option_value_id = '" . (int)$product_option_value['product_option_value_id'] . "', product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', option_value_id = '" . (int)$product_option_value['option_value_id'] . "', option_sku = '" . $product_option_value['option_sku'] . "', quantity = '" . (int)$product_option_value['quantity'] . "', subtract = '" . (int)$product_option_value['subtract'] . "', price = '" . (float)$product_option_value['price'] . "', price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "', points = '" . (int)$product_option_value['points'] . "', points_prefix = '" . $this->db->escape($product_option_value['points_prefix']) . "', weight = '" . (float)$product_option_value['weight'] . "', weight_prefix = '" . $this->db->escape($product_option_value['weight_prefix']) . "'"); ]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[ 'option_value_id'         => $product_option_value['option_value_id'], ]]></search>
+			<add><![CDATA[ 'option_sku'                => $product_option_value['option_sku'], ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="after"><![CDATA[ 'option_value_id'         => $option_value['option_value_id'], ]]></search>
+			<add><![CDATA[ 'option_sku'              => $option_value['option_sku'], ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/model/catalog/product.php">
+		<operation>
+			<search position="after"><![CDATA[ 'option_value_id'         => $product_option_value['option_value_id'], ]]></search>
+			<add><![CDATA[ 'option_sku'              => $product_option_value['option_sku'], ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+		<operation>
+			<search position="after" offset="6"><![CDATA[ <?php if ($option['type'] == 'select') { ?> ]]></search>
+			<add><![CDATA[ <?php if ($option_value['option_sku']) { ?>
+                    (<?php echo 'SKU: '. $option_value['option_sku']; ?>)
+                <?php } ?> ]]></add>
+		</operation>
+		<operation>
+			<search position="after" offset="11"><![CDATA[ <?php if ($option['type'] == 'radio') { ?> ]]></search>
+			<add><![CDATA[ <?php if ($option_value['option_sku']) { ?>
+                    (<?php echo 'SKU: '. $option_value['option_sku']; ?>)
+                    <?php } ?> ]]></add>
+		</operation>
+		<operation>
+			<search position="after" offset="11"><![CDATA[ <?php if ($option['type'] == 'checkbox') { ?> ]]></search>
+			<add><![CDATA[ <?php if ($option_value['option_sku']) { ?>
+                    (<?php echo 'SKU: '. $option_value['option_sku']; ?>)
+                    <?php } ?> ]]></add>
+		</operation>
+	</file>
+	
+	<file name="system/library/cart/cart.php">
+		<operation>
+			<search position="replace"><![CDATA[ $option_value_query = $this->db->query("SELECT pov.option_value_id, ovd.name, pov.quantity, pov.subtract, pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON (pov.option_value_id = ov.option_value_id) LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (ov.option_value_id = ovd.option_value_id) WHERE pov.product_option_value_id = '" . (int)$value . "' AND pov.product_option_id = '" . (int)$product_option_id . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'"); ]]></search>
+			<add><![CDATA[ $option_value_query = $this->db->query("SELECT pov.option_value_id, ovd.name, pov.quantity, pov.option_sku, pov.subtract, pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON (pov.option_value_id = ov.option_value_id) LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (ov.option_value_id = ovd.option_value_id) WHERE pov.product_option_value_id = '" . (int)$value . "' AND pov.product_option_id = '" . (int)$product_option_id . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'"); ]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[ 'quantity'                => $option_value_query->row['quantity'], ]]></search>
+			<add><![CDATA[ 'option_sku'              => $option_value_query->row['option_sku'], ]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[ $option_value_query = $this->db->query("SELECT pov.option_value_id, pov.quantity, pov.subtract, pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix, ovd.name FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (pov.option_value_id = ovd.option_value_id) WHERE pov.product_option_value_id = '" . (int)$product_option_value_id . "' AND pov.product_option_id = '" . (int)$product_option_id . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'"); ]]></search>
+			<add><![CDATA[ $option_value_query = $this->db->query("SELECT pov.option_value_id, pov.quantity, pov.option_sku, pov.subtract, pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix, ovd.name FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (pov.option_value_id = ovd.option_value_id) WHERE pov.product_option_value_id = '" . (int)$product_option_value_id . "' AND pov.product_option_id = '" . (int)$product_option_id . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'"); ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/checkout/cart.php">
+		<operation>
+			<search position="after"><![CDATA[ 'name'  => $option['name'], ]]></search>
+			<add><![CDATA[ 'option_sku'  => $option['option_sku'], ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/checkout/cart.tpl">
+		<operation>
+			<search position="replace"><![CDATA[ <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small> ]]></search>
+			<add><![CDATA[ <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?><?php echo ' (SKU:' . $option['option_sku'] . ')'; ?></small> ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/common/cart.php">
+		<operation>
+			<search position="after"><![CDATA[ 'name'  => $option['name'], ]]></search>
+			<add><![CDATA[ 'option_sku'  => $option['option_sku'], ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/common/cart.tpl">
+		<operation>
+			<search position="replace"><![CDATA[ - <small><?php echo $option['name']; ?> <?php echo $option['value']; ?></small> ]]></search>
+			<add><![CDATA[ - <small><?php echo $option['name']; ?> <?php echo $option['value']; ?><?php echo ' (SKU:' . $option['option_sku'] . ')'; ?></small> ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/checkout/confirm.php">
+		<operation>
+			<search position="after"><![CDATA[ 'name'  => $option['name'], ]]></search>
+			<add><![CDATA[ 'option_sku'  => $option['option_sku'], ]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[ 'value'                   => $option['value'], ]]></search>
+			<add><![CDATA[ 'option_sku'              => $option['option_sku'], ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/checkout/confirm.tpl">
+		<operation>
+			<search position="replace"><![CDATA[ &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small> ]]></search>
+			<add><![CDATA[ &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?><?php echo ' (SKU:' . $option['option_sku'] . ')'; ?></small> ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/model/checkout/order.php">
+		<operation>
+			<search position="replace"><![CDATA[ $this->db->query("INSERT INTO " . DB_PREFIX . "order_option SET order_id = '" . (int)$order_id . "', order_product_id = '" . (int)$order_product_id . "', product_option_id = '" . (int)$option['product_option_id'] . "', product_option_value_id = '" . (int)$option['product_option_value_id'] . "', name = '" . $this->db->escape($option['name']) . "', `value` = '" . $this->db->escape($option['value']) . "', `type` = '" . $this->db->escape($option['type']) . "'"); ]]></search>
+			<add><![CDATA[ $this->db->query("INSERT INTO " . DB_PREFIX . "order_option SET order_id = '" . (int)$order_id . "', order_product_id = '" . (int)$order_product_id . "', product_option_id = '" . (int)$option['product_option_id'] . "', product_option_value_id = '" . (int)$option['product_option_value_id'] . "', name = '" . $this->db->escape($option['name']) . "', `value` = '" . $this->db->escape($option['value']) . "', `option_sku` = '" . $this->db->escape($option['option_sku']) . "', `type` = '" . $this->db->escape($option['type']) . "'"); ]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/view/template/sale/order_form.tpl">
+		<operation>
+			<search position="replace"><![CDATA[ html += '  - <small>' + option['name'] + ': ' + option['value'] + '</small><br />'; ]]></search>
+			<add><![CDATA[ html += '  - <small>' + option['name'] + ': ' + option['value'] + ' (SKU:' + option['option_sku'] + ') ' + '</small><br />'; ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/api/cart.php">
+		<operation>
+			<search position="after"><![CDATA[ 'value'                   => $option['value'], ]]></search>
+			<add><![CDATA[ 'option_sku'              => $option['option_sku'], ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/api/order.php">
+		<operation>
+			<search position="after"><![CDATA[ 'value'                   => $option['value'], ]]></search>
+			<add><![CDATA[ 'option_sku'              => $option['option_sku'], ]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/controller/sale/order.php">
+		<operation>
+			<search position="after"><![CDATA[ 'name'  => $option['name'], ]]></search>
+			<add><![CDATA[ 'option_sku'  => $option['option_sku'], ]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/view/template/sale/order_info.tpl">
+		<operation>
+			<search position="replace"><![CDATA[ &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small> ]]></search>
+			<add><![CDATA[ &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?><?php if(isset($option['option_sku'])) { echo ' (SKU:' . $option['option_sku'] . ')'; } ?></small> ]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/view/template/sale/order_invoice.tpl">
+		<operation>
+			<search position="replace"><![CDATA[ &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small> ]]></search>
+			<add><![CDATA[ &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?><?php if(isset($option['option_sku'])) { echo ' (SKU:' . $option['option_sku'] . ')'; } ?></small> ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/mail/order.tpl">
+		<operation>
+			<search position="replace"><![CDATA[ &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small> ]]></search>
+			<add><![CDATA[ &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?><?php if(isset($option['option_sku'])) { echo ' (SKU:' . $option['option_sku'] . ')'; } ?></small> ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/model/checkout/order.php">
+		<operation>
+			<search position="after"><![CDATA[ 'name'  => $option['name'], ]]></search>
+			<add><![CDATA[ 'option_sku'  => $option['option_sku'], ]]></add>
+		</operation>
+	</file>
+</modification>
