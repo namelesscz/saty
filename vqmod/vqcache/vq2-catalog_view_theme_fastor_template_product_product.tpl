@@ -269,7 +269,7 @@ include('catalog/view/theme/'.$config->get($config->get('config_theme') . '_dire
      			          <select name="option[<?php echo $option['product_option_id']; ?>]" id="input-option<?php echo $option['product_option_id']; ?>" class="form-control">
      			            <option value=""><?php echo $text_select; ?></option>
      			            <?php foreach ($option['product_option_value'] as $option_value) { ?>
-     			            <option value="<?php echo $option_value['product_option_value_id']; ?>"><?php echo $option_value['name']; ?>
+     			            <option value="<?php echo $option_value['product_option_value_id']; ?>" <?php if ($option_value_id == $option_value['product_option_value_id']){ echo "selected='selected'"; } ?>><?php echo $option_value['name']; ?>
  <?php if ($option_value['option_sku']) { ?>
                     (<?php echo 'SKU: '. $option_value['option_sku']; ?>)
                 <?php } ?> 
@@ -288,7 +288,7 @@ include('catalog/view/theme/'.$config->get($config->get('config_theme') . '_dire
      			             <?php foreach ($option['product_option_value'] as $option_value) { ?>
      			             <div class="radio <?php if($theme_options->get( 'product_page_radio_style' ) == 1) { echo 'radio-type-button2'; } ?>">
      			               <label>
-     			                 <input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" />
+     			                 <input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>"  <?php if ($option_value_id == $option_value['product_option_value_id']){ echo "checked='checked'"; } ?>/>
      			                 <span <?php if ($option_value['image']) { echo 'style="padding: 2px"'; } ?>><?php if (!$option_value['image']) { ?><?php echo $option_value['name']; ?><?php } ?>
      			                 <?php if ($option_value['image']) { ?>
      			                 <img src="<?php echo $option_value['image']; ?>" alt="<?php echo $option_value['name'] . ($option_value['price'] ? ' ' . $option_value['price_prefix'] . $option_value['price'] : ''); ?>"  style="display: block;border-radius: 100px;-webkit-border-radius: 100px;-moz-border-radius: 100px" class="img-thumbnail" /> 

@@ -16,7 +16,7 @@ class ControllerStartupSeoUrl extends Controller {
 			}
 
 			$last_one = array_pop($parts);
-			$query = $this->db->query('SELECT product_option_value_id FROM ' . DB_PREFIX . "product_option_value WHERE option_sku='". $this->db->escape($part)."'");
+			$query = $this->db->query('SELECT product_option_value_id FROM ' . DB_PREFIX . "product_option_value WHERE option_sku='". $this->db->escape($last_one)."'");
 			if ($query->num_rows) {
 				$this->request->get['option_value_id'] =  $query->row['product_option_value_id'];
 			}

@@ -14,8 +14,9 @@ class ControllerStartupSeoUrl extends Controller {
 			if (utf8_strlen(end($parts)) == 0) {
 				array_pop($parts);
 			}
+
 			$last_one = array_pop($parts);
-			$query = $this->db->query('SELECT product_option_value_id FROM ' . DB_PREFIX . "product_option_value WHERE option_sku='". $this->db->escape($part)."'");
+			$query = $this->db->query('SELECT product_option_value_id FROM ' . DB_PREFIX . "product_option_value WHERE option_sku='". $this->db->escape($last_one)."'");
 			if ($query->num_rows) {
 				$this->request->get['option_value_id'] =  $query->row['product_option_value_id'];
 			}
@@ -28,7 +29,6 @@ class ControllerStartupSeoUrl extends Controller {
 				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $this->db->escape($part) . "'");
 
 				if ($query->num_rows) {
-					##enable multiple things in query
 					$url = explode('=', $query->row['query']);
 
 					if ($url[0] == 'product_id') {
