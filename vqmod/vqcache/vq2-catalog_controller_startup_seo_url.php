@@ -14,6 +14,15 @@ class ControllerStartupSeoUrl extends Controller {
 			if (utf8_strlen(end($parts)) == 0) {
 				array_pop($parts);
 			}
+			$last_one = array_pop($parts);
+			$query = $this->db->query('SELECT product_option_value_id FROM ' . DB_PREFIX . "product_option_value WHERE option_sku='". $this->db->escape($part)."'");
+			if ($query->num_rows) {
+				$this->request->get['option_value_id'] =  $query->row['product_option_value_id'];
+			}
+			else {
+				$parts[] = $last_one;
+			}
+
 
 			foreach ($parts as $part) {
 				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $this->db->escape($part) . "'");
