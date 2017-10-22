@@ -252,3 +252,10 @@ catalog\controller\error\not_found.php
 catalog\language\en-gb\error\not_found.php
 catalog\language\cs-cz\error\not_found.php
 catalog\view\theme\fastor\template\error\not_found.tpl
+catalog\controller\search\autocomplete.php
+catalog\controller\search\autocomplete.php
+catalog\controller\product\search.php
+catalog\language\en-gb\product\search.php
+catalog\language\cs-cz\product\search.php
+catalog\model\account\search.php
+catalog\view\theme\fastor\template\product\search.tpl

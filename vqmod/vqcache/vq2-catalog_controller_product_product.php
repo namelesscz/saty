@@ -404,7 +404,12 @@ class ControllerProductProduct extends Controller {
 			$data['attribute_groups'] = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
 
 			$data['products'] = array();
-			$data['option_value_id'] = $this->request->get['option_value_id'];
+			$data['option_value_id'] = (isset($this->request->get['option_value_id'])? $this->request->get['option_value_id'] : '');
+
+			if(preg_match('/^\d+$/',substr($this->request->get['search'], -2))){
+				$data['option_value_id'] = $this->request->get['search'];
+			}
+
 
 			$results = $this->model_catalog_product->getProductRelated($this->request->get['product_id']);
 

@@ -102,6 +102,11 @@ class ModelCatalogProduct extends Model {
 
 			if (!empty($data['filter_name'])) {
 				$implode = array();
+				if(preg_match('/^\d+$/',substr($data['filter_name'], -2))){
+					$this->request->get['variant'] = $data['filter_name'];
+					$data['filter_name'] = substr($data['filter_name'],0,-2);
+				}
+
 
 				$words = explode(' ', trim(preg_replace('/\s+/', ' ', $data['filter_name'])));
 
@@ -196,6 +201,7 @@ class ModelCatalogProduct extends Model {
 		}
 
 		$product_data = array();
+		print_r($sql);
 
 		$query = $this->db->query($sql);
 
