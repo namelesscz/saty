@@ -405,7 +405,7 @@ class ControllerProductProduct extends Controller {
 			$data['products'] = array();
 			$data['option_value_id'] = (isset($this->request->get['option_value_id'])? $this->request->get['option_value_id'] : '');
 
-			if(preg_match('/^\d+$/',substr($this->request->get['search'], -2))){
+			if(isset($this->request->get['search']) && preg_match('/^\d+$/',substr($this->request->get['search'], -2))){
 				$data['option_value_id'] = $this->request->get['search'];
 			}
 

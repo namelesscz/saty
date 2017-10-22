@@ -49,7 +49,9 @@ class ControllerStartupStartup extends Controller {
 		if (isset($this->request->cookie['language']) && !array_key_exists($code, $languages)) {
 			$code = $this->request->cookie['language'];
 		}
-		
+
+		$this->response->addHeader("Access-Control-Allow-Origin: ".$this->request->server['HTTP_HOST']);
+
 		// Language Detection
 		if (!empty($this->request->server['HTTP_ACCEPT_LANGUAGE']) && !array_key_exists($code, $languages)) {
 			$detect = '';

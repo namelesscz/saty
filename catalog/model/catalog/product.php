@@ -102,11 +102,6 @@ class ModelCatalogProduct extends Model {
 
 			if (!empty($data['filter_name'])) {
 				$implode = array();
-				if(preg_match('/^\d+$/',substr($data['filter_name'], -2))){
-					$this->request->get['variant'] = $data['filter_name'];
-					$data['filter_name'] = substr($data['filter_name'],0,-2);
-				}
-
 
 				$words = explode(' ', trim(preg_replace('/\s+/', ' ', $data['filter_name'])));
 
@@ -149,6 +144,8 @@ class ModelCatalogProduct extends Model {
 				$sql .= " OR LCASE(p.jan) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
 				$sql .= " OR LCASE(p.isbn) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
 				$sql .= " OR LCASE(p.mpn) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				$sql .= " OR p.product_id IN (SELECT product_id FROM " . DB_PREFIX . "product_option_value WHERE LCASE(option_sku) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "')";
+
 			}
 
 			$sql .= ")";
@@ -201,7 +198,6 @@ class ModelCatalogProduct extends Model {
 		}
 
 		$product_data = array();
-		print_r($sql);
 
 		$query = $this->db->query($sql);
 
