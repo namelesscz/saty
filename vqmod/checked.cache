@@ -102,3 +102,9 @@ catalog\language\cs-cz\extension\total\total.php
 catalog\model\tool\upload.php
 catalog\view\theme\fastor\template\common\header.tpl
 catalog\view\theme\fastor\template\product\category.tpl
+catalog\language\en-gb\product\product.php
+catalog\language\cs-cz\product\product.php
+catalog\model\catalog\manufacturer.php
+catalog\model\catalog\review.php
+catalog\view\theme\fastor\template\product\review.tpl
+catalog\controller\product\liveprice.php
