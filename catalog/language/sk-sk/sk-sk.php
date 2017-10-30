@@ -67,3 +67,7 @@ $_['error_upload_6']        = 'Upozornenie: Dočasný adresár nebol nájdený!'
 $_['error_upload_7']        = 'Upozornenie: Súbor nebolo možné zapísať!';
 $_['error_upload_8']        = 'Upozornenie: Nahrávanie súboru bolo zastavené nastavením!';
 $_['error_upload_999']      = 'Upozornenie: Žiadný dostupný chybový kód!';
+
+$_['glami_code']                                  = '89C48829893682E9CA939592499ECD4C';
+$_['fb_code']                                     = '339431586504119';
+$_['ga_code']                                     = 'UA-108404451-1';

@@ -85,6 +85,11 @@ class ControllerCommonHeader extends Controller {
 		$data['contact'] = $this->url->link('information/contact');
 		$data['telephone'] = $this->config->get('config_telephone');
 
+		//tracking codes
+		$data['glami_code'] = $this->language->get('glami_code');
+		$data['fb_code'] = $this->language->get('fb_code');
+		$data['ga_code'] = $this->language->get('ga_code');
+
 		// Menu
 		$this->load->model('catalog/category');
 

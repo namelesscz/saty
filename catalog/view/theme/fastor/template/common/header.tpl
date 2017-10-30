@@ -317,11 +317,11 @@ $modules_old_opencart = new Modules($registry);
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '339431586504119');
+  fbq('init', '<?php echo $fb_code;?>');
   fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=339431586504119&ev=PageView&noscript=1"
+  src="https://www.facebook.com/tr?id=<?php echo $fb_code;?>&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Facebook Pixel Code -->
 
@@ -332,18 +332,18 @@ f[i]=f[i]||function(){(f[i].q=f[i].q||[]).push(arguments)};o=a.createElement(s),
 n=a.getElementsByTagName(s)[0];o.async=1;o.src=h;n.parentNode.insertBefore(o,n)
 })(window, document, 'script', '//www.glami.cz/js/compiled/pt.js', 'glami');
 
-glami('create', '89C48829893682E9CA939592499ECD4C', 'cz');
+glami('create', '<?php echo $glami_code;?>', 'cz');
 glami('track', 'PageView');
 </script>
 <!-- End Glami piXel -->
  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108404451-1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $ga_code;?>"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 
-gtag('config', 'UA-108404451-1');
+gtag('config', '<?php echo $ga_code;?>');
 </script>
 </head>	
 <body class="<?php echo $class; ?> <?php if($theme_options->get( 'page_width' ) == 2 && $theme_options->get( 'max_width' ) > 1400) { echo 'body-full-width'; } ?> <?php if($theme_options->get( 'product_list_type' ) > 0) { echo 'product-list-type-' . $theme_options->get( 'product_list_type' ); } ?> <?php if($theme_options->get( 'product_grid_type' ) > 0) { echo 'product-grid-type-' . $theme_options->get( 'product_grid_type' ); } ?> <?php if($theme_options->get( 'dropdown_menu_type' ) > 0) { echo 'dropdown-menu-type-' . $theme_options->get( 'dropdown_menu_type' ); } ?> <?php if($theme_options->get( 'products_buttons_action' ) > 0) { echo 'products-buttons-action-type-' . $theme_options->get( 'products_buttons_action' ); } ?> <?php if($theme_options->get( 'buttons_prev_next_in_slider' ) > 0) { echo 'buttons-prev-next-type-' . $theme_options->get( 'buttons_prev_next_in_slider' ); } ?> <?php if($theme_options->get( 'inputs_type' ) > 0) { echo 'inputs-type-' . $theme_options->get( 'inputs_type' ); } ?> <?php if($theme_options->get( 'cart_block_type' ) > 0) { echo 'cart-block-type-' . $theme_options->get( 'cart_block_type' ); } ?> <?php if($theme_options->get( 'my_account_type' ) > 0) { echo 'my-account-type-' . $theme_options->get( 'my_account_type' ); } ?> <?php if($theme_options->get( 'top_bar_type' ) > 0) { echo 'top-bar-type-' . $theme_options->get( 'top_bar_type' ); } ?> <?php if($theme_options->get( 'show_vertical_menu_category_page' ) > 0) { echo 'show-vertical-megamenu-category-page'; } ?> <?php if($theme_options->get( 'show_vertical_menu_product_page' ) > 0) { echo 'show-vertical-megamenu-product-page'; } ?> <?php if($theme_options->get( 'show_vertical_menu' ) > 0) { echo 'show-vertical-megamenu'; } ?> <?php if($theme_options->get( 'product_page_type' ) > 0) { echo 'product-page-type-' . $theme_options->get( 'product_page_type' ); } ?> <?php if($theme_options->get( 'megamenu_type' ) > 0) { echo 'megamenu-type-' . $theme_options->get( 'megamenu_type' ); } ?> <?php if($theme_options->get( 'search_type_in_header' ) > 0) { echo 'search-type-' . $theme_options->get( 'search_type_in_header' ); } ?> <?php if($theme_options->get( 'megamenu_label_type' ) > 0) { echo 'megamenu-label-type-' . $theme_options->get( 'megamenu_label_type' ); } ?> <?php if($theme_options->get( 'box_type' ) == 7) { echo 'box-type-4'; } else { echo 'no-box-type-7'; } ?> <?php if($theme_options->get( 'box_type' ) > 0) { echo 'box-type-' . $theme_options->get( 'box_type' ); } ?> <?php if($theme_options->get( 'header_margin_top' ) > 0) { echo 'header-margin-top-' . $theme_options->get( 'header_margin_top' ); } ?> <?php if($theme_options->get( 'sale_new_type' ) > 0) { echo 'sale-new-type-' . $theme_options->get( 'sale_new_type' ); } ?> <?php if($theme_options->get( 'button_type' ) > 0) { echo 'button-body-type-' . $theme_options->get( 'button_type' ); } ?> <?php if($theme_options->get( 'countdown_special' ) > 0) { echo 'countdown-special-type-' . $theme_options->get( 'countdown_special' ); } ?> <?php if($theme_options->get( 'footer_type' ) > 0) { echo 'footer-type-' . $theme_options->get( 'footer_type' ); } ?> <?php if($theme_options->get( 'breadcrumb_style' ) > 0) { echo 'breadcrumb-style-' . $theme_options->get( 'breadcrumb_style' ); } ?> <?php if($theme_options->get( 'border_width' ) == '1') { echo 'border-width-1'; } else { echo 'border-width-0'; } ?> <?php if(($theme_options->get( 'body_background_color' ) == '#ffffff' || ($theme_options->get( 'main_content_background_color' ) == $theme_options->get( 'body_background_color' ) && $theme_options->get( 'body_background_color' ) != '') || $theme_options->get( 'main_content_background_color' ) == 'none') && $theme_options->get( 'colors_status' ) == '1') { echo 'body-white'; } else { echo 'body-other'; } ?> <?php if($theme_options->get( 'main_content_background_color' ) == 'none' && $theme_options->get( 'colors_status' ) == '1') { echo 'body-white-type-2'; } ?> <?php if($theme_options->get( 'main_content_background_color' ) == 'none' && $theme_options->get( 'box_with_products_background_color' ) == '#ffffff' && $theme_options->get( 'colors_status' ) == '1') { echo 'body-white-type-3'; } ?> <?php if($theme_options->get( 'hover_effect' ) == '1') { echo 'banners-effect-' . $theme_options->get( 'hover_effect_type' ); } ?> body-header-type-<?php echo $theme_options->get( 'header_type' ); ?>">
