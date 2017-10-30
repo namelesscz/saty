@@ -70,4 +70,4 @@ $_['error_upload_999']      = 'Upozornenie: Žiadný dostupný chybový kód!';
 
 $_['glami_code']                                  = '89C48829893682E9CA939592499ECD4C';
 $_['fb_code']                                     = '339431586504119';
-$_['ga_code']                                     = 'UA-108404451-1';
+$_['ga_code']                                     = 'UA-108957147-1';

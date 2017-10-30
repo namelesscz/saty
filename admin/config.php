@@ -1,11 +1,11 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://saty.dev/admin/');
-define('HTTP_CATALOG', 'http://saty.dev/');
+define('HTTP_SERVER', 'http://'.$_SERVER['HTTP_HOST'].'/admin/');
+define('HTTP_CATALOG', 'http://'.$_SERVER['HTTP_HOST'].'/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://saty.dev/admin/');
-define('HTTPS_CATALOG', 'http://saty.dev/');
+define('HTTPS_SERVER', 'http://'.$_SERVER['HTTP_HOST'].'/admin/');
+define('HTTPS_CATALOG', 'http://'.$_SERVER['HTTP_HOST'].'/');
 
 // DIR
 define('DIR_APPLICATION', 'd:/_data/www/saty_new_dev/admin/');
