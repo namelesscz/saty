@@ -465,7 +465,7 @@ include('catalog/view/theme/'.$config->get($config->get('config_theme') . '_dire
      				          <a href="#" id="q_down"><i class="fa fa-minus"></i></a>
      			          </div>
      			          <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
-     			          <input type="button" value="<?php echo $button_cart; ?>" id="button-cart" rel="<?php echo $product_id; ?>" data-loading-text="<?php echo $text_loading; ?>" class="button" />
+     			          <input type="button" value="<?php echo $button_cart; ?>" <?php if ($button_cart_disable) { echo 'disabled'; } ?> id="button-cart" rel="<?php echo $product_id; ?>" data-loading-text="<?php echo $text_loading; ?>" class="button <?php if ($button_cart_disable) { echo 'button_disabled'; } ?>" />
      			          
      			          <?php 
      			          $product_question = $modules_old_opencart->getModules('product_question');

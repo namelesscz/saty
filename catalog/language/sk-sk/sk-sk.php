@@ -24,6 +24,7 @@ $_['button_address_add']    = 'Pridať adresu';
 $_['button_back']           = 'Späť';
 $_['button_continue']       = 'Pokračovať';
 $_['button_cart']           = 'Do košíka';
+$_['button_cart_soldout']   = 'Vypredáno';
 $_['button_cancel']         = 'Zrušiť';
 $_['button_compare']        = 'Porovnať produkt';
 $_['button_wishlist']       = 'Obľúbený produkt';

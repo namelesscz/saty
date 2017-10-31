@@ -19,6 +19,7 @@ $_['text_no_results']                             = 'No results!';
 $_['button_address_add']                          = 'Přidat adresu';
 $_['button_back']                                 = 'Zpět';
 $_['button_continue']                             = 'Pokračovat';
+$_['button_cart_soldout']                         = 'Vyprodáno';
 $_['button_cart']                                 = 'Přidat do košíku';
 $_['button_cancel']                               = 'Zrušit';
 $_['button_compare']                              = 'Porovnat tento produkt';

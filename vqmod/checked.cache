@@ -185,3 +185,7 @@ catalog\controller\product\category.php
 catalog\language\en-gb\product\category.php
 catalog\language\cs-cz\product\category.php
 catalog\view\theme\fastor\template\product\category.tpl
+catalog\controller\common\home.php
+catalog\view\theme\fastor\template\common\home.tpl
+catalog\controller\extension\module\category_wall.php
+catalog\view\theme\fastor\template\extension\module\category_wall.tpl

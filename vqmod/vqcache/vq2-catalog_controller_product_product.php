@@ -213,7 +213,6 @@ class ControllerProductProduct extends Controller {
 				'text' => $product_info['name'],
 				'href' => $this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id'])
 			);
-
 			$this->document->setTitle($product_info['meta_title']);
 			$this->document->setDescription($product_info['meta_description']);
 			$this->document->setKeywords($product_info['meta_keyword']);
@@ -251,7 +250,15 @@ class ControllerProductProduct extends Controller {
 			$data['entry_good'] = $this->language->get('entry_good');
 			$data['entry_bad'] = $this->language->get('entry_bad');
 
-			$data['button_cart'] = $this->language->get('button_cart');
+			$data['button_cart_disable'] = 0;
+			if ($product_info['quantity'] > 0) {
+				$data['button_cart'] = $this->language->get('button_cart');
+			}
+			else {
+				$data['button_cart'] =  $this->language->get('button_cart_soldout');#$this->language->get('button_cart');
+				$data['button_cart_disable'] = 1;
+			}
+
 			$data['button_wishlist'] = $this->language->get('button_wishlist');
 			$data['button_compare'] = $this->language->get('button_compare');
 			$data['button_upload'] = $this->language->get('button_upload');

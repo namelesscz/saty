@@ -744,6 +744,9 @@ select {
 	outline: none;
 	-webkit-font-smoothing: subpixel-antialiased !important;
 }
+.button_disabled {
+	background: #f5f5f5 !important;
+}
 
      .button-body-type-10 .button,
      .button-body-type-10 .btn,
