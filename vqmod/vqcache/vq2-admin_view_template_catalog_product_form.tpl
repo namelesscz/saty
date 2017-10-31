@@ -563,7 +563,7 @@
                           <tbody>
                             <?php foreach ($product_option['product_option_value'] as $product_option_value) { ?>
                             <tr id="option-value-row<?php echo $option_value_row; ?>">
- <td class="text-right"><input type="text" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][option_sku]" value="<?php $sel_n='';foreach ($option_values[$product_option['option_id']] as $option_value) { if ($option_value['option_value_id'] == $product_option_value['option_value_id']) { $sel_n= $option_value['name'];};};   echo ($product_option_value['option_sku']? $product_option_value['option_sku']: $sku.str_pad(explode(' ', explode('(',explode(')',$sel_n)[0])[1])[1],2,'00',STR_PAD_LEFT)  ); ?>" placeholder="<?php echo $entry_option_sku; ?>" class="form-control" /></td>
+ <td class="text-right"><input type="text" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][option_sku]" value="<?php echo $product_option_value['option_sku']; ?>" placeholder="<?php echo $entry_option_sku; ?>" class="form-control" /></td> 
                               <td class="text-left"><select name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][option_value_id]" class="form-control">
                                   <?php if (isset($option_values[$product_option['option_id']])) { ?>
                                   <?php foreach ($option_values[$product_option['option_id']] as $option_value) { ?>
