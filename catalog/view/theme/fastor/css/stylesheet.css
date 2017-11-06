@@ -10081,6 +10081,8 @@ ul.box-filter {
 	ul.box-filter ul {
 		list-style: none;
 		padding: 0px;
+		max-height: 150px;
+		overflow: auto;
 	}
 	
 /* @end */
