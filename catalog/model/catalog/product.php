@@ -156,6 +156,9 @@ class ModelCatalogProduct extends Model {
 		}
 
 		$sql .= " GROUP BY p.product_id";
+		if (!empty($data['filter_filter'])) {
+			$sql .= ' HAVING count(distinct pf.filter_id) = '.count($implode);
+		}
 
 		$sort_data = array(
 			'pd.name',
