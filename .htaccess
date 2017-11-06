@@ -22,9 +22,16 @@ RewriteEngine On
 # If your opencart installation does not run on the main web folder make sure you folder it does run in ie. / becomes /shop/
 
 RewriteBase /
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
-#RewriteCond %{HTTP_HOST} !^www\.
-#RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTPS} on
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+#RewriteCond %{HTTP_HOST} ^www\.
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 #RewriteCond %{HTTPS} off
 #RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 

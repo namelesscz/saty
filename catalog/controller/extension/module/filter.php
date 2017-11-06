@@ -46,6 +46,21 @@ class ControllerExtensionModuleFilter extends Controller {
 
 			$data['filter_groups'] = array();
 
+			if (isset($this->request->get['fw'])) {
+				$data['filter_waist'] = intval($this->request->get['fw']);
+			} else {
+				$data['filter_waist'] = '';
+			}
+			if (isset($this->request->get['fb'])) {
+				$data['filter_breast'] = intval($this->request->get['fb']);
+			} else {
+				$data['filter_breast'] = '';
+			}
+
+			$data['filter_waist_label'] = $this->language->get('filter_waist_label');
+			$data['filter_breast_label'] = $this->language->get('filter_breast_label');
+
+
 			$filter_groups = $this->model_catalog_category->getCategoryFilters($category_id);
 
 			if ($filter_groups) {

@@ -5,6 +5,11 @@
     <ul class="box-filter">
       <?php foreach ($filter_groups as $filter_group) { ?>
       <li><span id="filter-group<?php echo $filter_group['filter_group_id']; ?>"><?php echo $filter_group['name']; ?></span>
+			<?php if ($filter_group['filter_group_id'] == 1) { ?>
+					 <br />
+					 <label for="filter_waist"><?php echo $filter_waist_label; ?></label> <input type="text" id="filter_waist" name="filter_waist" value="<?php echo $filter_waist;?>" size="3"/>
+					 <label for="filter_breast"><?php echo $filter_breast_label; ?></label> <input type="text" id="filter_breast" name="filter_breast" value="<?php echo $filter_breast;?>" size="3"/>
+			<?php } else { ?>
         <ul>
           <?php foreach ($filter_group['filter'] as $filter) { ?>
           <?php if (in_array($filter['filter_id'], $filter_category)) { ?>
@@ -20,6 +25,7 @@
           <?php } ?>
           <?php } ?>
         </ul>
+			<?php }?>
       </li>
       <?php } ?>
     </ul>
@@ -28,12 +34,14 @@
 </div>
 <script type="text/javascript"><!--
 $('#button-filter').bind('click', function() {
-	filter = [];
-	
+	filter     = [];
 	$('.box-filter input[type=\'checkbox\']:checked').each(function(element) {
 		filter.push(this.value);
 	});
-	
-	location = '<?php echo $action; ?>&filter=' + filter.join(',');
+	val_waist= $('#filter_waist').val();
+	val_breast= $('#filter_breast').val();
+	console.log(val_waist);
+	console.log(val_breast);
+	location = '<?php echo $action; ?>&filter=' + filter.join(',')+(val_waist? '&fw='+val_waist :'')+(val_breast? '&fb='+val_breast : '');
 });
 //--></script> 
