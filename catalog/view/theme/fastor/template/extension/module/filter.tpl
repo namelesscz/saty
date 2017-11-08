@@ -6,9 +6,9 @@
       <?php foreach ($filter_groups as $filter_group) { ?>
       <li><span id="filter-group<?php echo $filter_group['filter_group_id']; ?>"><?php echo $filter_group['name']; ?></span>
 			<?php if ($filter_group['filter_group_id'] == 1) { ?>
-					 <br />
-					 <label for="filter_waist"><?php echo $filter_waist_label; ?></label> <input type="text" id="filter_waist" name="filter_waist" value="<?php echo $filter_waist;?>" size="3"/>
-					 <label for="filter_breast"><?php echo $filter_breast_label; ?></label> <input type="text" id="filter_breast" name="filter_breast" value="<?php echo $filter_breast;?>" size="3"/>
+					<br />
+					<label for="filter_breast"><?php echo $filter_breast_label; ?></label> <input type="text" id="filter_breast" name="filter_breast" value="<?php echo $filter_breast;?>" size="3"/>
+					<label for="filter_waist"><?php echo $filter_waist_label; ?></label> <input type="text" id="filter_waist" name="filter_waist" value="<?php echo $filter_waist;?>" size="3"/>
 			<?php } else { ?>
         <ul>
           <?php foreach ($filter_group['filter'] as $filter) { ?>

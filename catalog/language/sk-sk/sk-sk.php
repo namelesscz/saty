@@ -69,6 +69,6 @@ $_['error_upload_7']        = 'Upozornenie: Súbor nebolo možné zapísať!';
 $_['error_upload_8']        = 'Upozornenie: Nahrávanie súboru bolo zastavené nastavením!';
 $_['error_upload_999']      = 'Upozornenie: Žiadný dostupný chybový kód!';
 
-$_['glami_code']                                  = '89C48829893682E9CA939592499ECD4C';
+$_['glami_code']                                  = 'BF830B5E5E42B28EEA3850B07DB74F85';
 $_['fb_code']                                     = '339431586504119';
 $_['ga_code']                                     = 'UA-108957147-1';
