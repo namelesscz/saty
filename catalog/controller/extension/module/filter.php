@@ -57,6 +57,11 @@ class ControllerExtensionModuleFilter extends Controller {
 				$data['filter_breast'] = '';
 			}
 
+			if ($data['filter_breast'] && $data['filter_waist']) {
+				$data['filter_size_selected_label'] = $this->language->get('filter_size_selected_label');
+				$data['filter_size_selected'] = $this->model_catalog_product->getFilterSize($data['filter_breast'],$data['filter_waist']);
+			}
+
 			$data['filter_waist_label'] = $this->language->get('filter_waist_label');
 			$data['filter_breast_label'] = $this->language->get('filter_breast_label');
 
