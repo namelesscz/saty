@@ -87,7 +87,7 @@ class ModelCatalogProduct extends Model {
 			}
 
 			if (!empty($data['filter_filter'])) {
-				$sql .= " LEFT JOIN " . DB_PREFIX . "product_filter pf ON (p2c.product_id = pf.product_id) LEFT JOIN " . DB_PREFIX . "product p ON (pf.product_id = p.product_id)";
+				$sql .= " LEFT JOIN " . DB_PREFIX . "product_attribute pf ON (p2c.product_id = pf.product_id) LEFT JOIN " . DB_PREFIX . "product p ON (pf.product_id = p.product_id)";
 			} else {
 				$sql .= " LEFT JOIN " . DB_PREFIX . "product p ON (p2c.product_id = p.product_id)";
 			}
@@ -121,7 +121,7 @@ class ModelCatalogProduct extends Model {
 					}
 				}
 
-				$sql .= " AND pf.filter_id IN (" . implode(',', $implode) . ")";
+				$sql .= " AND pf.attribute_id IN (" . implode(',', $implode) . ")";
 			}
 		}
 
@@ -185,7 +185,7 @@ class ModelCatalogProduct extends Model {
 
 		$sql .= " GROUP BY p.product_id";
 		if (!empty($data['filter_filter'])) {
-			$sql .= ' HAVING count(distinct pf.filter_id) = '.count($implode);
+			$sql .= ' HAVING count(distinct pf.attribute_id) = '.count($implode);
 		}
 
 		$sort_data = array(

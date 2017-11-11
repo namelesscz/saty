@@ -64,6 +64,8 @@ class ControllerExtensionModuleFilter extends Controller {
 
 			$data['filter_waist_label'] = $this->language->get('filter_waist_label');
 			$data['filter_breast_label'] = $this->language->get('filter_breast_label');
+			$data['filter_size_label'] = $this->language->get('filter_size_label');
+			$data['category_id'] = $category_id ;
 
 
 			$filter_groups = $this->model_catalog_category->getCategoryFilters($category_id);

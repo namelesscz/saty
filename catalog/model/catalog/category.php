@@ -7,46 +7,92 @@ class ModelCatalogCategory extends Model {
 	}
 
 	public function getCategories($parent_id = 0) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)");
 
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)");
+#
 		return $query->rows;
 	}
-
+#
 	public function getCategoryFilters($category_id) {
-		$implode = array();
+		#$implode = array();
+#
+		#$query = $this->db->query("SELECT filter_id FROM " . DB_PREFIX . "category_filter WHERE category_id = '" . (int)$category_id . "'");
+#
+		#foreach ($query->rows as $result) {
+			#$implode[] = (int)$result['filter_id'];
+		#}
+#
+		#$filter_group_data = array();
+#
+		#if ($implode) {
+			#$filter_group_query = $this->db->query("SELECT DISTINCT f.filter_group_id, fgd.name, fg.sort_order FROM " . DB_PREFIX . "filter f LEFT JOIN " . DB_PREFIX . "filter_group fg ON (f.filter_group_id = fg.filter_group_id) LEFT JOIN " . DB_PREFIX . "filter_group_description fgd ON (fg.filter_group_id = fgd.filter_group_id) WHERE f.filter_id IN (" . implode(',', $implode) . ") AND fgd.language_id = '" . (int)$this->config->get('config_language_id') . "' GROUP BY f.filter_group_id ORDER BY fg.sort_order, LCASE(fgd.name)");
+#
+			#foreach ($filter_group_query->rows as $filter_group) {
+				#$filter_data = array();
+#
+				#$filter_query = $this->db->query("SELECT DISTINCT f.filter_id, fd.name FROM " . DB_PREFIX . "filter f LEFT JOIN " . DB_PREFIX . "filter_description fd ON (f.filter_id = fd.filter_id) WHERE f.filter_id IN (" . implode(',', $implode) . ") AND f.filter_group_id = '" . (int)$filter_group['filter_group_id'] . "' AND fd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY f.sort_order, LCASE(fd.name)");
+#
+				#foreach ($filter_query->rows as $filter) {
+					#$filter_data[] = array(
+						#'filter_id' => $filter['filter_id'],
+						#'name'      => $filter['name']
+					#);
+				#}
+#
+				#if ($filter_data) {
+					#$filter_group_data[] = array(
+						#'filter_group_id' => $filter_group['filter_group_id'],
+						#'name'            => $filter_group['name'],
+						#'filter'          => $filter_data
+					#);
+				#}
+			#}
+		#}
 
-		$query = $this->db->query("SELECT filter_id FROM " . DB_PREFIX . "category_filter WHERE category_id = '" . (int)$category_id . "'");
-
-		foreach ($query->rows as $result) {
-			$implode[] = (int)$result['filter_id'];
+		##### filters from products;
+		$query = $this->db->query("SELECT
+ agd.name as group_name,
+ ad.name as atrr_name,
+ pa.attribute_id as attr_id,
+ a.attribute_group_id as group_id,
+ count(DISTINCT pc.product_id) as product_count,
+ group_concat(pc.product_id) as products
+FROM " . DB_PREFIX . "product_to_category pc
+JOIN " . DB_PREFIX . "product_attribute pa ON pc.product_id=pa.product_id
+LEFT JOIN " . DB_PREFIX . "attribute_description ad ON pa.attribute_id=ad.attribute_id and pa.language_id=ad.language_id
+JOIN " . DB_PREFIX . "attribute a ON a.attribute_id=pa.attribute_id
+JOIN " . DB_PREFIX . "attribute_group ag ON ag.attribute_group_id=a.attribute_group_id
+LEFT JOIN " . DB_PREFIX . "attribute_group_description agd ON agd.attribute_group_id=a.attribute_group_id AND agd.language_id=pa.language_id
+WHERE pc.category_id='".(int)$category_id."' and pa.language_id='" . (int)$this->config->get('config_language_id') . "'
+GROUP BY a.attribute_group_id,a.attribute_id
+ORDER BY agd.name, ad.name");
+	$last_group_name ='';
+	$last_group_id ='';
+	$filter_data = array();
+	$filter_group_data = array();
+	foreach ($query->rows as $result) {
+		if (! $last_group_name) {
+			$last_group_name = $result['group_name'];
+			$last_group_id   = $result['group_id'];
 		}
 
-		$filter_group_data = array();
-
-		if ($implode) {
-			$filter_group_query = $this->db->query("SELECT DISTINCT f.filter_group_id, fgd.name, fg.sort_order FROM " . DB_PREFIX . "filter f LEFT JOIN " . DB_PREFIX . "filter_group fg ON (f.filter_group_id = fg.filter_group_id) LEFT JOIN " . DB_PREFIX . "filter_group_description fgd ON (fg.filter_group_id = fgd.filter_group_id) WHERE f.filter_id IN (" . implode(',', $implode) . ") AND fgd.language_id = '" . (int)$this->config->get('config_language_id') . "' GROUP BY f.filter_group_id ORDER BY fg.sort_order, LCASE(fgd.name)");
-
-			foreach ($filter_group_query->rows as $filter_group) {
-				$filter_data = array();
-
-				$filter_query = $this->db->query("SELECT DISTINCT f.filter_id, fd.name FROM " . DB_PREFIX . "filter f LEFT JOIN " . DB_PREFIX . "filter_description fd ON (f.filter_id = fd.filter_id) WHERE f.filter_id IN (" . implode(',', $implode) . ") AND f.filter_group_id = '" . (int)$filter_group['filter_group_id'] . "' AND fd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY f.sort_order, LCASE(fd.name)");
-
-				foreach ($filter_query->rows as $filter) {
-					$filter_data[] = array(
-						'filter_id' => $filter['filter_id'],
-						'name'      => $filter['name']
-					);
-				}
-
-				if ($filter_data) {
-					$filter_group_data[] = array(
-						'filter_group_id' => $filter_group['filter_group_id'],
-						'name'            => $filter_group['name'],
-						'filter'          => $filter_data
-					);
-				}
+		if ($last_group_name != $result['group_name']) {
+			if (count ($filter_data)){
+				$filter_group_data[] = array(
+					'filter_group_id' => $last_group_id,
+					'name'            => $last_group_name,
+					'filter'          => $filter_data
+				);
 			}
+			$last_group_name = $result['group_name'];
+			$last_group_id   = $result['group_id'];
+			$filter_data     = array();
 		}
+		$filter_data[] = array(
+			'filter_id' => $result['attr_id'],
+			'name'      => $result['atrr_name']
+		);
+	}
 
 		return $filter_group_data;
 	}
