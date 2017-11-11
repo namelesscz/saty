@@ -115,10 +115,7 @@ class ModelCatalogProduct extends Model {
 
 				if (isset($data['filter_breast']) && isset($data['filter_waist']) ){
 					$size = $this->getFilterSize(intval($data['filter_breast']),intval($data['filter_waist']));
-					$qw = $this->db->query('SELECT filter_id FROM '.DB_PREFIX.'filter_description WHERE language_id='.(int)$this->config->get('config_language_id') .' AND name="'.$size.'"');
-					if ($qw->num_rows){
-						$implode[]=intval($qw->row['filter_id']);
-					}
+					$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value pov JOIN '.DB_PREFIX.'option_value_description ovd ON pov.option_value_id=ovd.option_value_id  WHERE language_id='.(int)$this->config->get('config_language_id') .' AND name like "'.$size.'%")';
 				}
 
 				$sql .= " AND pf.attribute_id IN (" . implode(',', $implode) . ")";
