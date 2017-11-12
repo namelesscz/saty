@@ -65,6 +65,11 @@ class ControllerExtensionModuleFilter extends Controller {
 			$data['filter_waist_label'] = $this->language->get('filter_waist_label');
 			$data['filter_breast_label'] = $this->language->get('filter_breast_label');
 			$data['filter_size_label'] = $this->language->get('filter_size_label');
+			$data['filter_availability_label'] = $this->language->get('filter_availability_label');
+
+			$data['filter_availabilities'] = $this->model_catalog_category->getFilterByAvailability($category_id);
+			$data['filter_availability']= isset($this->request->get['filter_availability'])? explode(',',$this->request->get['filter_availability']) : array();
+
 			$data['category_id'] = $category_id ;
 
 

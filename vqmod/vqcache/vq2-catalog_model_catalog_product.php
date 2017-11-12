@@ -112,14 +112,17 @@ class ModelCatalogProduct extends Model {
 				foreach ($filters as $filter_id) {
 					$implode[] = (int)$filter_id;
 				}
-
-				if (isset($data['filter_breast']) && isset($data['filter_waist']) ){
-					$size = $this->getFilterSize(intval($data['filter_breast']),intval($data['filter_waist']));
-					$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value pov JOIN '.DB_PREFIX.'option_value_description ovd ON pov.option_value_id=ovd.option_value_id  WHERE language_id='.(int)$this->config->get('config_language_id') .' AND name like "'.$size.'%")';
-				}
-
 				$sql .= " AND pf.attribute_id IN (" . implode(',', $implode) . ")";
 			}
+			if (isset($data['filter_breast']) && isset($data['filter_waist']) ){
+				$size = $this->getFilterSize(intval($data['filter_breast']),intval($data['filter_waist']));
+				$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value pov JOIN '.DB_PREFIX.'option_value_description ovd ON pov.option_value_id=ovd.option_value_id  WHERE language_id='.(int)$this->config->get('config_language_id') .' AND name like "'.$size.'%")';
+			}
+			if (isset($data['filter_availability'])) {
+				$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value WHERE option_value_id IN ('.$data['filter_availability'].'))';
+			}
+
+
 		}
 
 		if (!empty($data['filter_name']) || !empty($data['filter_tag'])) {
@@ -224,7 +227,6 @@ class ModelCatalogProduct extends Model {
 
 			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}
-
 		$product_data = array();
 		$query = $this->db->query($sql);
 

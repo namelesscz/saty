@@ -181,6 +181,9 @@ class ControllerProductCategory extends Controller {
 			if (isset($this->request->get['fb'])) {
 				$filter_data['filter_breast'] = intval($this->request->get['fb']);
 			}
+			if (isset($this->request->get['filter_availability'])) {
+				$filter_data['filter_availability'] = $this->request->get['filter_availability'];
+			}
 
 			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
 

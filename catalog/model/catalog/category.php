@@ -77,7 +77,7 @@ ORDER BY agd.name, ad.name");
 		}
 
 		if ($last_group_name != $result['group_name']) {
-			if (count ($filter_data)){
+			if (count ($filter_data) > 1){
 				$filter_group_data[] = array(
 					'filter_group_id' => $last_group_id,
 					'name'            => $last_group_name,
@@ -111,5 +111,14 @@ ORDER BY agd.name, ad.name");
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$parent_id . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.status = '1'");
 
 		return $query->row['total'];
+	}
+
+	public function getFilterByAvailability($category_id) {
+		$query = $this->db->query("SELECT substring(ovd.name, position(') - ' IN ovd.name)+3) as sub,GROUP_CONCAT(distinct pov.option_value_id) as options, count(DISTINCT pov.product_id) as cnt FROM product_option_value pov JOIN option_value_description ovd ON pov.option_value_id=ovd.option_value_id JOIN product_to_category pc ON pov.product_id=pc.product_id WHERE ovd.language_id=". (int)$this->config->get('config_language_id')." AND pc.category_id=".(int)$category_id." GROUP BY substring(ovd.name, position(') - ' IN ovd.name)+3)");
+		$filters = array();
+		foreach ($query->rows as $result) {
+			$filters[] = array('name' => $result['sub'],'ids' => $result['options']);
+		}
+		return $filters;
 	}
 }
