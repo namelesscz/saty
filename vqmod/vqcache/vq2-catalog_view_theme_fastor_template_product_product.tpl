@@ -808,7 +808,7 @@ $('#button-cart').on('click', function() {
 					onClosed: null,
 					icon_type: 'class',
 					template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-success" role="alert">' +
-						'<button type="button" aria-hidden="true" class="close" data-notify="dismiss">A—</button>' +
+						'<button type="button" aria-hidden="true" class="close" data-notify="dismiss">&times;</button>' +
 						'<span data-notify="message"><i class="fa fa-check-circle"></i>&nbsp; {2}</span>' +
 						'<div class="progress" data-notify="progressbar">' +
 							'<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
