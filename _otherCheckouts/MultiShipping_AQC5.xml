@@ -1,0 +1,334 @@
+<modification>
+	<id>Multishipping AQC5</id>
+	<version>1.0</version>
+	<author>Juraj Korim</author>
+     
+	<file name="catalog/model/d_quickcheckout/order.php">
+		<operation>
+			<search position="replace" index="1,3">
+				<![CDATA[store_id = '" . (int)$data['store_id'] . "',]]>
+			</search>
+			<add>
+				<![CDATA[store_id = '" . (int)$data['store_id'] . "', branch_id = '" . $this->db->escape(((!empty($data['branch_id'])) ? $data['branch_id'] : 0)) . "',]]>
+			</add>
+		</operation>
+  </file>
+     
+	<file name="catalog/view/theme/*/template/module/d_quickcheckout.tpl">    
+		<operation>
+			<search position="before">
+				<![CDATA[if ($('#shipping_method_wrap').is(':visible') && json['error']['shipping_method'] ) {]]>
+			</search>
+			<add>
+				<![CDATA[
+                if (json['error']['multishipping']) {
+                    $('button[data-multishipping_id="' + json['error']['multishipping'] + '"]').trigger('click');
+                }
+        ]]>
+			</add>
+		</operation>
+  </file>
+          
+	<file name="catalog/controller/module/d_quickcheckout.php">      
+		<operation>
+			<search position="before">
+				<![CDATA[if(file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/d_quickcheckout/shipping_method.tpl')) {]]>
+			</search>
+			<add>
+				<![CDATA[
+        $this->language->load('shipping/multishipping');
+        
+        $this->data['multishipping_destination_select'] = $this->url->link('shipping/multishipping/getModal', '', 'SSL');
+        $this->data['text_change_destination'] = $this->language->get('text_change_destination');
+        ]]>
+			</add>
+		</operation>
+    
+		<operation>
+			<search position="before">
+				<![CDATA[if(empty($this->session->data['shipping_methods']) && $this->settings['step']['shipping_method']['display']){]]>
+			</search>
+			<add>       
+				<![CDATA[            
+          if (!empty($this->session->data['shipping_method']) && stristr($this->session->data['shipping_method']['code'], 'multishipping'))
+          {
+            $shipping = explode('.', $this->session->data['shipping_method']['code']);
+             
+            $this->load->model('shipping/multishipping');
+            
+            $multishipping_info = $this->model_shipping_multishipping->getMultishipping($shipping[1]);   
+ 
+            if (!empty($multishipping_info))
+            {
+              if (empty($this->session->data['multishipping']['service_' . $multishipping_info['service_id']]))
+              {
+				        $json['error']['multishipping'] = $shipping[1];
+              }  
+            }
+          } 
+        ]]>
+			</add>
+		</operation>
+    
+		<operation>
+			<search position="after">
+				<![CDATA[$data['ip'] = $this->request->server['REMOTE_ADDR'];]]>
+			</search>
+			<add>
+				<![CDATA[
+          $data['branch_id'] = 0;
+          
+          if (!empty($this->session->data['shipping_method']['code']) && stristr($this->session->data['shipping_method']['code'], 'multishipping.'))
+          {
+            $this->load->model('shipping/multishipping');
+            
+            $multishipping = explode('.', $this->session->data['shipping_method']['code']);
+
+            $multishipping_info = $this->model_shipping_multishipping->getMultishipping($multishipping[1]);
+            
+            if (!empty($multishipping_info))
+            {
+              $data['branch_id'] = (!empty($this->session->data['multishipping']['service_' . $multishipping_info['service_id']])) ? $this->session->data['multishipping']['service_' . $multishipping_info['service_id']] : 0;
+            }
+          }
+        ]]>
+			</add>
+		</operation>    
+  </file>
+
+	<file name="catalog/view/theme/*/template/d_quickcheckout/payment_method.tpl">
+		<operation>
+			<search position="replace">
+				<![CDATA[<span class="price"><?php if (isset($payment_method['cost'])) { echo $payment_method['cost']; } ?></span>]]>
+			</search>
+			<add>
+				<![CDATA[
+        <span class="price">
+          <?php if (!empty($payment_method['text'])) { ?>
+            <?php echo $payment_method['text']; ?>
+          <?php } else if (isset($payment_method['cost'])) { ?>
+            <?php echo $payment_method['cost']; ?>
+          <?php } ?>
+        </span>
+        ]]>
+			</add>
+		</operation>
+  </file>
+                            
+	<file name="catalog/view/theme/*/template/d_quickcheckout/shipping_method.tpl">
+		<operation>
+			<search position="after">
+				<![CDATA[<span class="text"><?php echo $quote['title']; ?></span><span class="price"><?php echo $quote['text']; ?></span></label>]]>
+			</search>
+			<add>
+				<![CDATA[<?php if (!empty($quote['description'])) { echo $quote['description']; } ?>]]>
+			</add>
+		</operation>
+    
+		<operation>
+			<search position="bottom">
+				<![CDATA[]]>
+			</search>
+			<add>
+				<![CDATA[
+        <div class="modal fade" id="multishippingModal" tabindex="-1" role="dialog" aria-labelledby="multishippingModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content"></div>
+          </div>
+        </div>    
+            
+        <script type="text/javascript">
+          (function($) {
+          	$.fn.autocomplete = function(option) {
+          		return this.each(function() {
+          			this.timer = null;
+          			this.items = new Array();
+          
+          			$.extend(this, option);
+          
+          			$(this).attr('autocomplete', 'off');
+          
+          			// Focus
+          			$(this).on('focus', function() {
+                  $(this).addClass('focus');
+          				this.request();
+          			});
+          
+          			// Blur
+          			$(this).on('blur', function() {
+                  $(this).removeClass('focus');
+                  
+          				setTimeout(function(object) {
+          					object.hide();
+          				}, 200, this);
+          			});
+          
+          			// Keydown
+          			$(this).on('keydown', function(event) {
+          				switch(event.keyCode) {
+          					case 27: // escape
+          						this.hide();
+          						break;
+          					default:
+          						this.request();
+          						break;
+          				}
+          			});
+          
+          			// Click
+          			this.click = function(event) {
+          				event.preventDefault();
+          
+          				value = $(event.target).parent().attr('data-value');
+          
+          				if (value && this.items[value]) {
+          					this.select(this.items[value]);
+          				}
+          			}
+          
+          			// Show
+          			this.show = function() {
+          				var pos = $(this).position();
+          
+          				$(this).siblings('ul.dropdown-menu').css({
+          					top: pos.top + $(this).outerHeight(),
+          					left: pos.left
+          				});
+          
+          				$(this).siblings('ul.dropdown-menu').show();
+          			}
+          
+          			// Hide
+          			this.hide = function() {
+          				$(this).siblings('ul.dropdown-menu').not(':hover').hide();
+          			}
+          
+          			// Request
+          			this.request = function() {
+          				clearTimeout(this.timer);
+          
+          				this.timer = setTimeout(function(object) {
+          					object.source($(object).val(), $.proxy(object.response, object));
+          				}, 200, this);
+          			}
+          
+          			// Response
+          			this.response = function(json) {
+          				html = '';
+          
+          				if (json.length) {
+          					for (i = 0; i < json.length; i++) {
+          						this.items[json[i]['value']] = json[i];
+          					}
+          
+          					for (i = 0; i < json.length; i++) {
+          						if (!json[i]['category']) {
+          							html += '<li data-value="' + json[i]['value'] + '"><a href="#">' + json[i]['label'] + '</a></li>';
+          						}
+          					}
+          
+          					// Get all the ones with a categories
+          					var category = new Array();
+          
+          					for (i = 0; i < json.length; i++) {
+          						if (json[i]['category']) {
+          							if (!category[json[i]['category']]) {
+          								category[json[i]['category']] = new Array();
+          								category[json[i]['category']]['name'] = json[i]['category'];
+          								category[json[i]['category']]['item'] = new Array();
+          							}
+          
+          							category[json[i]['category']]['item'].push(json[i]);
+          						}
+          					}
+          
+          					for (i in category) {
+          						html += '<li class="dropdown-header">' + category[i]['name'] + '</li>';
+          
+          						for (j = 0; j < category[i]['item'].length; j++) {
+          							html += '<li data-value="' + category[i]['item'][j]['value'] + '"><a href="#">&nbsp;&nbsp;&nbsp;' + category[i]['item'][j]['label'] + '</a></li>';
+          						}
+          					}
+          				}
+          
+          				if (html) {
+          					this.show();
+          				} else {
+          					this.hide();
+          				}
+          
+          				$(this).siblings('ul.dropdown-menu').html(html);
+          			}
+          
+                var ul = $('<ul class="dropdown-menu"/>');
+          
+          			$(this).after(ul);
+                
+                ul.hover(function () {
+                  $(this).prev().focus();
+                }).click(function () {
+                  $(this).prev().focus();
+                });
+                
+          			$(this).siblings('ul.dropdown-menu').delegate('a', 'click', $.proxy(this.click, this));
+          
+          		});
+          	}
+          })(window.jQuery);
+          
+          $('#multishippingModal').on('shown.bs.modal', function () {
+            var input = $('input[id$="_city"]'),
+                strLength = input.val().length * 2;
+          
+                input.focus();
+                input[0].setSelectionRange(strLength, strLength);
+          });
+          
+          $('.multishipping_destination[data-toggle="modal"]').click(function(e) {            
+          	var $url = '<?php echo $multishipping_destination_select; ?>&multishipping_id=' + $(this).data('multishipping_id'),
+                $btn = $(this).button('loading');
+        
+          	e.preventDefault();        
+                
+          	$.get($url, function(data) {
+              $btn.button('reset');
+
+          	 $('#multishippingModal .modal-content').html(data);
+             $('#multishippingModal').modal('show');
+          	});
+          });
+          
+          $('body').on('click', function (e) {
+              $('[data-toggle=popover]').each(function () {
+                  if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                      $(this).popover('hide');
+                  }
+              });
+          });
+          
+          $('body').on('click', '.select_destination', function () {
+            var $this = $(this),
+                $service_id = $(this).data('service_id');
+              
+            $this.button('loading');
+              
+            $.ajax({
+              url: 'index.php?route=shipping/multishipping/select_destination&service_id=' + $(this).data('service_id') + '&branch_id=' + $(this).data('branch_id'),
+            	dataType: 'json',
+            	success: function(json) { 
+                $this.button('reset');
+                    
+                $('#destination_service_' + $service_id).html('<strong>' + json['name'] + '</strong> (' + json['address'] + ')').next().text('<?php echo $text_change_destination; ?>');
+                
+                $('#multishippingModal').modal('hide'); 
+                
+                refreshStep(6);
+              }
+            });          
+          });
+        </script>
+        ]]>
+			</add>
+		</operation>
+	</file>
+</modification>

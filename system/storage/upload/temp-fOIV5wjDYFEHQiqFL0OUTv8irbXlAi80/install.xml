@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification> 
+	<name>Disable Add to Cart Button and Stock Notification</name> 
+	<version>1.0</version> 
+	<link>http://jeinscope.com</link>
+	<author>jeinscope@outlook.com</author>   
+	<code>disable_add_to_cart_stock_alert</code> 
+
+	<file path="catalog/language/*/checkout/cart.php">
+
+		<operation error="log">
+			<search><![CDATA[// Error]]>
+			</search>
+			<add position="after"><![CDATA[$_['error_out_stock']    = 'Sorry! Only %s left in stock';]]>
+			</add>
+		</operation>
+
+	</file>
+	
+	<file path="catalog/controller/checkout/cart.php">
+		<operation error="log">
+			<search><![CDATA[if (!$json) {]]></search>
+			<add position="before"><![CDATA[
+				//added exceeds quanitity available
+        	     if ($quantity > $product_info['quantity']) {
+					$json['error']['quantity'] = sprintf($this->language->get('error_out_stock'), $product_info['quantity']);
+				}
+				]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/product.php">
+        <operation>
+            <search><![CDATA[if ($product_info['quantity'] <= 0) {]]></search>
+            <add position="before"><![CDATA[
+                $data['stock_quantity'] = $product_info['quantity'];
+                $data['text_out_of_stock'] = $product_info['stock_status'];
+            ]]></add>
+        </operation>
+		 <operation>
+            <search><![CDATA[$data['products'][] = array(]]></search>
+            <add position="after"><![CDATA[
+			    'quantity'              => $result['quantity'],
+                'text_out_of_stock'     => $result['stock_status'],
+                ]]></add>
+        </operation>
+    </file> 
+	<!-- Template --> 	
+	<!-- product --> 
+   <file path="catalog/view/theme/*/template/product/product.tpl">	
+		<operation>
+            <search><![CDATA[
+            <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_cart; ?></button>
+            ]]></search>
+            <add position="replace"><![CDATA[
+			<?php if ($stock_quantity <= 0) { ?>
+			       	<button type="button" disabled="disabled" style="cursor: not-allowed;pointer-events: none;" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $text_out_of_stock; ?></button>
+					<?php } else { ?>
+					 <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_cart; ?></button>
+						
+					<?php } ?>
+            ]]></add>
+        </operation>
+		<operation>
+			<search><![CDATA[if (json['error']['recurring']) {]]></search>
+			<add position="before"><![CDATA[
+				if (json['error']['quantity']) {
+				   $('#button-cart').after('<div class="alert alert-info" style="margin-top:10px;">' + json['error']['quantity'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                }
+				]]></add>
+		</operation>
+	</file>
+	<!--related product --> 
+   <file path="catalog/view/theme/*/template/product/product.tpl">	
+		<operation>
+            <search><![CDATA[
+            <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');"><span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span> <i class="fa fa-shopping-cart"></i></button>
+            ]]></search>
+            <add position="replace"><![CDATA[
+			 <?php if ($product['quantity'] <= 0) { ?>
+			         <button type="button" disabled="disabled" style="cursor: not-allowed;pointer-events: none;" onclick="cart.add('<?php echo $product['product_id']; ?>');"><img class="icon icons8-Clear-Shopping-Cart-Filled" width="18" height="18" style="margin-right:5px;margin-bottom:5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAABU0lEQVQ4T5WUsXGDQBBF96OA0LgC4wrkEuQO7ApMCVLCzGZydDMkyBVYqsSoA3dguQMpVML3LHM3gxAYtMkycPu43f/vUBTFk4jciY88z/fh+ZYM59xBRCoRsWyxUNXFLRBbi26Bc24rImtVDeBJzD5QZpWqasDJ0QdK/Y4a4NS4Almhc66KouhrKqSu690QaAvgbSoojuP7IVAG4DOASO4AmE1SksvuN1XNhkApgJ/Wjo4kXxuZgVJEDNoEyWdVrXpBfk4HAA9+/YnkiwdtRGTuIb+qauJc+yj8yfzUmpNZoWkNwJJkYw2S76q6HgNdzKlv8CQfg3H/a607pwsWyX37KA2Cgp+mnrsx0HY2m23yPP8e89QYyNprICSPdkMASLxqpziO09VqZe+HVWupV1l7dmx8zqIoSuq6NkA6qlrHBnOSH3YjlGWZnM/nyu8wC6r9AUQ2n4WcAHeRAAAAAElFTkSuQmCC"><span class="hidden-xs hidden-sm hidden-md"><?php echo $text_out_of_stock; ?></span></button>
+					<?php } else { ?>
+					 <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');"><span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span> <i class="fa fa-shopping-cart"></i></button>
+						
+					<?php } ?>
+            ]]></add>
+        </operation>
+		
+	</file>
+	<!-- category --> 
+	<file path="catalog/controller/product/category.php">
+        <operation>
+            <search><![CDATA[$data['products'][] = array(]]></search>
+            <add position="after"><![CDATA[
+			    'quantity'              => $result['quantity'],
+                'text_out_of_stock'     => $result['stock_status'],
+                ]]></add>
+        </operation>
+    </file> 
+
+    <file path="catalog/view/theme/*/template/product/category.tpl">
+        <operation>
+            <search><![CDATA[<button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>]]></search>
+            <add position="replace"><![CDATA[
+			    <?php if ($product['quantity'] <= 0) { ?>
+                  <button type="button" disabled="disabled" style="cursor: not-allowed;pointer-events: none;" onclick="cart.add('<?php echo $product['product_id']; ?>');"><img class="icon icons8-Clear-Shopping-Cart-Filled" width="18" height="18" style="margin-right:5px;margin-bottom:5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAABU0lEQVQ4T5WUsXGDQBBF96OA0LgC4wrkEuQO7ApMCVLCzGZydDMkyBVYqsSoA3dguQMpVML3LHM3gxAYtMkycPu43f/vUBTFk4jciY88z/fh+ZYM59xBRCoRsWyxUNXFLRBbi26Bc24rImtVDeBJzD5QZpWqasDJ0QdK/Y4a4NS4Almhc66KouhrKqSu690QaAvgbSoojuP7IVAG4DOASO4AmE1SksvuN1XNhkApgJ/Wjo4kXxuZgVJEDNoEyWdVrXpBfk4HAA9+/YnkiwdtRGTuIb+qauJc+yj8yfzUmpNZoWkNwJJkYw2S76q6HgNdzKlv8CQfg3H/a607pwsWyX37KA2Cgp+mnrsx0HY2m23yPP8e89QYyNprICSPdkMASLxqpziO09VqZe+HVWupV1l7dmx8zqIoSuq6NkA6qlrHBnOSH3YjlGWZnM/nyu8wC6r9AUQ2n4WcAHeRAAAAAElFTkSuQmCC"><span class="hidden-xs hidden-sm hidden-md"><?php echo $product['text_out_of_stock']; ?></span></button>
+                <?php } else { ?> 
+                  <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+                <?php } ?>]]></add>
+        </operation>
+    </file> 
+
+ 	<!-- Search -->
+	 <file path="catalog/controller/product/search.php">
+        <operation>
+            <search><![CDATA[$data['products'][] = array(]]></search>
+            <add position="after"><![CDATA[
+			    'quantity'              => $result['quantity'],
+                'text_out_of_stock'     => $result['stock_status'],
+                ]]></add>
+        </operation>
+    </file>
+
+    <file path="catalog/view/theme/*/template/product/search.tpl">
+        <operation>
+            <search><![CDATA[
+			<button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+			]]></search>
+            <add position="replace"><![CDATA[
+			    <?php if ($product['quantity'] <= 0) { ?>
+                  <button type="button" disabled="disabled" style="cursor: not-allowed;pointer-events: none;" onclick="cart.add('<?php echo $product['product_id']; ?>');"><img class="icon icons8-Clear-Shopping-Cart-Filled" width="18" height="18" style="margin-right:5px;margin-bottom:5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAABU0lEQVQ4T5WUsXGDQBBF96OA0LgC4wrkEuQO7ApMCVLCzGZydDMkyBVYqsSoA3dguQMpVML3LHM3gxAYtMkycPu43f/vUBTFk4jciY88z/fh+ZYM59xBRCoRsWyxUNXFLRBbi26Bc24rImtVDeBJzD5QZpWqasDJ0QdK/Y4a4NS4Almhc66KouhrKqSu690QaAvgbSoojuP7IVAG4DOASO4AmE1SksvuN1XNhkApgJ/Wjo4kXxuZgVJEDNoEyWdVrXpBfk4HAA9+/YnkiwdtRGTuIb+qauJc+yj8yfzUmpNZoWkNwJJkYw2S76q6HgNdzKlv8CQfg3H/a607pwsWyX37KA2Cgp+mnrsx0HY2m23yPP8e89QYyNprICSPdkMASLxqpziO09VqZe+HVWupV1l7dmx8zqIoSuq6NkA6qlrHBnOSH3YjlGWZnM/nyu8wC6r9AUQ2n4WcAHeRAAAAAElFTkSuQmCC"><span class="hidden-xs hidden-sm hidden-md"><?php echo $product['text_out_of_stock']; ?></span></button>
+                <?php } else { ?> 
+                  <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+                <?php } ?>]]></add>
+        </operation>
+    </file> 
+	 <!-- manufacturer --> 	
+	<file path="catalog/controller/extension/module/featured.php">
+        <operation>
+            <search><![CDATA[$data['products'][] = array(]]></search>
+            <add position="after"><![CDATA[
+			    'quantity'              => $product_info['quantity'],
+                'text_out_of_stock'     => $product_info['stock_status'],
+                ]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/*/template/extension/module/featured.tpl">	
+		<operation>		 
+           <search><![CDATA[
+            <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+            ]]></search>
+            <add position="replace"><![CDATA[
+			<?php if ($product['quantity'] <= 0) { ?>
+			          <button type="button" disabled="disabled" style="cursor: not-allowed;pointer-events: none;" onclick="cart.add('<?php echo $product['product_id']; ?>');"><img class="icon icons8-Clear-Shopping-Cart-Filled" width="18" height="18" style="margin-right:5px;margin-bottom:5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAABU0lEQVQ4T5WUsXGDQBBF96OA0LgC4wrkEuQO7ApMCVLCzGZydDMkyBVYqsSoA3dguQMpVML3LHM3gxAYtMkycPu43f/vUBTFk4jciY88z/fh+ZYM59xBRCoRsWyxUNXFLRBbi26Bc24rImtVDeBJzD5QZpWqasDJ0QdK/Y4a4NS4Almhc66KouhrKqSu690QaAvgbSoojuP7IVAG4DOASO4AmE1SksvuN1XNhkApgJ/Wjo4kXxuZgVJEDNoEyWdVrXpBfk4HAA9+/YnkiwdtRGTuIb+qauJc+yj8yfzUmpNZoWkNwJJkYw2S76q6HgNdzKlv8CQfg3H/a607pwsWyX37KA2Cgp+mnrsx0HY2m23yPP8e89QYyNprICSPdkMASLxqpziO09VqZe+HVWupV1l7dmx8zqIoSuq6NkA6qlrHBnOSH3YjlGWZnM/nyu8wC6r9AUQ2n4WcAHeRAAAAAElFTkSuQmCC"><span class="hidden-xs hidden-sm hidden-md"><?php echo $product['text_out_of_stock']; ?></span></button>
+					<?php } else { ?>
+					  <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+					    
+					<?php } ?>
+            ]]></add>
+        </operation>
+	</file>	
+	 <!-- Special --> 
+	 <file path="catalog/controller/extension/{module,product}/special.php">
+        <operation>
+            <search><![CDATA[$data['products'][] = array(]]></search>
+            <add position="after"><![CDATA[
+			    'quantity'              => $result['quantity'],
+                'text_out_of_stock'     => $result['stock_status'],
+                ]]></add>
+        </operation>
+    </file>
+	<file path="catalog/view/theme/*/template/extension/module/special.tpl">	
+		<operation>		 
+           <search><![CDATA[
+            <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+            ]]></search>
+            <add position="replace"><![CDATA[
+			<?php if ($product['quantity'] <= 0) { ?>
+			        <button type="button" disabled="disabled" style="cursor: not-allowed;pointer-events: none;" onclick="cart.add('<?php echo $product['product_id']; ?>');"><img class="icon icons8-Clear-Shopping-Cart-Filled" width="18" height="18" style="margin-right:5px;margin-bottom:5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAABU0lEQVQ4T5WUsXGDQBBF96OA0LgC4wrkEuQO7ApMCVLCzGZydDMkyBVYqsSoA3dguQMpVML3LHM3gxAYtMkycPu43f/vUBTFk4jciY88z/fh+ZYM59xBRCoRsWyxUNXFLRBbi26Bc24rImtVDeBJzD5QZpWqasDJ0QdK/Y4a4NS4Almhc66KouhrKqSu690QaAvgbSoojuP7IVAG4DOASO4AmE1SksvuN1XNhkApgJ/Wjo4kXxuZgVJEDNoEyWdVrXpBfk4HAA9+/YnkiwdtRGTuIb+qauJc+yj8yfzUmpNZoWkNwJJkYw2S76q6HgNdzKlv8CQfg3H/a607pwsWyX37KA2Cgp+mnrsx0HY2m23yPP8e89QYyNprICSPdkMASLxqpziO09VqZe+HVWupV1l7dmx8zqIoSuq6NkA6qlrHBnOSH3YjlGWZnM/nyu8wC6r9AUQ2n4WcAHeRAAAAAElFTkSuQmCC"><span class="hidden-xs hidden-sm hidden-md"><?php echo $product['text_out_of_stock']; ?></span></button>
+					<?php } else { ?>
+					 <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+					<?php } ?>
+            ]]></add>
+        </operation>
+	</file>	
+	<file path="catalog/view/theme/*/template/extension/product/special.tpl">	
+		<operation>		 
+           <search><![CDATA[
+            <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+            ]]></search>
+            <add position="replace"><![CDATA[
+			<?php if ($product['quantity'] <= 0) { ?>
+			        <button type="button" disabled="disabled" style="cursor: not-allowed;pointer-events: none;" onclick="cart.add('<?php echo $product['product_id']; ?>');"><img class="icon icons8-Clear-Shopping-Cart-Filled" width="18" height="18" style="margin-right:5px;margin-bottom:5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAABU0lEQVQ4T5WUsXGDQBBF96OA0LgC4wrkEuQO7ApMCVLCzGZydDMkyBVYqsSoA3dguQMpVML3LHM3gxAYtMkycPu43f/vUBTFk4jciY88z/fh+ZYM59xBRCoRsWyxUNXFLRBbi26Bc24rImtVDeBJzD5QZpWqasDJ0QdK/Y4a4NS4Almhc66KouhrKqSu690QaAvgbSoojuP7IVAG4DOASO4AmE1SksvuN1XNhkApgJ/Wjo4kXxuZgVJEDNoEyWdVrXpBfk4HAA9+/YnkiwdtRGTuIb+qauJc+yj8yfzUmpNZoWkNwJJkYw2S76q6HgNdzKlv8CQfg3H/a607pwsWyX37KA2Cgp+mnrsx0HY2m23yPP8e89QYyNprICSPdkMASLxqpziO09VqZe+HVWupV1l7dmx8zqIoSuq6NkA6qlrHBnOSH3YjlGWZnM/nyu8wC6r9AUQ2n4WcAHeRAAAAAElFTkSuQmCC"><span class="hidden-xs hidden-sm hidden-md"><?php echo $product['text_out_of_stock']; ?></span></button>
+					<?php } else { ?>
+					<button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+					<?php } ?>
+            ]]></add>
+        </operation>
+	</file>	
+	 <!-- latest --> 
+	 <file path="catalog/controller/extension/module/latest.php">
+        <operation>
+            <search><![CDATA[$data['products'][] = array(]]></search>
+            <add position="after"><![CDATA[
+			    'quantity'              => $result['quantity'],
+                'text_out_of_stock'     => $result['stock_status'],
+                ]]></add>
+        </operation>
+    </file>
+	<file path="catalog/view/theme/*/template/extension/module/latest.tpl">	
+		<operation>		 
+           <search><![CDATA[
+            <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+            ]]></search>
+            <add position="replace"><![CDATA[
+			<?php if ($product['quantity'] <= 0) { ?>
+			        <button type="button" disabled="disabled" style="cursor: not-allowed;pointer-events: none;" onclick="cart.add('<?php echo $product['product_id']; ?>');"><img class="icon icons8-Clear-Shopping-Cart-Filled" width="18" height="18" style="margin-right:5px;margin-bottom:5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAABU0lEQVQ4T5WUsXGDQBBF96OA0LgC4wrkEuQO7ApMCVLCzGZydDMkyBVYqsSoA3dguQMpVML3LHM3gxAYtMkycPu43f/vUBTFk4jciY88z/fh+ZYM59xBRCoRsWyxUNXFLRBbi26Bc24rImtVDeBJzD5QZpWqasDJ0QdK/Y4a4NS4Almhc66KouhrKqSu690QaAvgbSoojuP7IVAG4DOASO4AmE1SksvuN1XNhkApgJ/Wjo4kXxuZgVJEDNoEyWdVrXpBfk4HAA9+/YnkiwdtRGTuIb+qauJc+yj8yfzUmpNZoWkNwJJkYw2S76q6HgNdzKlv8CQfg3H/a607pwsWyX37KA2Cgp+mnrsx0HY2m23yPP8e89QYyNprICSPdkMASLxqpziO09VqZe+HVWupV1l7dmx8zqIoSuq6NkA6qlrHBnOSH3YjlGWZnM/nyu8wC6r9AUQ2n4WcAHeRAAAAAElFTkSuQmCC"><span class="hidden-xs hidden-sm hidden-md"><?php echo $product['text_out_of_stock']; ?></span></button>
+					<?php } else { ?>
+					  <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+					<?php } ?>
+            ]]></add>
+        </operation>
+	</file>	
+    <!-- bestseller --> 
+	 <file path="catalog/controller/extension/module/bestseller.php">
+        <operation>
+            <search><![CDATA[$data['products'][] = array(]]></search>
+            <add position="after"><![CDATA[
+			    'quantity'              => $result['quantity'],
+                'text_out_of_stock'     => $result['stock_status'],
+                ]]></add>
+        </operation>
+    </file>
+	<file path="catalog/view/theme/*/template/extension/module/bestseller.tpl">	
+		<operation>		 
+           <search><![CDATA[
+            <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+            ]]></search>
+            <add position="replace"><![CDATA[
+			<?php if ($product['quantity'] <= 0) { ?>
+			        <button type="button" disabled="disabled" style="cursor: not-allowed;pointer-events: none;" onclick="cart.add('<?php echo $product['product_id']; ?>');"><img class="icon icons8-Clear-Shopping-Cart-Filled" width="18" height="18" style="margin-right:5px;margin-bottom:5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAABU0lEQVQ4T5WUsXGDQBBF96OA0LgC4wrkEuQO7ApMCVLCzGZydDMkyBVYqsSoA3dguQMpVML3LHM3gxAYtMkycPu43f/vUBTFk4jciY88z/fh+ZYM59xBRCoRsWyxUNXFLRBbi26Bc24rImtVDeBJzD5QZpWqasDJ0QdK/Y4a4NS4Almhc66KouhrKqSu690QaAvgbSoojuP7IVAG4DOASO4AmE1SksvuN1XNhkApgJ/Wjo4kXxuZgVJEDNoEyWdVrXpBfk4HAA9+/YnkiwdtRGTuIb+qauJc+yj8yfzUmpNZoWkNwJJkYw2S76q6HgNdzKlv8CQfg3H/a607pwsWyX37KA2Cgp+mnrsx0HY2m23yPP8e89QYyNprICSPdkMASLxqpziO09VqZe+HVWupV1l7dmx8zqIoSuq6NkA6qlrHBnOSH3YjlGWZnM/nyu8wC6r9AUQ2n4WcAHeRAAAAAElFTkSuQmCC"><span class="hidden-xs hidden-sm hidden-md"><?php echo $product['text_out_of_stock']; ?></span></button>
+					<?php } else { ?>
+					  <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+					<?php } ?>
+            ]]></add>
+        </operation>
+	</file>	
+	<!-- compare list --> 	
+	<file path="catalog/controller/product/compare.php">
+        <operation>
+            <search><![CDATA[$data['products'][$product_id] = array(]]></search>
+            <add position="after"><![CDATA[
+			    'quantity'              => $product_info['quantity'],
+                'text_out_of_stock'     => $product_info['stock_status'],
+                ]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/*/template/product/compare.tpl">		
+	<operation>
+            <search><![CDATA[
+            <input type="button" value="<?php echo $button_cart; ?>" class="btn btn-primary btn-block" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');" />
+            ]]></search>
+            <add position="replace"><![CDATA[
+			<?php if ($product['quantity'] <= 0) { ?>
+		     	<input type="button" disabled="disabled" style="cursor: not-allowed;pointer-events: none;"  value="<?php echo $product['text_out_of_stock']; ?>" class="btn btn-primary btn-block" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');" />		
+					<?php } else { ?>
+				<input type="button" value="<?php echo $button_cart; ?>" class="btn btn-primary btn-block" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');" />
+					<?php } ?>
+            ]]></add>
+        </operation>
+	</file>
+	<!-- wishlist -->
+	<file path="catalog/controller/account/wishlist.php">
+        <operation>
+            <search><![CDATA[$data['products'][] = array(]]></search>
+            <add position="after"><![CDATA[
+			    'quantity'              => $product_info['quantity'],
+                'text_out_of_stock'     => $product_info['stock_status'],
+                ]]></add>
+        </operation>
+    </file>
+	<file path="catalog/view/theme/*/template/account/wishlist.tpl">		
+	<operation>
+            <search><![CDATA[
+            <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>');" data-toggle="tooltip" title="<?php echo $button_cart; ?>" class="btn btn-primary"><i class="fa fa-shopping-cart"></i></button>
+            ]]></search>
+            <add position="replace"><![CDATA[
+			<?php if ($product['quantity'] <= 0) { ?>
+			       	
+					<button type="button" disabled="disabled" onclick="cart.add('<?php echo $product['product_id']; ?>');" data-toggle="tooltip" title="<?php echo $button_cart; ?>" class="btn btn-primary"><img class="icon icons8-Clear-Shopping-Cart-Filled" width="16" height="16" style="margin-right:0px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAABHUlEQVQ4T5WU0VHDMBBEdysAKkhSASkhdBAqwCWkBFNBkgqCK8HugA4gHUAFx6znbkajWLF8P5It6cl3u2ea2RbAAzxIDjFfMtLMfgD0ADQqdiR3SyDay/yAmX0AaEkGuIo5BWrGG0gBq2MKtPYvGoG1cQPSQTNTzT5rIQC6EkhpvS0APZVASuuSgDoAsonSPuRrJJsSSAe+E9AvgFd/Pjo0ll9I9pMgr5PkX/nuPwB7n58APPv8SlKX3voornE/RZ1UszS1sMY7yXYOlNdpqvabMO691PI65aAhbaUiKPxU23dzINXiRPJrzlNzIKUXEFlASj66alJyTVLvy6ol6vVKT23jo0QQTACB7quW2UC+OeuPYGaCqBcFakK1f1E7bz2cZvFjAAAAAElFTkSuQmCC"></button>
+					<?php } else { ?>
+					<button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>');" data-toggle="tooltip" title="<?php echo $button_cart; ?>" class="btn btn-primary"><i class="fa fa-shopping-cart"></i></button>
+					<?php } ?>
+            ]]></add>
+        </operation>
+	</file>	
+</modification>

@@ -36,6 +36,18 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');
 		$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
 
+				
+    		if (file_exists('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/multishipping.css')) {
+          $multishipping_css = 'catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/multishipping.css'; 
+    		} else {
+          $multishipping_css = 'catalog/view/theme/default/stylesheet/multishipping.css';
+    		}
+
+        $this->document->addStyle($multishipping_css);
+        //$this->document->addScript('catalog/view/javascript/jquery/typehead.js');
+      
+			
+
 		// Required by klarna
 		if ($this->config->get('klarna_account') || $this->config->get('klarna_invoice')) {
 			$this->document->addScript('http://cdn.klarna.com/public/kitt/toc/v1.0/js/klarna.terms.min.js');
