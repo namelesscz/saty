@@ -14,15 +14,15 @@ class ControllerExtensionModuleCarouselItem extends Controller {
 		}
 		$data['carousel_item'] = array();
 		$lang_id = $this->config->get('config_language_id');
-		
-		foreach($setting['items'] as $item) {
-			if(isset($item[$lang_id]['html'])) {
-				$data['carousel_item'][]['content'] = html_entity_decode($item[$lang_id]['html'], ENT_QUOTES, 'UTF-8');
-			} else {
-				$data['carousel_item'][]['content'] = 'You must set block content in the module Carousel Item!';
+		if (array_key_exists('items',$setting) && count($setting['items']) ){
+			foreach($setting['items'] as $item) {
+				if(isset($item[$lang_id]['html'])) {
+					$data['carousel_item'][]['content'] = html_entity_decode($item[$lang_id]['html'], ENT_QUOTES, 'UTF-8');
+				} else {
+					$data['carousel_item'][]['content'] = 'You must set block content in the module Carousel Item!';
+				}
 			}
 		}
-		
 		return $this->load->view('extension/module/carousel_item', $data);
 	}
 }
