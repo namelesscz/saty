@@ -175,14 +175,11 @@ class ControllerProductCategory extends Controller {
 				'limit'              => $limit
 			);
 
-			if (isset($this->request->get['fw'])) {
-				$filter_data['filter_waist'] = intval($this->request->get['fw']);
-			}
-			if (isset($this->request->get['fb'])) {
-				$filter_data['filter_breast'] = intval($this->request->get['fb']);
-			}
 			if (isset($this->request->get['filter_availability'])) {
 				$filter_data['filter_availability'] = $this->request->get['filter_availability'];
+			}
+			if (isset($this->request->get['filter_size'])) {
+				$filter_data['filter_size'] = $this->request->get['filter_size'];
 			}
 
 			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);

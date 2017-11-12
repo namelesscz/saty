@@ -1,4 +1,128 @@
-2017-10-19 19:28:54 - PHP Notice:  Undefined variable: product in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\product\product.tpl on line 817
-2017-10-19 19:28:54 - PHP Notice:  Undefined variable: product in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\product\product.tpl on line 1014
-2017-10-19 19:29:50 - PHP Notice:  Undefined variable: product in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\product\product.tpl on line 817
-2017-10-19 19:29:50 - PHP Notice:  Undefined variable: product in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\product\product.tpl on line 1014
+2017-10-16 19:48:06 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:06 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:06 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:06 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:07 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:08 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:09 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:10 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:10 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:10 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:10 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:10 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-16 19:48:10 - PHP Notice:  Undefined index:  in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/system/library/cart/currency.php on line 37
+2017-10-17 11:41:33 - PHP Notice:  Undefined variable: text_none in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/guest.tpl on line 300
+2017-10-17 11:41:33 - PHP Notice:  Undefined variable: text_none in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/guest_shipping.tpl on line 214
+2017-10-17 11:41:33 - PHP Notice:  Undefined variable: button_login in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/login.tpl on line 14
+2017-10-17 11:41:33 - PHP Notice:  Undefined variable: button_continue in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/terms.tpl on line 7
+2017-10-17 11:41:38 - PHP Notice:  Undefined variable: button_update in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/cart.tpl on line 36
+2017-10-17 11:41:38 - PHP Notice:  Undefined variable: button_remove in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/cart.tpl on line 37
+2017-10-17 11:50:22 - PHP Notice:  Undefined variable: text_none in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/guest.tpl on line 300
+2017-10-17 11:50:22 - PHP Notice:  Undefined variable: text_none in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/guest_shipping.tpl on line 214
+2017-10-17 11:50:22 - PHP Notice:  Undefined variable: button_login in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/login.tpl on line 14
+2017-10-17 11:50:22 - PHP Notice:  Undefined variable: button_continue in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/terms.tpl on line 7
+2017-10-17 11:50:27 - PHP Notice:  Undefined variable: button_update in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/cart.tpl on line 36
+2017-10-17 11:50:27 - PHP Notice:  Undefined variable: button_remove in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/cart.tpl on line 37
+2017-10-17 11:53:37 - PHP Notice:  Undefined variable: text_none in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/guest.tpl on line 300
+2017-10-17 11:53:37 - PHP Notice:  Undefined variable: text_none in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/guest_shipping.tpl on line 214
+2017-10-17 11:53:37 - PHP Notice:  Undefined variable: button_login in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/login.tpl on line 14
+2017-10-17 11:53:37 - PHP Notice:  Undefined variable: button_continue in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/terms.tpl on line 7
+2017-10-17 11:53:42 - PHP Notice:  Undefined variable: button_update in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/cart.tpl on line 36
+2017-10-17 11:53:42 - PHP Notice:  Undefined variable: button_remove in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/catalog/view/theme/default/template/quickcheckout/cart.tpl on line 37
+2017-10-22 18:22:46 - PHP Notice:  Undefined index: search in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/vqmod/vqcache/vq2-catalog_controller_product_product.php on line 409
+2017-10-31 22:14:20 - PHP Warning:  ftp_login(): Login incorrect. in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/vqmod/vqcache/vq2-admin_controller_extension_installer.php on line 294
+2017-11-11 17:50:04 - PHP Notice:  Undefined variable: token in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/admin/view/template/extension/module/quickcheckout.tpl on line 812
+2017-11-11 17:50:04 - PHP Notice:  Undefined variable: token in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/admin/view/template/extension/module/quickcheckout.tpl on line 909
+2017-11-11 17:53:46 - PHP Notice:  Undefined index: option_sku in /data/web/virtuals/4411/virtual/www/domains/saty.ppc-systemy.cz/vqmod/vqcache/vq2-catalog_model_checkout_order.php on line 16
+2017-11-11 19:46:33 - PHP Notice:  Undefined index: option_sku in D:\_data\www\saty_new_dev\vqmod\vqcache\vq2-catalog_model_checkout_order.php on line 16
+2017-11-11 19:51:28 - PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in D:\_data\www\saty_new_dev\system\library\mail.php on line 158
+2017-11-11 19:51:29 - PHP Notice:  Undefined variable: order_id in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\common\success.tpl on line 21
+2017-11-12 13:11:25 - PHP Notice:  Undefined variable: filter_availabilty_label in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 13
+2017-11-12 13:11:25 - PHP Notice:  Undefined variable: filter_availabilities in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 15
+2017-11-12 13:11:25 - PHP Warning:  Invalid argument supplied for foreach() in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 15
+2017-11-12 13:11:25 - PHP Notice:  Undefined variable: filter_availabilty_label in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 13
+2017-11-12 13:11:25 - PHP Notice:  Undefined variable: filter_availabilities in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 15
+2017-11-12 13:11:25 - PHP Warning:  Invalid argument supplied for foreach() in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 15
+2017-11-12 13:13:13 - PHP Notice:  Undefined variable: filter_availabilty_label in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 13
+2017-11-12 13:13:13 - PHP Notice:  Undefined variable: filter_availabilities in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 15
+2017-11-12 13:13:13 - PHP Warning:  Invalid argument supplied for foreach() in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 15
+2017-11-12 13:13:13 - PHP Notice:  Undefined variable: filter_availabilty_label in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 13
+2017-11-12 13:13:13 - PHP Notice:  Undefined variable: filter_availabilities in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 15
+2017-11-12 13:13:13 - PHP Warning:  Invalid argument supplied for foreach() in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 15
+2017-11-12 13:13:33 - PHP Notice:  Undefined variable: filter_availability_label in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 13
+2017-11-12 13:13:33 - PHP Notice:  Undefined variable: filter_availabilities in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 15
+2017-11-12 13:13:33 - PHP Warning:  Invalid argument supplied for foreach() in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 15
+2017-11-12 13:13:33 - PHP Notice:  Undefined variable: filter_availability_label in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 13
+2017-11-12 13:13:33 - PHP Notice:  Undefined variable: filter_availabilities in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 15
+2017-11-12 13:13:33 - PHP Warning:  Invalid argument supplied for foreach() in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 15
+2017-11-12 13:16:48 - PHP Notice:  Undefined variable: filter_availability in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 16
+2017-11-12 13:16:48 - PHP Warning:  in_array() expects parameter 2 to be array, null given in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 16
+2017-11-12 13:16:48 - PHP Notice:  Undefined variable: filter_availability in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 16
+2017-11-12 13:16:48 - PHP Warning:  in_array() expects parameter 2 to be array, null given in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 16
+2017-11-12 13:16:48 - PHP Notice:  Undefined variable: filter_availability in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 16
+2017-11-12 13:16:48 - PHP Warning:  in_array() expects parameter 2 to be array, null given in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 16
+2017-11-12 13:16:48 - PHP Notice:  Undefined variable: filter_availability in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 16
+2017-11-12 13:16:48 - PHP Warning:  in_array() expects parameter 2 to be array, null given in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 16
+2017-11-12 13:18:25 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 16
+2017-11-12 13:18:25 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 16
+2017-11-12 13:18:25 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 16
+2017-11-12 13:18:25 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\_data\www\saty_new_dev\catalog\view\theme\fastor\template\extension\module\filter.tpl on line 16
+2017-11-12 13:21:48 - PHP Warning:  implode(): Invalid arguments passed in D:\_data\www\saty_new_dev\vqmod\vqcache\vq2-catalog_model_catalog_product.php on line 122
+2017-11-12 13:22:33 - PHP Warning:  implode(): Invalid arguments passed in D:\_data\www\saty_new_dev\vqmod\vqcache\vq2-catalog_model_catalog_product.php on line 122
+2017-11-12 13:23:03 - PHP Warning:  implode(): Invalid arguments passed in D:\_data\www\saty_new_dev\vqmod\vqcache\vq2-catalog_model_catalog_product.php on line 122
+2017-11-12 13:23:19 - PHP Warning:  implode(): Invalid arguments passed in D:\_data\www\saty_new_dev\vqmod\vqcache\vq2-catalog_model_catalog_product.php on line 122
+2017-11-12 13:23:22 - PHP Warning:  implode(): Invalid arguments passed in D:\_data\www\saty_new_dev\vqmod\vqcache\vq2-catalog_model_catalog_product.php on line 122
+2017-11-12 13:23:48 - PHP Warning:  implode(): Invalid arguments passed in D:\_data\www\saty_new_dev\vqmod\vqcache\vq2-catalog_model_catalog_product.php on line 122
+2017-11-12 13:25:40 - PHP Warning:  implode(): Invalid arguments passed in D:\_data\www\saty_new_dev\vqmod\vqcache\vq2-catalog_model_catalog_product.php on line 122
+2017-11-12 15:27:04 - PHP Notice:  Undefined index: text in D:\_data\www\saty_new_dev\catalog\view\theme\default\template\quickcheckout\payment_method.tpl on line 19
+2017-11-12 15:27:04 - PHP Notice:  Undefined index: text in D:\_data\www\saty_new_dev\catalog\view\theme\default\template\quickcheckout\payment_method.tpl on line 19
+2017-11-12 15:57:56 - PHP Notice:  Indirect modification of overloaded property ControllerQuickCheckoutCheckout::$sesssion has no effect in D:\_data\www\saty_new_dev\catalog\controller\quickcheckout\checkout.php on line 212
+2017-11-12 15:57:56 - PHP Warning:  Creating default object from empty value in D:\_data\www\saty_new_dev\catalog\controller\quickcheckout\checkout.php on line 212
+2017-11-12 16:19:56 - PHP Warning:  Illegal string offset 'code' in D:\_data\www\saty_new_dev\catalog\model\extension\payment\multishipping_cod.php on line 15

@@ -46,27 +46,12 @@ class ControllerExtensionModuleFilter extends Controller {
 
 			$data['filter_groups'] = array();
 
-			if (isset($this->request->get['fw'])) {
-				$data['filter_waist'] = intval($this->request->get['fw']);
-			} else {
-				$data['filter_waist'] = '';
-			}
-			if (isset($this->request->get['fb'])) {
-				$data['filter_breast'] = intval($this->request->get['fb']);
-			} else {
-				$data['filter_breast'] = '';
-			}
-
-			if ($data['filter_breast'] && $data['filter_waist']) {
-				$data['filter_size_selected_label'] = $this->language->get('filter_size_selected_label');
-				$data['filter_size_selected'] = $this->model_catalog_product->getFilterSize($data['filter_breast'],$data['filter_waist']);
-			}
-
-			$data['filter_waist_label'] = $this->language->get('filter_waist_label');
-			$data['filter_breast_label'] = $this->language->get('filter_breast_label');
 			$data['filter_size_label'] = $this->language->get('filter_size_label');
-			$data['filter_availability_label'] = $this->language->get('filter_availability_label');
+			$data['filter_sizes'] = $this->model_catalog_category->getFilterBySize($category_id);
+			$data['filter_size']= isset($this->request->get['filter_size'])? explode(',',$this->request->get['filter_size']) : array();
 
+
+			$data['filter_availability_label'] = $this->language->get('filter_availability_label');
 			$data['filter_availabilities'] = $this->model_catalog_category->getFilterByAvailability($category_id);
 			$data['filter_availability']= isset($this->request->get['filter_availability'])? explode(',',$this->request->get['filter_availability']) : array();
 

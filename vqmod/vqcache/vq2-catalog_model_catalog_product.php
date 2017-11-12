@@ -4,36 +4,36 @@ class ModelCatalogProduct extends Model {
 		$this->db->query("UPDATE " . DB_PREFIX . "product SET viewed = (viewed + 1) WHERE product_id = '" . (int)$product_id . "'");
 	}
 
-	public function getFilterSize($breast,$waist){
-	$_a = array(6 => 'XS', 8 => 'S', 10 => 'M', 12 => 'L', 14 => 'XL', 16 => 'XXL', 20 => ‘XXXL’, 22 => ‘4XL’, 24 => ‘5XL’, 26 => ‘6XL’, 28 => ‘7XL’, );
- 	$to_ret =4;
-
-	if($breast >=144) { $to_ret =max(28,$to_ret);}
-	if($breast >=136) { $to_ret =max(26,$to_ret);}
-	if($breast >=128.5) { $to_ret =max(24,$to_ret);}
-	if($breast >=123.5) { $to_ret =max(22,$to_ret);}
-	if($breast >=118) { $to_ret =max(20,$to_ret);}
-	if($breast >=112) { $to_ret =max(16,$to_ret);}
-	if($breast >=106) { $to_ret =max(14,$to_ret);}
-	if($breast >=101) { $to_ret =max(12,$to_ret);}
-	if($breast >=96)  { $to_ret =max(10,$to_ret);}
-	if($breast >=91)  { $to_ret =max( 8,$to_ret);}
-	if($breast >=86)  { $to_ret =max( 6,$to_ret);}
-
-	if($waist >=127)  { $to_ret =max(28,$to_ret);}
-	if($waist >=120)  { $to_ret =max(26,$to_ret);}
-	if($waist >=112)  { $to_ret =max(24,$to_ret);}
-	if($waist >=106)  { $to_ret =max(22,$to_ret);}
-	if($waist >=100.5)  { $to_ret =max(20,$to_ret);}
-	if($waist >=96)  { $to_ret =max(16,$to_ret);}
-	if($waist >=91)  { $to_ret =max(14,$to_ret);}
-	if($waist >=86)  { $to_ret =max(12,$to_ret);}
-	if($waist >=81)  { $to_ret =max(10,$to_ret);}
-	if($waist >=76)  { $to_ret =max( 8,$to_ret);}
-	if($waist >=71)  { $to_ret =max( 6,$to_ret);}
-
-	return $_a[$to_ret];
-}
+	#public function getFilterSize($breast,$waist){
+	#$_a = array(6 => 'XS', 8 => 'S', 10 => 'M', 12 => 'L', 14 => 'XL', 16 => 'XXL', 20 => ‘XXXL’, 22 => ‘4XL’, 24 => ‘5XL’, 26 => ‘6XL’, 28 => ‘7XL’, );
+ 	#$to_ret =4;
+#
+	#if($breast >=144) { $to_ret =max(28,$to_ret);}
+	#if($breast >=136) { $to_ret =max(26,$to_ret);}
+	#if($breast >=128.5) { $to_ret =max(24,$to_ret);}
+	#if($breast >=123.5) { $to_ret =max(22,$to_ret);}
+	#if($breast >=118) { $to_ret =max(20,$to_ret);}
+	#if($breast >=112) { $to_ret =max(16,$to_ret);}
+	#if($breast >=106) { $to_ret =max(14,$to_ret);}
+	#if($breast >=101) { $to_ret =max(12,$to_ret);}
+	#if($breast >=96)  { $to_ret =max(10,$to_ret);}
+	#if($breast >=91)  { $to_ret =max( 8,$to_ret);}
+	#if($breast >=86)  { $to_ret =max( 6,$to_ret);}
+#
+	#if($waist >=127)  { $to_ret =max(28,$to_ret);}
+	#if($waist >=120)  { $to_ret =max(26,$to_ret);}
+	#if($waist >=112)  { $to_ret =max(24,$to_ret);}
+	#if($waist >=106)  { $to_ret =max(22,$to_ret);}
+	#if($waist >=100.5)  { $to_ret =max(20,$to_ret);}
+	#if($waist >=96)  { $to_ret =max(16,$to_ret);}
+	#if($waist >=91)  { $to_ret =max(14,$to_ret);}
+	#if($waist >=86)  { $to_ret =max(12,$to_ret);}
+	#if($waist >=81)  { $to_ret =max(10,$to_ret);}
+	#if($waist >=76)  { $to_ret =max( 8,$to_ret);}
+	#if($waist >=71)  { $to_ret =max( 6,$to_ret);}
+#
+	#return $_a[$to_ret];
+#}
 
 	public function getProduct($product_id) {
 		$query = $this->db->query("SELECT DISTINCT *, pd.name AS name, p.image, m.name AS manufacturer, (SELECT price FROM " . DB_PREFIX . "product_discount pd2 WHERE pd2.product_id = p.product_id AND pd2.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND pd2.quantity = '1' AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) AS discount, (SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) AS special, (SELECT points FROM " . DB_PREFIX . "product_reward pr WHERE pr.product_id = p.product_id AND pr.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "') AS reward, (SELECT ss.name FROM " . DB_PREFIX . "stock_status ss WHERE ss.stock_status_id = p.stock_status_id AND ss.language_id = '" . (int)$this->config->get('config_language_id') . "') AS stock_status, (SELECT wcd.unit FROM " . DB_PREFIX . "weight_class_description wcd WHERE p.weight_class_id = wcd.weight_class_id AND wcd.language_id = '" . (int)$this->config->get('config_language_id') . "') AS weight_class, (SELECT lcd.unit FROM " . DB_PREFIX . "length_class_description lcd WHERE p.length_class_id = lcd.length_class_id AND lcd.language_id = '" . (int)$this->config->get('config_language_id') . "') AS length_class, (SELECT AVG(rating) AS total FROM " . DB_PREFIX . "review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating, (SELECT COUNT(*) AS total FROM " . DB_PREFIX . "review r2 WHERE r2.product_id = p.product_id AND r2.status = '1' GROUP BY r2.product_id) AS reviews, p.sort_order FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) LEFT JOIN " . DB_PREFIX . "manufacturer m ON (p.manufacturer_id = m.manufacturer_id) WHERE p.product_id = '" . (int)$product_id . "' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");
@@ -125,9 +125,9 @@ class ModelCatalogProduct extends Model {
 				}
 				$sql .= " AND pf.attribute_id IN (" . implode(',', $implode) . ")";
 			}
-			if (isset($data['filter_breast']) && isset($data['filter_waist']) ){
-				$size = $this->getFilterSize(intval($data['filter_breast']),intval($data['filter_waist']));
-				$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value pov JOIN '.DB_PREFIX.'option_value_description ovd ON pov.option_value_id=ovd.option_value_id  WHERE language_id='.(int)$this->config->get('config_language_id') .' AND name like "'.$size.'%")';
+			if (isset($data['filter_size'])){
+				$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value WHERE option_value_id IN ('.$data['filter_size'].'))';
+				#$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value pov JOIN '.DB_PREFIX.'option_value_description ovd ON pov.option_value_id=ovd.option_value_id  WHERE language_id='.(int)$this->config->get('config_language_id') .' AND name like "'.$size.'%")';
 			}
 			if (isset($data['filter_availability'])) {
 				$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value WHERE option_value_id IN ('.$data['filter_availability'].'))';
