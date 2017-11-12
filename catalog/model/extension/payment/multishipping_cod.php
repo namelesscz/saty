@@ -4,7 +4,7 @@ class ModelExtensionPaymentMultiShippingCOD extends Model
     public function getMethod($address, $total)
     {   
         $method_data = array();
-				$shipping = "multishipping_cod";
+				$shipping = array("code" => "multishipping.1");
 				if (!empty($this->session->data['shipping_method'])) {
 					$shipping = $this->session->data['shipping_method'];
 				}

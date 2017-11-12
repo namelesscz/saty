@@ -5,23 +5,34 @@ class ModelCatalogProduct extends Model {
 	}
 
 	public function getFilterSize($breast,$waist){
-  $_a = array(6 => 'XS', 8 => 'S', 10 => 'M', 12 => 'L', 14 => 'XL', 16 => 'XXL');
-  $to_ret =4;
-  if($breast >=112) { $to_ret =max(16,$to_ret);}
-  if($breast >=106) { $to_ret =max(14,$to_ret);}
-  if($breast >=101) { $to_ret =max(12,$to_ret);}
-  if($breast >=96)  { $to_ret =max(10,$to_ret);}
-  if($breast >=91)  { $to_ret =max( 8,$to_ret);}
-  if($breast >=86)  { $to_ret =max( 6,$to_ret);}
+	$_a = array(6 => 'XS', 8 => 'S', 10 => 'M', 12 => 'L', 14 => 'XL', 16 => 'XXL', 20 => ‘XXXL’, 22 => ‘4XL’, 24 => ‘5XL’, 26 => ‘6XL’, 28 => ‘7XL’, );
+ 	$to_ret =4;
 
-  if($waist >=96)  { $to_ret =max(16,$to_ret);}
-  if($waist >=91)  { $to_ret =max(14,$to_ret);}
-  if($waist >=86)  { $to_ret =max(12,$to_ret);}
-  if($waist >=81)  { $to_ret =max(10,$to_ret);}
-  if($waist >=76)  { $to_ret =max( 8,$to_ret);}
-  if($waist >=71)  { $to_ret =max( 6,$to_ret);}
+	if($breast >=144) { $to_ret =max(28,$to_ret);}
+	if($breast >=136) { $to_ret =max(26,$to_ret);}
+	if($breast >=128.5) { $to_ret =max(24,$to_ret);}
+	if($breast >=123.5) { $to_ret =max(22,$to_ret);}
+	if($breast >=118) { $to_ret =max(20,$to_ret);}
+	if($breast >=112) { $to_ret =max(16,$to_ret);}
+	if($breast >=106) { $to_ret =max(14,$to_ret);}
+	if($breast >=101) { $to_ret =max(12,$to_ret);}
+	if($breast >=96)  { $to_ret =max(10,$to_ret);}
+	if($breast >=91)  { $to_ret =max( 8,$to_ret);}
+	if($breast >=86)  { $to_ret =max( 6,$to_ret);}
 
-  return $_a[$to_ret];
+	if($waist >=127)  { $to_ret =max(28,$to_ret);}
+	if($waist >=120)  { $to_ret =max(26,$to_ret);}
+	if($waist >=112)  { $to_ret =max(24,$to_ret);}
+	if($waist >=106)  { $to_ret =max(22,$to_ret);}
+	if($waist >=100.5)  { $to_ret =max(20,$to_ret);}
+	if($waist >=96)  { $to_ret =max(16,$to_ret);}
+	if($waist >=91)  { $to_ret =max(14,$to_ret);}
+	if($waist >=86)  { $to_ret =max(12,$to_ret);}
+	if($waist >=81)  { $to_ret =max(10,$to_ret);}
+	if($waist >=76)  { $to_ret =max( 8,$to_ret);}
+	if($waist >=71)  { $to_ret =max( 6,$to_ret);}
+
+	return $_a[$to_ret];
 }
 
 	public function getProduct($product_id) {
