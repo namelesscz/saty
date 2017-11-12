@@ -270,7 +270,7 @@ include('catalog/view/theme/'.$config->get($config->get('config_theme') . '_dire
      			            <option value=""><?php echo $text_select; ?></option>
      			            <?php foreach ($option['product_option_value'] as $option_value) { ?>
      			            <option value="<?php echo $option_value['product_option_value_id']; ?>" <?php if ($option_value_id == $option_value['product_option_value_id']){ echo "selected='selected'"; } ?>><?php echo $option_value['name']; ?>
- <?php if ($option_value['option_sku']) { ?>
+ <?php if ($option_value['option_sku'] && 0) { ?>
                     (<?php echo 'SKU: '. $option_value['option_sku']; ?>)
                 <?php } ?> 
      			            <?php if ($option_value['price']) { ?>
@@ -293,7 +293,7 @@ include('catalog/view/theme/'.$config->get($config->get('config_theme') . '_dire
      			                 <?php if ($option_value['image']) { ?>
      			                 <img src="<?php echo $option_value['image']; ?>" alt="<?php echo $option_value['name'] . ($option_value['price'] ? ' ' . $option_value['price_prefix'] . $option_value['price'] : ''); ?>"  style="display: block;border-radius: 100px;-webkit-border-radius: 100px;-moz-border-radius: 100px" class="img-thumbnail" /> 
      			                 <?php } ?> 
- <?php if ($option_value['option_sku']) { ?>
+ <?php if ($option_value['option_sku'] && 0) { ?>
                     (<?php echo 'SKU: '. $option_value['option_sku']; ?>)
                     <?php } ?> 
      			                 <?php if($theme_options->get( 'product_page_radio_style' ) != 1) { ?><?php if ($option_value['price']) { ?>
@@ -328,7 +328,7 @@ include('catalog/view/theme/'.$config->get($config->get('config_theme') . '_dire
      			                <?php if($theme_options->get( 'product_page_checkbox_style' ) != 1) { ?><?php if ($option_value['price']) { ?>
      			                (<?php echo $option_value['price_prefix']; ?><?php echo $option_value['price']; ?>)
      			                <?php } ?><?php } ?></span>
- <?php if ($option_value['option_sku']) { ?>
+ <?php if ($option_value['option_sku'] && 0) { ?>
                     (<?php echo 'SKU: '. $option_value['option_sku']; ?>)
                     <?php } ?> 
      			              </label>

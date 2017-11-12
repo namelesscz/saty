@@ -73,19 +73,19 @@
 	<file name="catalog/view/theme/*/template/product/product.tpl">
 		<operation>
 			<search position="after" offset="6"><![CDATA[ <?php if ($option['type'] == 'select') { ?> ]]></search>
-			<add><![CDATA[ <?php if ($option_value['option_sku']) { ?>
+			<add><![CDATA[ <?php if ($option_value['option_sku'] && 0) { ?>
                     (<?php echo 'SKU: '. $option_value['option_sku']; ?>)
                 <?php } ?> ]]></add>
 		</operation>
 		<operation>
 			<search position="after" offset="11"><![CDATA[ <?php if ($option['type'] == 'radio') { ?> ]]></search>
-			<add><![CDATA[ <?php if ($option_value['option_sku']) { ?>
+			<add><![CDATA[ <?php if ($option_value['option_sku'] && 0) { ?>
                     (<?php echo 'SKU: '. $option_value['option_sku']; ?>)
                     <?php } ?> ]]></add>
 		</operation>
 		<operation>
 			<search position="after" offset="11"><![CDATA[ <?php if ($option['type'] == 'checkbox') { ?> ]]></search>
-			<add><![CDATA[ <?php if ($option_value['option_sku']) { ?>
+			<add><![CDATA[ <?php if ($option_value['option_sku'] && 0) { ?>
                     (<?php echo 'SKU: '. $option_value['option_sku']; ?>)
                     <?php } ?> ]]></add>
 		</operation>
