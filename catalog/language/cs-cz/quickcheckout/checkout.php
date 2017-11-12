@@ -27,7 +27,7 @@ $_['text_image']                      = 'Obrázek';
 $_['text_name']                       = 'Název produktu';
 $_['text_quantity']                   = 'Množství';
 $_['text_price']                      = 'Cena za jednotku';
-$_['text_total']                      = 'Celkem s DPH';
+$_['text_total']                      = 'Celkem k úhradě';
 $_['text_points']                     = 'Zákaznické body: %s';
 
 // Column

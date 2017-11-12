@@ -1,0 +1,65 @@
+body {
+	background: url("http://www.satynajednicku.cz/image/data/logo/logo2.0.png") no-repeat scroll left top 15px ; ;
+        
+}
+body, td, th, input, select, textarea, option, optgroup {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	color: #787878;
+}
+h1 {
+	text-transform: uppercase;
+	color: #787878;
+	text-align: right;
+	font-size: 30px;
+	font-weight: normal;
+	padding-bottom: 5px;
+	margin-top: 135px;
+	margin-bottom: 15px;
+	border-bottom: 3px solid #DA251C;
+}
+.store {
+	width: 100%;
+	margin-bottom: 20px;
+}
+.div2 {
+	float: left;
+	display: inline-block;
+}
+.div3 {
+	float: right;
+	display: inline-block;
+	padding: 5px;
+}
+.heading td {
+	background: #EDEDED;
+}
+.address, .product {
+	border-collapse: collapse;
+}
+.address {
+	width: 100%;
+	margin-bottom: 20px;
+	border-top: 1px solid #EDEDED;
+	border-right: 1px solid #EDEDED;
+}
+.address th, .address td {
+	border-left: 1px solid #EDEDED;
+	border-bottom: 1px solid #EDEDED;
+	padding: 5px;
+	vertical-align: text-bottom;
+}
+.address td {
+	width: 50%;
+}
+.product {
+	width: 100%;
+	margin-bottom: 20px;
+	border-top: 1px solid #EDEDED;
+	border-right: 1px solid #EDEDED;
+}
+.product td {
+	border-left: 1px solid #EDEDED;
+	border-bottom: 1px solid #EDEDED;
+	padding: 5px;
+}
