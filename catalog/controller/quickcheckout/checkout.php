@@ -208,7 +208,9 @@ class ControllerQuickCheckoutCheckout extends Equotix {
 			$data['payment_address'] = $this->load->controller('quickcheckout/payment_address');
 			$data['shipping_address'] = $this->load->controller('quickcheckout/shipping_address');
 		}
-		
+
+		$_SESSION['data'] = $data;
+
 		$data['voucher'] = $this->load->controller('quickcheckout/voucher');
 		$data['terms'] = $this->load->controller('quickcheckout/terms');
 		
@@ -218,7 +220,6 @@ class ControllerQuickCheckoutCheckout extends Equotix {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-
 		$this->response->setOutput($this->load->view('quickcheckout/checkout', $data));
   	}
 	

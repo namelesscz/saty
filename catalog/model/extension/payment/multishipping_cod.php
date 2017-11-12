@@ -4,9 +4,13 @@ class ModelExtensionPaymentMultiShippingCOD extends Model
     public function getMethod($address, $total)
     {   
         $method_data = array();
-              
-        if (!empty($this->session->data['shipping_method'])) {
-            $shipping = $this->session->data['shipping_method'];
+				$shipping = "multishipping_cod";
+				if (!empty($this->session->data['shipping_method'])) {
+					$shipping = $this->session->data['shipping_method'];
+				}
+
+        if (!empty($shipping)) {
+            #$shipping = $this->session->data['shipping_method'];
             
             $code = explode('.', $shipping['code']);
             
@@ -64,7 +68,7 @@ class ModelExtensionPaymentMultiShippingCOD extends Model
                 }
             }
         }
-           
+
         return $method_data;
     }
     

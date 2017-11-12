@@ -16,7 +16,7 @@
 	<?php if (!empty($payment_logo[$payment_method['code']])) { ?>
 	<td><img src="<?php echo $payment_logo[$payment_method['code']]; ?>" alt="<?php echo $payment_method['title']; ?>" /></td>
 	<?php } else { ?>
-	<td></td>
+	<td><label for="<?php echo $payment_method['code']; ?>"><?php if (array_key_exists('text',$payment_method)) { echo $payment_method['text']; }?></label></td>
 	<?php } ?>
   </tr>
   <?php } ?>
