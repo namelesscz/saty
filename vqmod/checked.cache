@@ -383,3 +383,7 @@ catalog\language\cs-cz\extension\payment\twisto.php
 catalog\controller\error\not_found.php
 catalog\language\en-gb\error\not_found.php
 catalog\language\cs-cz\error\not_found.php
+catalog\controller\common\home.php
+catalog\view\theme\fastor\template\common\home.tpl
+catalog\controller\extension\module\category_wall.php
+catalog\view\theme\fastor\template\extension\module\category_wall.tpl
