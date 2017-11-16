@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>Twisto</id>
+	<version>1.0.0</version>
+    <author>NetGate.cz</author>
+
+    <file name="catalog/model/checkout/order.php">
+        <operation info="Add info about order items in new order">
+            <search position="after"><![CDATA[
+				$order_id = $this->db->getLastId();
+			]]></search>
+            <add><![CDATA[
+		$this->load->model('extension/payment/twisto');
+
+		$this->model_extension_payment_twisto->storeOrderItems($order_id, $data['total']);
+			]]></add>
+        </operation>
+        <operation info="Add info about order items in edited order">
+            <search position="before"><![CDATA[
+				$this->db->query("DELETE FROM " . DB_PREFIX . "order_product
+			]]></search>
+            <add><![CDATA[
+		$this->load->model('extension/payment/twisto');
+
+		$this->model_extension_payment_twisto->storeOrderItems($order_id, $data['total']);
+			]]></add>
+        </operation>
+    </file>
+
+	<file name="system/library/cart/cart.php">
+        <operation info="Add Twisto related product info">
+            <search position="after"><![CDATA[
+				'cart_id'         => $cart['cart_id'],
+			]]></search>
+            <add><![CDATA[
+					'ean'             => $product_query->row['ean'],
+					'isbn'            => $product_query->row['isbn'],
+			]]></add>
+        </operation>
+    </file>
+</modification>

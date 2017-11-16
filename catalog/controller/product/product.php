@@ -251,7 +251,7 @@ class ControllerProductProduct extends Controller {
 			$data['entry_bad'] = $this->language->get('entry_bad');
 
 			$data['button_cart_disable'] = 0;
-			if ($product_info['quantity'] > 0) {
+			if ($product_info['stock_status'] != 5) {
 				$data['button_cart'] = $this->language->get('button_cart');
 			}
 			else {

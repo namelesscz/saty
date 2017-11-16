@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>Phone number validation in catalog</id>
+	<version>1.0.0</version>
+    <author>NetGate.cz</author>
+	<vqmver>2.3.0</vqmver>
+
+	<file path="catalog/controller/" name="account/*,checkout/*">
+        <operation info="Add error message">
+            <search position="before"><![CDATA[
+				$this->response->setOutput
+			]]></search>
+            <add><![CDATA[
+		$data['error_telephone_invalid'] = $this->language->get('error_telephone_invalid');
+			]]></add>
+        </operation>
+    </file>
+
+	<file path="catalog/language/" name="en-gb/en-gb.php,english/english.php" error="skip">
+        <operation info="Add error message">
+            <search position="bottom"><![CDATA[]]></search>
+            <add><![CDATA[
+$_['error_telephone_invalid'] = 'Telephone has incorrect format! Use international format, please.';
+			]]></add>
+        </operation>
+    </file>
+
+    <file path="catalog/view/theme/*/template/" name="account/register.tpl,account/edit.tpl,account/address_form.tpl,checkout/cart.php,checkout/checkout.tpl">
+        <operation info="Add javascript validation">
+            <search position="after"><![CDATA[
+				<?php echo $header; ?>
+			]]></search>
+            <add><![CDATA[
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/0.4.13/libphonenumber-js.min.js"></script>
+<script type="text/javascript">
+$(document)
+	.on('submit', 'form', validatePhoneNumber(true))
+	.on('click', '[type=button]', validatePhoneNumber(false));
+
+function validatePhoneNumber(isForm) {
+	return function(e) {
+		var $wrap = (isForm ? $(this) : $(this).closest('.buttons').parent());
+
+		$('.text-danger', $wrap).remove();
+		$('.has-error', $wrap).removeClass('has-error');
+
+		var valid = true;
+		var $firstInvalid = null;
+
+		$('[name*="phone"], [name*="mobile"]', $wrap).each(function() {
+			var $input = $(this);
+
+			if ($input.val() && !libphonenumber.isValidNumber($input.val())) {
+				$input.closest('.form-group').addClass('has-error');
+				$input.after('<div class="text-danger"><?php echo $error_telephone_invalid; ?></div>');
+
+				valid = false;
+
+				if (!$firstInvalid) {
+					$firstInvalid = $input;
+				}
+			}
+		});
+
+		if (!valid) {
+			e.preventDefault();
+			e.stopImmediatePropagation();
+
+			$('html, body').animate({scrollTop: $firstInvalid.offset().top - 50}, 200);
+		}
+	};
+}
+</script>
+			]]></add>
+        </operation>
+    </file>
+</modification>

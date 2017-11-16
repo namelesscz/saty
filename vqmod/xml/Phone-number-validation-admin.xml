@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>Phone number validation in admin</id>
+	<version>1.0.0</version>
+    <author>NetGate.cz</author>
+	<vqmver>2.3.0</vqmver>
+
+	<file path="admin/controller/" name="customer/customer.php,sale/order.php">
+        <operation info="Add error message">
+            <search position="before"><![CDATA[
+				$this->response->setOutput
+			]]></search>
+            <add><![CDATA[
+		$data['error_telephone_invalid'] = $this->language->get('error_telephone_invalid');
+			]]></add>
+        </operation>
+    </file>
+
+	<file path="admin/language/" name="en-gb/en-gb.php,english/english.php" error="skip">
+        <operation info="Add error message">
+            <search position="bottom"><![CDATA[]]></search>
+            <add><![CDATA[
+$_['error_telephone_invalid'] = 'Telephone has incorrect format! Use international format, please.';
+			]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/" name="customer/customer_form.tpl,sale/order_form.tpl">
+        <operation info="Add javascript validation">
+            <search position="before" index="1"><![CDATA[
+				<script type="text/javascript">
+			]]></search>
+            <add><![CDATA[
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/0.4.13/libphonenumber-js.min.js"></script>
+<script type="text/javascript">
+$('form').on('submit', validatePhoneNumber);
+
+$('.text-right [type=button]').on('click', validatePhoneNumber);
+
+function validatePhoneNumber(e) {console.log('VALIDATE');
+	var $wrap = $(this);
+
+	if (!$wrap.is('form')) {
+		$wrap = $wrap.closest('form');
+	}
+
+	$('.text-danger', $wrap).remove();
+	$('.has-error', $wrap).removeClass('has-error');
+
+	var valid = true;
+	var $firstInvalid = null;
+
+	$('[name*="phone"], [name*="mobile"]', $wrap).each(function() {
+		var $input = $(this);
+
+		if ($input.val() && !libphonenumber.isValidNumber($input.val())) {
+			$input.closest('.form-group').addClass('has-error');
+			$input.after('<div class="text-danger"><?php echo $error_telephone_invalid; ?></div>');
+
+			valid = false;
+
+			if (!$firstInvalid) {
+				$firstInvalid = $input;
+			}
+		}
+	});
+
+	if (!valid) {
+		e.preventDefault();
+		e.stopImmediatePropagation();
+
+		if ($firstInvalid.closest('.tab-pane').length) {
+			var id = $firstInvalid.closest('.tab-pane').attr('id');
+
+			$('a[href="\#' + id + '"]').tab('show');
+		}
+
+		$('html, body').animate({scrollTop: $firstInvalid.offset().top - 50}, 200);
+	}
+}
+</script>
+			]]></add>
+        </operation>
+    </file>
+</modification>
