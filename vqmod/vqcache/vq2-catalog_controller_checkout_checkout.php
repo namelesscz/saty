@@ -110,6 +110,9 @@ class ControllerCheckoutCheckout extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+
+		$data['error_telephone_invalid'] = $this->language->get('error_telephone_invalid');
+			
 		$this->response->setOutput($this->load->view('checkout/checkout', $data));
 	}
 
@@ -136,6 +139,9 @@ class ControllerCheckoutCheckout extends Controller {
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
+
+		$data['error_telephone_invalid'] = $this->language->get('error_telephone_invalid');
+			
 		$this->response->setOutput(json_encode($json));
 	}
 
@@ -161,6 +167,9 @@ class ControllerCheckoutCheckout extends Controller {
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
+
+		$data['error_telephone_invalid'] = $this->language->get('error_telephone_invalid');
+			
 		$this->response->setOutput(json_encode($json));
 	}
 }

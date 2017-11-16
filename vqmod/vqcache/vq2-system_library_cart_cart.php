@@ -239,11 +239,17 @@ class Cart {
 
 				$product_data[] = array(
 					'cart_id'         => $cart['cart_id'],
+
+					'ean'             => $product_query->row['ean'],
+					'isbn'            => $product_query->row['isbn'],
+			
 					'product_id'      => $product_query->row['product_id'],
 					'name'            => $product_query->row['name'],
 					'model'           => $product_query->row['model'],
 					'shipping'        => $product_query->row['shipping'],
 					'image'           => $product_query->row['image'],
+					'ean'             => $product_query->row['ean'],
+					'isbn'            => $product_query->row['isbn'],
 					'option'          => $option_data,
 					'download'        => $download_data,
 					'quantity'        => $cart['quantity'],

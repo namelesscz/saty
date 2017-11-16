@@ -12,7 +12,7 @@
       <?php } else { ?>
       <input type="radio" name="payment_method" value="<?php echo $payment_method['code']; ?>" id="<?php echo $payment_method['code']; ?>" />
       <?php } ?></td>
-    <td><label for="<?php echo $payment_method['code']; ?>"><?php echo $payment_method['title']; ?></label></td>
+    <td><label for="<?php echo $payment_method['code']; ?>"><?php echo $payment_method['title']; if ($payment_method['code'] == 'twisto'){ echo " <a href='/twisto' target='_blank'>&quest;</a>";}?></label></td>
 	<?php if (!empty($payment_logo[$payment_method['code']])) { ?>
 	<td><img src="<?php echo $payment_logo[$payment_method['code']]; ?>" alt="<?php echo $payment_method['title']; ?>" /></td>
 	<?php } else { ?>

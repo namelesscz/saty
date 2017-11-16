@@ -167,8 +167,10 @@ class ModelExtensionPaymentTwisto extends Model {
 			isset($data['qty']) ? $data['qty'] : 1,
 			$this->getPrice($data['total']),
 			isset($data['tax']) ? $data['tax'] : 0,
-			!empty($data['ean']) ? $data['ean'] : null,
-			!empty($data['isbn']) ? $data['isbn'] : null
+			null,
+			null
+#			!empty($data['ean']) ? $data['ean'] : null,
+#			!empty($data['isbn']) ? $data['isbn'] : null
 		);
 	}
 
@@ -321,8 +323,8 @@ class ModelExtensionPaymentTwisto extends Model {
 				'qty'   => $product['quantity'],
 				'total' => $this->tax->calculate($product['total'], $product['tax_class_id']),
 				'tax'   => $this->tax->getTax(100, $product['tax_class_id']),
-				'ean'   => $product['ean'],
-				'isbn'  => $product['isbn'],
+				'ean'   => ($product['ean'] ? $product['ean'] : $product['model']),
+				'isbn'  => ($product['isbn'] ? $product['isbn'] : $product['model']),
 			);
 		}
 

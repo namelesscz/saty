@@ -13,4 +13,4 @@ $_['text_account']                                = 'Můj účet';
 $_['text_order']                                  = 'Historie objednávek';
 $_['text_wishlist']                               = 'Seznam přání';
 $_['text_newsletter']                             = 'Novinky';
-$_['text_powered']                                = 'Systém <a href="http://www.opencart.com">OpenCart</a><br /> %s &copy; %s<br />Překlad: <a href="http://www.opencart.cz" target="_blank">opencart.cz</a> &amp; <a href="http://www.opencart-support.com" target="_blank">opencart-support.com</a>.';
+$_['text_powered']                                = 'Spravují <a href="https://www.ppc-systemy.cz">PPC-systemy.cz</a><br> %s &copy; 2012 - %s';
