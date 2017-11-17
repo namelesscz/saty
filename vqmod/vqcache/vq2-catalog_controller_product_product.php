@@ -251,12 +251,11 @@ class ControllerProductProduct extends Controller {
 			$data['entry_bad'] = $this->language->get('entry_bad');
 
 			$data['button_cart_disable'] = 0;
-			if ($product_info['stock_status_id'] != 5) {
-				$data['button_cart'] = $this->language->get('button_cart');
-			}
-			else {
+			if ($product_info['quantity'] <= 0 && $product_info['substract'] ) {
 				$data['button_cart'] = $this->language->get('button_cart_soldout');#$this->language->get('button_cart');
 				$data['button_cart_disable'] = 1;
+			} else {
+				$data['button_cart'] = $this->language->get('button_cart');
 			}
 
 			$data['button_wishlist'] = $this->language->get('button_wishlist');

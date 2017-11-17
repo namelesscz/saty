@@ -20,13 +20,13 @@ $_['text_use_reward']                 = 'Použít zákaznické body:';
 $_['text_estimated_delivery']         = 'Očekávané doručení:';
 $_['text_delivery']                   = 'Datum doručení:';
 $_['text_points']                     = 'Zákaznické body: %s';
-$_['text_loading']                    = 'načítám...';
+$_['text_loading']                    = 'Načítám...';
 $_['text_survey']                     = 'Hodnocení:';
 $_['text_order_comments']             = 'Přidejte komentář k Vaší objednávce:';
 $_['text_image']                      = 'Obrázek';
 $_['text_name']                       = 'Název produktu';
 $_['text_quantity']                   = 'Množství';
-$_['text_price']                      = 'Cena za jednotku';
+$_['text_price']                      = 'Cena za kus';
 $_['text_total']                      = 'Celkem k úhradě';
 $_['text_points']                     = 'Zákaznické body: %s';
 
@@ -34,8 +34,8 @@ $_['text_points']                     = 'Zákaznické body: %s';
 $_['column_name']                     = 'Název výrobku';
 $_['column_model']                    = 'Model';
 $_['column_quantity']                 = 'Množství';
-$_['column_price']                    = 'Cena za jednotku';
-$_['column_total']                    = 'Celkem s DPH';
+$_['column_price']                    = 'Cena za kus';
+$_['column_total']                    = 'Celkem';
 
 // Entry
 $_['entry_coupon']                    = 'Zde zadejte Váš kupón:';
@@ -44,6 +44,7 @@ $_['entry_reward']                    = 'Zadejte kolik chcete použít zákaznic
 
 // Error
 $_['error_fax']                       = 'Fax musí mít mezi 3 a 32 znaky!';
+$_['error_postcode']                  = 'Uveďte platné PSČ!';
 $_['error_company']                   = 'Společnost musí mít mezi 3 a 32 znaky!';
 $_['error_address_2']                 = 'Adresa 2 musí mít mezi 3 a 128 znaky!';
 $_['error_coupon']                    = 'Varování: Kupón je buď neplatný, vypršel nebo nebo dosáhl limitu!';

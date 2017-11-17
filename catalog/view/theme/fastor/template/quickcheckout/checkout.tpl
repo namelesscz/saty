@@ -1,9 +1,9 @@
-<?php echo $header; 
+<?php echo $header;
 $theme_options = $registry->get('theme_options');
 $config = $registry->get('config'); ?>
-<?php $grid_center = 12; 
-if($column_left != '') $grid_center = $grid_center-3; 
-if($column_right != '') $grid_center = $grid_center-3; 
+<?php $grid_center = 12;
+if($column_left != '') $grid_center = $grid_center-3;
+if($column_right != '') $grid_center = $grid_center-3;
 $modules_old_opencart = new Modules($registry); ?>
 
 <!-- BREADCRUMB
@@ -35,21 +35,21 @@ $modules_old_opencart = new Modules($registry); ?>
      				                    <?php } ?>
 				                    <?php } ?>
 				               </div>
-				               
+
 				               <div class="col-md-6">
 				                    <h1 id="title-page"><?php echo $heading_title; ?>
 				                    	<?php if(isset($weight)) { if ($weight) { ?>
 				                    	&nbsp;(<?php echo $weight; ?>)
 				                    	<?php } } ?>
 				                    </h1>
-				                    
+
 				                    <ul>
 				                    	<?php foreach ($breadcrumbs as $breadcrumb) { ?>
 				                    	<li><a href="<?php echo $breadcrumb['href']; ?>"><?php if($breadcrumb['text'] != '<i class="fa fa-home"></i>') { echo $breadcrumb['text']; } else { if($theme_options->get( 'home_text', $config->get( 'config_language_id' ) ) != '') { echo $theme_options->get( 'home_text', $config->get( 'config_language_id' ) ); } else { echo 'Home'; } } ?></a></li>
 				                    	<?php } ?>
 				                    </ul>
 				               </div>
-				               
+
      					     <div class="col-md-3 hidden-xs hidden-sm">
      					          <?php if(is_array($product_prev_next['next'])) { ?>
           					          <?php if($theme_options->get( 'product_breadcrumb' ) == '1') { ?>
@@ -74,7 +74,7 @@ $modules_old_opencart = new Modules($registry); ?>
 					     	&nbsp;(<?php echo $weight; ?>)
 					     	<?php } } ?>
 					     </h1>
-					     
+
 					     <ul>
 					     	<?php foreach ($breadcrumbs as $breadcrumb) { ?>
 					     	<li><a href="<?php echo $breadcrumb['href']; ?>"><?php if($breadcrumb['text'] != '<i class="fa fa-home"></i>') { echo $breadcrumb['text']; } else { if($theme_options->get( 'home_text', $config->get( 'config_language_id' ) ) != '') { echo $theme_options->get( 'home_text', $config->get( 'config_language_id' ) ); } else { echo 'Home'; } } ?></a></li>
@@ -95,7 +95,7 @@ $modules_old_opencart = new Modules($registry); ?>
 		<div class="shadow"></div>
 		<div class="pattern">
 			<div class="container">
-				<?php 
+				<?php
 				$preface_left = $modules_old_opencart->getModules('preface_left');
 				$preface_right = $modules_old_opencart->getModules('preface_right');
 				?>
@@ -109,7 +109,7 @@ $modules_old_opencart = new Modules($registry); ?>
 							}
 						} ?>
 					</div>
-					
+
 					<div class="col-sm-3">
 						<?php
 						if( count($preface_right) ) {
@@ -120,8 +120,8 @@ $modules_old_opencart = new Modules($registry); ?>
 					</div>
 				</div>
 				<?php } ?>
-				
-				<?php 
+
+				<?php
 				$preface_fullwidth = $modules_old_opencart->getModules('preface_fullwidth');
 				if( count($preface_fullwidth) ) {
 					echo '<div class="row"><div class="col-sm-12">';
@@ -130,9 +130,9 @@ $modules_old_opencart = new Modules($registry); ?>
 					}
 					echo '</div></div>';
 				} ?>
-				
+
 				<div class="row">
-					<?php 
+					<?php
 					$columnleft = $modules_old_opencart->getModules('column_left');
 					if( count($columnleft) ) { ?>
 					<div class="col-md-3" id="column-left">
@@ -143,30 +143,30 @@ $modules_old_opencart = new Modules($registry); ?>
 						?>
 					</div>
 					<?php } ?>
-					
+
 					<?php $grid_center = 12; if( count($columnleft) ) { $grid_center = 9; } ?>
 					<div class="col-md-<?php echo $grid_center; ?>">
-						<?php 
+						<?php
 						$content_big_column = $modules_old_opencart->getModules('content_big_column');
-						if( count($content_big_column) ) { 
+						if( count($content_big_column) ) {
 							foreach ($content_big_column as $module) {
 								echo $module;
 							}
 						} ?>
-						
-						<?php 
+
+						<?php
 						$content_top = $modules_old_opencart->getModules('content_top');
-						if( count($content_top) ) { 
+						if( count($content_top) ) {
 							foreach ($content_top as $module) {
 								echo $module;
 							}
 						} ?>
-						
+
 						<div class="row">
-							<?php 
-							$grid_content_top = 12; 
+							<?php
+							$grid_content_top = 12;
 							$grid_content_right = 3;
-							$column_right = $modules_old_opencart->getModules('column_right'); 
+							$column_right = $modules_old_opencart->getModules('column_right');
 							if( count($column_right) ) {
 								if($grid_center == 9) {
 									$grid_content_top = 8;
@@ -316,7 +316,7 @@ $(window).load(function() {
 			color: '#ffffff'
 		}
 	});
-	
+
 	setTimeout(function() {
 		$.unblockUI();
 	}, 2000);
@@ -362,7 +362,7 @@ $(window).load(function() {
 		});
 	});
 	<?php } ?>
-	
+
 	<?php if ($login_module) { ?>
 	// Login Form Clicked
 	$(document).on('click', '#button-login', function() {
@@ -387,9 +387,9 @@ $(window).load(function() {
 					location = json['redirect'];
 				} else if (json['error']) {
 					$('#warning-messages').prepend('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
-					
+
 					$('html, body').animate({ scrollTop: 0 }, 'slow');
-					
+
 					$('.alert-danger').fadeIn('slow');
 				}
 			},
@@ -419,14 +419,14 @@ function validateRegister() {
 				$('#button-payment-method').prop('disabled', false);
 				$('#button-payment-method').button('reset');
 				$('#terms input[type=\'checkbox\']').prop('checked', false);
-				
+
 				$('.fa-spinner').remove();
-				
+
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
-							
+
 				if (json['error']['warning']) {
 					$('#warning-messages').prepend('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
-					
+
 					$('.alert-danger').fadeIn('slow');
 				}
 
@@ -478,7 +478,7 @@ function validateGuestAddress() {
 		data: $('#payment-address input[type=\'text\'], #payment-address input[type=\'checkbox\']:checked, #payment-address input[type=\'radio\']:checked, #payment-address select, #payment-address textarea'),
 		dataType: 'json',
 		cache: false,
-		success: function(json) {		
+		success: function(json) {
 			$('.alert, .text-danger').remove();
 
 			if (json['redirect']) {
@@ -487,21 +487,21 @@ function validateGuestAddress() {
 				$('#button-payment-method').prop('disabled', false);
 				$('#button-payment-method').button('reset');
 				$('#terms input[type=\'checkbox\']').prop('checked', false);
-				
+
 				$('.fa-spinner').remove();
-				
+
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
-			
+
 				if (json['error']['warning']) {
 					$('#warning-messages').prepend('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
-					
+
 					$('.alert-danger').fadeIn('slow');
 				}
 
 				<?php if ($text_error) { ?>
 					for (i in json['error']) {
 						var element = $('#input-payment-' + i.replace('_', '-'));
-						
+
 						if ($(element).parent().hasClass('input-group')) {
 							$(element).parent().after('<div class="text-danger">' + json['error'][i] + '</div>');
 						} else {
@@ -565,21 +565,21 @@ function validateGuestShippingAddress() {
 				$('#button-payment-method').prop('disabled', false);
 				$('#button-payment-method').button('reset');
 				$('#terms input[type=\'checkbox\']').prop('checked', false);
-				
+
 				$('.fa-spinner').remove();
-				
+
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
-				
+
 				if (json['error']['warning']) {
 					$('#warning-messages').prepend('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
-					
+
 					$('.alert-danger').fadeIn('slow');
 				}
 
 				<?php if ($text_error) { ?>
 					for (i in json['error']) {
 						var element = $('#input-shipping-' + i.replace('_', '-'));
-						
+
 						if ($(element).parent().hasClass('input-group')) {
 							$(element).parent().after('<div class="text-danger">' + json['error'][i] + '</div>');
 						} else {
@@ -610,9 +610,9 @@ function validateGuestShippingAddress() {
 $(document).on('click', '#button-payment-method', function() {
 	$('#button-payment-method').prop('disabled', true);
 	$('#button-payment-method').button('loading');
-	
+
 	$('#button-payment-method').after('<i class="fa fa-spinner fa-spin"></i>');
-	
+
 	validateGuestAddress();
 });
 <?php } else { ?>
@@ -633,21 +633,21 @@ function validatePaymentAddress() {
 				$('#button-payment-method').prop('disabled', false);
 				$('#button-payment-method').button('reset');
 				$('#terms input[type=\'checkbox\']').prop('checked', false);
-				
+
 				$('.fa-spinner').remove();
-				
+
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
-				
+
 				if (json['error']['warning']) {
 					$('#warning-messages').prepend('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
-					
+
 					$('.alert-danger').fadeIn('slow');
 				}
 
 				<?php if ($text_error) { ?>
 					for (i in json['error']) {
 						var element = $('#input-payment-' + i.replace('_', '-'));
-						
+
 						if ($(element).parent().hasClass('input-group')) {
 							$(element).parent().after('<div class="text-danger">' + json['error'][i] + '</div>');
 						} else {
@@ -696,21 +696,21 @@ function validateShippingAddress() {
 				$('#button-payment-method').prop('disabled', false);
 				$('#button-payment-method').button('reset');
 				$('#terms input[type=\'checkbox\']').prop('checked', false);
-				
+
 				$('.fa-spinner').remove();
-				
+
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
-				
+
 				if (json['error']['warning']) {
 					$('#warning-messages').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"> ' + json['error']['warning'] + '</div>');
-					
+
 					$('.alert-danger').fadeIn('slow');
 				}
 
 				<?php if ($text_error) { ?>
 					for (i in json['error']) {
 						var element = $('#input-shipping-' + i.replace('_', '-'));
-						
+
 						if ($(element).parent().hasClass('input-group')) {
 							$(element).parent().after('<div class="text-danger">' + json['error'][i] + '</div>');
 						} else {
@@ -742,9 +742,9 @@ function validateShippingAddress() {
 $(document).on('click', '#button-payment-method', function() {
 	$('#button-payment-method').prop('disabled', true);
 	$('#button-payment-method').button('loading');
-	
+
 	$('#button-payment-method').after('<i class="fa fa-spinner fa-spin"></i>');
-	
+
 	validatePaymentAddress();
 });
 <?php } ?> // Close if logged php
@@ -762,9 +762,9 @@ function reloadPaymentMethod() {
 		},
 		success: function(html) {
 			moduleLoaded($('#payment-method'), <?php echo $loading_display; ?>);
-			
+
 			$('#payment-method .quickcheckout-content').html(html);
-			
+
 			<?php if ($load_screen) { ?>
 			$.unblockUI();
 			<?php } ?>
@@ -789,9 +789,9 @@ function reloadPaymentMethodById(address_id) {
 		},
 		success: function(html) {
 			moduleLoaded($('#payment-method'), <?php echo $loading_display; ?>);
-			
+
 			$('#payment-method .quickcheckout-content').html(html);
-			
+
 			<?php if ($load_screen) { ?>
 			$.unblockUI();
 			<?php } ?>
@@ -821,14 +821,14 @@ function validatePaymentMethod() {
 				$('#button-payment-method').prop('disabled', false);
 				$('#button-payment-method').button('reset');
 				$('#terms input[type=\'checkbox\']').prop('checked', false);
-				
+
 				$('.fa-spinner').remove();
-				
+
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
-				
+
 				if (json['error']['warning']) {
 					$('#warning-messages').prepend('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
-					
+
 					$('.alert-danger').fadeIn('slow');
 				}
 			} else {
@@ -851,7 +851,7 @@ function validatePaymentMethod() {
 		} else {
 			var post_data = $('#shipping-address input[type=\'text\'], #shipping-address input[type=\'checkbox\']:checked, #shipping-address input[type=\'radio\']:checked, #shipping-address input[type=\'hidden\'], #shipping-address select, #shipping-address textarea, #shipping-method input[type=\'text\'], #shipping-method input[type=\'checkbox\']:checked, #shipping-method input[type=\'radio\']:checked, #shipping-method input[type=\'hidden\'], #shipping-method select, #shipping-method textarea');
 		}
-		
+
 		$.ajax({
 			url: 'index.php?route=quickcheckout/shipping_method',
 			type: 'post',
@@ -863,7 +863,7 @@ function validatePaymentMethod() {
 			},
 			success: function(html) {
 				moduleLoaded($('#shipping-method'), <?php echo $loading_display; ?>);
-				
+
 				$('#shipping-method .quickcheckout-content').html(html);
 			},
 			<?php if ($debug) { ?>
@@ -886,7 +886,7 @@ function validatePaymentMethod() {
 			},
 			success: function(html) {
 				moduleLoaded($('#shipping-method'), <?php echo $loading_display; ?>);
-				
+
 				$('#shipping-method .quickcheckout-content').html(html);
 			},
 			<?php if ($debug) { ?>
@@ -914,14 +914,14 @@ function validatePaymentMethod() {
 					$('#button-payment-method').prop('disabled', false);
 					$('#button-payment-method').button('reset');
 					$('#terms input[type=\'checkbox\']').prop('checked', false);
-					
+
 					$('.fa-spinner').remove();
-					
+
 					$('html, body').animate({ scrollTop: 0 }, 'slow');
-				
+
 					if (json['error']['warning']) {
 						$('#warning-messages').prepend('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
-					
+
 						$('.alert-danger').fadeIn('slow');
 					}
 				} else {
@@ -949,19 +949,19 @@ function validateTerms() {
 			if (json['redirect']) {
 				location = json['redirect'];
 			}
-		
+
 			if (json['error']) {
 				$('#button-payment-method').prop('disabled', false);
 				$('#button-payment-method').button('reset');
 				$('#terms input[type=\'checkbox\']').prop('checked', false);
-				
+
 				$('.fa-spinner').remove();
-				
+
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
-				
+
 				if (json['error']['warning']) {
 					$('#warning-messages').prepend('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
-					
+
 					$('.alert-danger').fadeIn('slow');
 				}
 			} else {
@@ -985,13 +985,13 @@ function loadConfirm() {
 		beforeSend: function() {
 			<?php if ($confirmation_page) { ?>
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
-			
+
 				<?php if ($slide_effect) { ?>
 				$('#quickcheckoutconfirm').slideUp('slow');
 				<?php } else { ?>
 				$('#quickcheckoutconfirm').html('<div class="text-center"><i class="fa fa-spinner fa-spin fa-5x"></i></div>');
 				<?php } ?>
-			
+
 				<?php if ($load_screen) { ?>
 				$.blockUI({
 					message: '<h1 style="color:#ffffff;"><?php echo $text_please_wait; ?></h1>',
@@ -1015,9 +1015,9 @@ function loadConfirm() {
 				<?php if ($load_screen) { ?>
 				$.unblockUI();
 				<?php } ?>
-				
+
 				$('#quickcheckoutconfirm').hide().html(html);
-				
+
 				<?php if (!$auto_submit) { ?>
 					<?php if ($slide_effect) { ?>
 					$('#quickcheckoutconfirm').slideDown('slow');
@@ -1030,13 +1030,13 @@ function loadConfirm() {
 			<?php } else { ?>
 				$('#terms .terms').hide();
 				$('#payment').html(html).slideDown('fast');
-				
+
 				<?php if ($auto_submit) { ?>
 				$('#payment').hide().after('<div class="text-center"><i class="fa fa-spinner fa-spin fa-5x"></i></div>');
 				<?php } ?>
-				
+
 				$('html, body').animate({ scrollTop: $('#terms').offset().top }, 'slow');
-				
+
 				disableCheckout();
 			<?php } ?>
 		},
@@ -1057,12 +1057,12 @@ function loadCart() {
 		cache: false,
 		beforeSend: function() {
 			$('.tooltip').remove();
-			
+
 			moduleLoad($('#cart1'), <?php echo $loading_display; ?>);
 		},
 		success: function(html) {
 			moduleLoaded($('#cart1'), <?php echo $loading_display; ?>);
-			
+
 			$('#cart1 .quickcheckout-content').html(html);
 		},
 		<?php if ($debug) { ?>
@@ -1099,12 +1099,12 @@ $(document).on('click', '#button-coupon', function() {
 		},
 		success: function(json) {
 			$('.alert').remove();
-			
+
 			$('html, body').animate({ scrollTop: 0 }, 'slow');
 
 			if (json['success']) {
 				$('#success-messages').prepend('<div class="alert alert-success" style="display:none;"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
-				
+
 				$('.alert-success').fadeIn('slow');
 			} else if (json['error']) {
 				$('#warning-messages').prepend('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
@@ -1115,13 +1115,13 @@ $(document).on('click', '#button-coupon', function() {
 			<?php if (!$logged) { ?>
 				if ($('#payment-address input[name=\'shipping_address\']:checked').val()) {
 					reloadPaymentMethod();
-					
+
 					<?php if ($shipping_required) { ?>
 					reloadShippingMethod('payment');
 					<?php } ?>
 				} else {
 					reloadPaymentMethod();
-					
+
 					<?php if ($shipping_required) { ?>
 					reloadShippingMethod('shipping');
 					<?php } ?>
@@ -1132,7 +1132,7 @@ $(document).on('click', '#button-coupon', function() {
 				} else {
 					reloadPaymentMethodById($('#payment-address select[name=\'address_id\']').val());
 				}
-				
+
 				<?php if ($shipping_required) { ?>
 				if ($('#shipping-address input[name=\'shipping_address\']:checked').val() == 'new') {
 					reloadShippingMethod('shipping');
@@ -1141,7 +1141,7 @@ $(document).on('click', '#button-coupon', function() {
 				}
 				<?php } ?>
 			<?php } ?>
-			
+
 			<?php if (!$shipping_required) { ?>
 			loadCart();
 			<?php } ?>
@@ -1171,12 +1171,12 @@ $(document).on('click', '#button-voucher', function() {
 		},
 		success: function(json) {
 			$('.alert').remove();
-			
+
 			$('html, body').animate({ scrollTop: 0 }, 'slow');
 
 			if (json['success']) {
 				$('#success-messages').prepend('<div class="alert alert-success" style="display:none;"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
-				
+
 				$('.alert-success').fadeIn('slow');
 			} else if (json['error']) {
 				$('#warning-messages').prepend('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
@@ -1187,13 +1187,13 @@ $(document).on('click', '#button-voucher', function() {
 			<?php if (!$logged) { ?>
 				if ($('#payment-address input[name=\'shipping_address\']:checked').val()) {
 					reloadPaymentMethod();
-					
+
 					<?php if ($shipping_required) { ?>
 					reloadShippingMethod('payment');
 					<?php } ?>
 				} else {
 					reloadPaymentMethod();
-					
+
 					<?php if ($shipping_required) { ?>
 					reloadShippingMethod('shipping');
 					<?php } ?>
@@ -1204,7 +1204,7 @@ $(document).on('click', '#button-voucher', function() {
 				} else {
 					reloadPaymentMethodById($('#payment-address select[name=\'address_id\']').val());
 				}
-				
+
 				<?php if ($shipping_required) { ?>
 				if ($('#shipping-address input[name=\'shipping_address\']:checked').val() == 'new') {
 					reloadShippingMethod('shipping');
@@ -1213,7 +1213,7 @@ $(document).on('click', '#button-voucher', function() {
 				}
 				<?php } ?>
 			<?php } ?>
-			
+
 			<?php if (!$shipping_required) { ?>
 			loadCart();
 			<?php } ?>
@@ -1243,12 +1243,12 @@ $(document).on('click', '#button-reward', function() {
 		},
 		success: function(json) {
 			$('.alert').remove();
-			
+
 			$('html, body').animate({ scrollTop: 0 }, 'slow');
 
 			if (json['success']) {
 				$('#success-messages').prepend('<div class="alert alert-success" style="display:none;"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
-				
+
 				$('.alert-success').fadeIn('slow');
 			} else if (json['error']) {
 				$('#warning-messages').prepend('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
@@ -1259,13 +1259,13 @@ $(document).on('click', '#button-reward', function() {
 			<?php if (!$logged) { ?>
 				if ($('#payment-address input[name=\'shipping_address\']:checked').val()) {
 					reloadPaymentMethod();
-					
+
 					<?php if ($shipping_required) { ?>
 					reloadShippingMethod('payment');
 					<?php } ?>
 				} else {
 					reloadPaymentMethod();
-					
+
 					<?php if ($shipping_required) { ?>
 					reloadShippingMethod('shipping');
 					<?php } ?>
@@ -1276,7 +1276,7 @@ $(document).on('click', '#button-reward', function() {
 				} else {
 					reloadPaymentMethodById($('#payment-address select[name=\'address_id\']').val());
 				}
-				
+
 				<?php if ($shipping_required) { ?>
 				if ($('#shipping-address input[name=\'shipping_address\']:checked').val() == 'new') {
 					reloadShippingMethod('shipping');
@@ -1285,7 +1285,7 @@ $(document).on('click', '#button-reward', function() {
 				}
 				<?php } ?>
 			<?php } ?>
-			
+
 			<?php if (!$shipping_required) { ?>
 			loadCart();
 			<?php } ?>
@@ -1320,12 +1320,12 @@ $(document).on('focusout', 'input[name=\'postcode\']', function() {
 <?php if ($highlight_error) { ?>
 	$(document).on('keydown', 'input', function() {
 		$(this).css('background', '').css('border', '');
-		
+
 		$(this).siblings('.text-danger').remove();
 	});
 	$(document).on('change', 'select', function() {
 		$(this).css('background', '').css('border', '');
-		
+
 		$(this).siblings('.text-danger').remove();
 	});
 <?php } ?>
@@ -1348,13 +1348,13 @@ $(document).on('click', '.button-update', function() {
 				<?php if (!$logged) { ?>
 					if ($('#payment-address input[name=\'shipping_address\']:checked').val()) {
 						reloadPaymentMethod();
-						
+
 						<?php if ($shipping_required) { ?>
 						reloadShippingMethod('payment');
 						<?php } ?>
 					} else {
 						reloadPaymentMethod();
-						
+
 						<?php if ($shipping_required) { ?>
 						reloadShippingMethod('shipping');
 						<?php } ?>
@@ -1365,7 +1365,7 @@ $(document).on('click', '.button-update', function() {
 					} else {
 						reloadPaymentMethodById($('#payment-address select[name=\'address_id\']').val());
 					}
-					
+
 					<?php if ($shipping_required) { ?>
 					if ($('#shipping-address input[name=\'shipping_address\']:checked').val() == 'new') {
 						reloadShippingMethod('shipping');
@@ -1374,7 +1374,7 @@ $(document).on('click', '.button-update', function() {
 					}
 					<?php } ?>
 				<?php } ?>
-				
+
 				<?php if (!$shipping_required) { ?>
 				loadCart();
 				<?php } ?>
@@ -1406,13 +1406,13 @@ $(document).on('click', '.button-remove', function() {
 				<?php if (!$logged) { ?>
 					if ($('#payment-address input[name=\'shipping_address\']:checked').val()) {
 						reloadPaymentMethod();
-						
+
 						<?php if ($shipping_required) { ?>
 						reloadShippingMethod('payment');
 						<?php } ?>
 					} else {
 						reloadPaymentMethod();
-						
+
 						<?php if ($shipping_required) { ?>
 						reloadShippingMethod('shipping');
 						<?php } ?>
@@ -1423,7 +1423,7 @@ $(document).on('click', '.button-remove', function() {
 					} else {
 						reloadPaymentMethodById($('#payment-address select[name=\'address_id\']').val());
 					}
-					
+
 					<?php if ($shipping_required) { ?>
 					if ($('#shipping-address input[name=\'shipping_address\']:checked').val() == 'new') {
 						reloadShippingMethod('shipping');
@@ -1432,7 +1432,7 @@ $(document).on('click', '.button-remove', function() {
 					}
 					<?php } ?>
 				<?php } ?>
-				
+
 				<?php if (!$shipping_required) { ?>
 				loadCart();
 				<?php } ?>

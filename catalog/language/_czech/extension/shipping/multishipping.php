@@ -1,6 +1,6 @@
 <?php
 // Text
-$_['text_title'] = 'Způsoby přepravy';
+$_['text_title'] = 'Multi Shipping';
 $_['text_destination'] = 'Pobočka';
 $_['text_no_destination'] = 'Nevybraná';
 $_['text_select_destination'] = 'Vybrat pobočku';

@@ -32,4 +32,7 @@ $_['text_update_order_status']                    = 'Stav Vaší objednávky byl
 $_['text_update_comment']                         = 'Komentář k Vaší objednávce je:';
 $_['text_update_link']                            = 'Pro zobrazení objednávky klikněte na odkaz uvedený níže:';
 $_['text_update_footer']                          = 'V případě dotazů, prosím, odpovězte na tento email.';
+
+
+#													'Děkujeme :) <a href="http://www.satynajednicku.cz">Vaše Šatynajedničku.cz</a>.;
 $_['text_new_powered']          = 'Děkujeme :) <a href="http://www.satynajednicku.cz">Vaše Šatynajedničku.cz</a>.';
