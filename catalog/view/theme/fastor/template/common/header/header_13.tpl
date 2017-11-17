@@ -56,12 +56,12 @@
 	                                    						<div class="megamenuToogle-pattern">
 	                                    							<div class="container">
 	                                    								<div><span></span><span></span><span></span></div>
-	                                    								Navigation
+																						 Menu
 	                                    							</div>
 	                                    						</div>
 	                                    					</div>
 	                                    				</div>
-	                                    				
+
 	                                    				<div class="megamenu-wrapper">
 	                                    					<div class="megamenu-pattern">
 	                                    						<div class="container">
@@ -75,7 +75,7 @@
 	                                    									<a href="<?php echo $category['href']; ?>"><span><strong><?php echo $category['name']; ?></strong></span></a>
 	                                    								<?php } ?>
 	                                    									<?php if ($category['children']) { ?>
-	                                    									<?php 
+	                                    									<?php
 	                                    										$width = '100%';
 	                                    										$row_fluid = 3;
 	                                    										if($category['column'] == 1) { $width = '220px'; $row_fluid = 12; }

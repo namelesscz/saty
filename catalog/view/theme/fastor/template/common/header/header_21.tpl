@@ -44,7 +44,7 @@
                								<div class="megamenuToogle-pattern">
                									<div class="container">
                										<div><span></span><span></span><span></span></div>
-               										Navigation
+                         Menu
                									</div>
                								</div>
                							</div>

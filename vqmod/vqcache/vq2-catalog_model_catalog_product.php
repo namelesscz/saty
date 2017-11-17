@@ -58,6 +58,7 @@ class ModelCatalogProduct extends Model {
 				'quantity'         => $query->row['quantity'],
 				'stock_status'     => $query->row['stock_status'],
 				'stock_status_id'  => $query->row['stock_status_id'],
+				'substract'        => $query->row['subtract'],
 				'image'            => $query->row['image'],
 				'manufacturer_id'  => $query->row['manufacturer_id'],
 				'manufacturer'     => $query->row['manufacturer'],

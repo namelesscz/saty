@@ -44,7 +44,7 @@ class ControllerExtensionModuleMegamenu extends Controller {
 			'animation' => $setting['animation'],
 			'animation_time' => $setting['animation_time']
 		);
-		$data['navigation_text'] = 'Navigation';
+		$data['navigation_text'] = 'Menu';
 		if(isset($setting['navigation_text'][$lang_id])) {
 			if(!empty($setting['navigation_text'][$lang_id])) {
 				$data['navigation_text'] = $setting['navigation_text'][$lang_id];
