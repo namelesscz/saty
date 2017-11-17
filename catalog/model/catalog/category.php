@@ -114,7 +114,7 @@ ORDER BY agd.name, ad.name");
 	}
 
 	public function getFilterByAvailability($category_id) {
-		$query = $this->db->query("SELECT substring(ovd.name, position(') - ' IN ovd.name)+3) as sub,GROUP_CONCAT(distinct pov.option_value_id) as options, count(DISTINCT pov.product_id) as cnt FROM " . DB_PREFIX . "product_option_value pov JOIN " . DB_PREFIX . "option_value_description ovd ON pov.option_value_id=ovd.option_value_id JOIN product_to_category pc ON pov.product_id=pc.product_id WHERE ovd.language_id=". (int)$this->config->get('config_language_id')." AND pc.category_id=".(int)$category_id." GROUP BY substring(ovd.name, position(') - ' IN ovd.name)+3)");
+		$query = $this->db->query("SELECT substring(ovd.name, position(') - ' IN ovd.name)+3) as sub,GROUP_CONCAT(distinct pov.option_value_id) as options, count(DISTINCT pov.product_id) as cnt FROM " . DB_PREFIX . "product_option_value pov JOIN " . DB_PREFIX . "option_value_description ovd ON pov.option_value_id=ovd.option_value_id JOIN product_to_category pc ON pov.product_id=pc.product_id WHERE ovd.language_id=". (int)$this->config->get('config_language_id')." AND ovd.name LIKE '%)%' AND pc.category_id=".(int)$category_id." GROUP BY substring(ovd.name, position(') - ' IN ovd.name)+3)");
 		$filters = array();
 		foreach ($query->rows as $result) {
 			$filters[] = array('name' => $result['sub'],'ids' => $result['options']);
@@ -123,7 +123,7 @@ ORDER BY agd.name, ad.name");
 	}
 
 	public function getFilterBySize($category_id) {
-		$query = $this->db->query("SELECT  * FROM (SELECT substring(ovd.name,1, position(') - ' IN ovd.name)+1) as sub ,GROUP_CONCAT(distinct pov.option_value_id) as options, count(DISTINCT pov.product_id) as cnt FROM " . DB_PREFIX . "product_option_value pov JOIN " . DB_PREFIX . "option_value_description ovd ON pov.option_value_id=ovd.option_value_id JOIN product_to_category pc ON pov.product_id=pc.product_id WHERE ovd.language_id=". (int)$this->config->get('config_language_id')." AND pc.category_id=".(int)$category_id." GROUP BY substring(ovd.name,1, position(') - ' IN ovd.name)+1) ) as f ORDER BY cast(replace(substring(f.sub,position('(US' iN f.sub)+3),')','') as unsigned)");
+		$query = $this->db->query("SELECT  * FROM (SELECT substring(ovd.name,1, position(') - ' IN ovd.name)+1) as sub ,GROUP_CONCAT(distinct pov.option_value_id) as options, count(DISTINCT pov.product_id) as cnt FROM " . DB_PREFIX . "product_option_value pov JOIN " . DB_PREFIX . "option_value_description ovd ON pov.option_value_id=ovd.option_value_id JOIN product_to_category pc ON pov.product_id=pc.product_id WHERE ovd.language_id=". (int)$this->config->get('config_language_id')." AND ovd.name LIKE '%)%' AND pc.category_id=".(int)$category_id." GROUP BY substring(ovd.name,1, position(') - ' IN ovd.name)+1) ) as f ORDER BY cast(replace(substring(f.sub,position('(US' iN f.sub)+3),')','') as unsigned)");
 		$filters = array();
 		foreach ($query->rows as $result) {
 			$filters[] = array('name' => $result['sub'],'ids' => $result['options']);

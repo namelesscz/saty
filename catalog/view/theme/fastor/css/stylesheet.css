@@ -1320,8 +1320,8 @@ header {
      }
 
 	#top .pattern > .container {
-		padding-top: 16px;
-		padding-bottom: 40px;
+		padding-top: 5px;
+		padding-bottom: 10px;
 		position: relative;
 		z-index: 35;
 	}
@@ -3638,7 +3638,7 @@ header {
      }
 	
 	.breadcrumb .container > div {
-		padding: 63px 0px 5px 0px;
+		padding: 30px 0px 5px 0px;
 		text-align: center;
 	}
 	
@@ -3734,7 +3734,7 @@ header {
 
 		.breadcrumb .container ul {
 			list-style: none;
-			padding: 17px 0px 56px 0px;
+			padding: 10px 0px 8px 0px;
 			margin: 0px;
 		}
 		
@@ -5832,7 +5832,7 @@ header {
 				.col-md-3 .box-no-advanced .products .row > div .product .left,
 				.col-md-4 .box-no-advanced .products .row > div .product .left {
 					float: left;
-					width: 34%;
+/*					width: 34%;* */
 				}
 				
 				.col-sm-3 .box-no-advanced .products .row > div .product .right,
@@ -5840,7 +5840,7 @@ header {
 				.col-md-3 .box-no-advanced .products .row > div .product .right,
 				.col-md-4 .box-no-advanced .products .row > div .product .right {
 					float: left;
-					width: 57%;
+/*					width: 57%; */
 					margin-left: 9%;
 					padding-top: 0px;
 				}
@@ -7089,7 +7089,7 @@ header {
 			.product-info .description,
 			.product-info .price,
 			.product-info .options {
-				padding: 24px 0px 22px 0px;
+				padding: 14px 0px 12px 0px;
 				background: url(../img/bg-megamenu.png) bottom left repeat-x;
 			}
 			
@@ -7484,9 +7484,9 @@ header {
 				/* Reviews */
 							
 				.product-info .review {
-					padding: 0px 0px 17px 0px;
+					padding: 0px 0px 7px 0px;
 					border-bottom: 1px solid #e5e5e5;
-					margin-bottom: 24px;
+					margin-bottom: 14px;
 					margin-top: -7px;
 					position: relative;
 				}
@@ -7498,7 +7498,7 @@ header {
 				     }
 				
 					.product-info .review > div {
-						padding: 7px 0px 7px 0px;
+					/*	padding: 7px 0px 7px 0px; */
 					}
 						
 						.product-info .review a {

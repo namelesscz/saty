@@ -387,3 +387,4 @@ catalog\controller\common\home.php
 catalog\view\theme\fastor\template\common\home.tpl
 catalog\controller\extension\module\category_wall.php
 catalog\view\theme\fastor\template\extension\module\category_wall.tpl
+catalog\controller\search\autocomplete.php

@@ -163,7 +163,7 @@ input[type="submit"] {
 button[disabled],
 html input[disabled] {
   cursor: default;
-  background: #f5f5f5 !important;}
+  background: #ef0808 !important;}
 
 input[type="checkbox"],
 input[type="radio"] {

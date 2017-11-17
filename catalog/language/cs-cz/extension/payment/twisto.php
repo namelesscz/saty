@@ -1,8 +1,8 @@
 <?php
 // Text
 $_['text_title']        = 'Twisto';
-$_['text_instructions'] = 'Twisto Platební instrukce';
-$_['text_description']  = 'Poté co schválíte objednávku, systém Vás presmeruje do Twisto. Muže to chvíli trvat.';
-$_['text_error_server'] = 'Požadavek selhal. Prosíme zkuste znovu nebo nás kontaktujte.';
-$_['text_fill_item']    = 'Celkem rozdíl';
-$_['text_rounding']     = 'Celkem zaokrouhlení';
+$_['text_instructions'] = 'Twisto PlatebnÃ­ instrukce';
+$_['text_description']  = 'PotÃ© co schvÃ¡lÃ­te objednÃ¡vku, systÃ©m VÃ¡s presmeruje do Twisto. MuÅ¾e to chvÃ­li trvat.';
+$_['text_error_server'] = 'PoÅ¾adavek selhal. ProsÃ­me zkuste znovu nebo nÃ¡s kontaktujte.';
+$_['text_fill_item']    = 'Celkem rozdÃ­l';
+$_['text_rounding']     = 'Celkem zaokrouhlenÃ­';

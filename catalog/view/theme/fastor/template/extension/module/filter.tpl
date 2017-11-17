@@ -14,7 +14,7 @@
 			<li><span id="filter-group1"><?php echo $filter_availability_label; ?></span>
 				<ul>
 				<?php foreach ($filter_availabilities as $key => $filter) { ?>
-					<li><input type="checkbox" id="id_filter_avalibity_<?php echo $key;?>" value="<?php echo $filter['ids'];?>" <?php $a = explode(',',$filter['ids']); if ( in_array($a[0],$filter_availability )){ echo 'checked="checked"';} ?> /><label for="id_filter_avalibity_<?php echo $key;?>"><?php echo $filter['name'];?></label></li>
+					<li><input type="checkbox" id="id_filter_availability_<?php echo $key;?>" value="<?php echo $filter['ids'];?>" <?php $a = explode(',',$filter['ids']); if ( in_array($a[0],$filter_availability )){ echo 'checked="checked"';} ?> /><label for="id_filter_availability_<?php echo $key;?>"><?php echo $filter['name'];?></label></li>
 				<?php }?>
 				</ul>
 			</li>
@@ -48,14 +48,15 @@ $('#button-filter').bind('click', function() {
 	filter_avail = [];
 	filter_size = [];
 	$('.box-filter input[type=\'checkbox\']:checked').each(function(element) {
-		if (this.id.substring('id_filter_size') !== -1) {
+		if (this.id.indexOf('id_filter_size_') !== -1) {
 			filter_size.push(this.value);
-		} else if (this.id.substring('id_filter_avalibity') !== -1) {
+		} else if (this.id.indexOf('id_filter_availability_') !== -1) {
 			filter_avail.push(this.value);
 		} else {
 			filter.push(this.value);
 		}
 	});
-	location = '<?php echo $action; ?>&filter=' + filter.join(',')+(filter_size.length ? '&filter_size='+filter_size.join(',') : '')+(filter_avail.length ? '&filter_availability='+filter_avail.join(',') : '');
+
+	location = '<?php echo $action; ?>'+(filter.length? '&filter=' + filter.join(',') : '')+(filter_size.length ? '&filter_size='+filter_size.join(',') : '')+(filter_avail.length ? '&filter_availability='+filter_avail.join(',') : '');
 });
 //--></script> 
