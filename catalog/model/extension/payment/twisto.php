@@ -149,7 +149,7 @@ class ModelExtensionPaymentTwisto extends Model {
 			$data[$type . '_firstname'] . ' ' . $data[$type . '_lastname'],
 			$data[$type . '_address_1'] . ($data[$type . '_address_2'] ? ' ' . $data[$type . '_address_2'] : ''),
 			$data[$type . '_city'],
-			$data[$type . '_postcode'],
+			str_replace(' ','', $data[$type . '_postcode']),
 			$this->country_codes[$country_id],
 			$this->getOrderCustomField('telephone', $data, $type . '_custom_field') ?: $data['telephone']
 		);

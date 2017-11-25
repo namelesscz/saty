@@ -36,7 +36,7 @@ class Address implements BaseAddress
         $this->name = $name;
         $this->street = $street;
         $this->city = $city;
-        $this->zipcode = $zipcode;
+        $this->zipcode = str_replace(' ','',$zipcode);
         $this->country = $country;
         $this->phone_number = $phone_number;
     }
