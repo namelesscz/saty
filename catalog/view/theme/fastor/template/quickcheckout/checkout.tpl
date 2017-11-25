@@ -273,7 +273,7 @@ $modules_old_opencart = new Modules($registry); ?>
 
 		<div class="quickcheckoutmid">
 		  <div id="terms">
-			<div class="quickcheckout-content text-right"><?php echo $terms; ?></div>
+			<div class="quickcheckout-content text-right"><?php echo $terms; ?>			
 		  </div>
 		</div>
 	  </div><!-- Close QuickCheckoutConfirm div -->

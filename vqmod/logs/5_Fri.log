@@ -1,0 +1,14 @@
+---------- Date: 2017-11-17 09:49:50 ~ IP : 109.238.223.78 ----------
+REQUEST URI : /index.php?route=account/register
+MOD DETAILS:
+   modFile   : /data/web/virtuals/15879/virtual/www/domains/satynajednicku.cz/vqmod/xml/Phone-number-validation-catalog.xml
+   id        : Phone number validation in catalog
+   version   : 1.0.0
+   vqmver    : 2.3.0
+   author    : NetGate.cz
+
+File Name    : catalog/view/theme/*/template/account/register.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <?php echo $header; ?>
+----------------------------------------------------------------------
+
+

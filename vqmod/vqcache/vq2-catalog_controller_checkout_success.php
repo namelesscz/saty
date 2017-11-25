@@ -57,6 +57,10 @@ class ControllerCheckoutSuccess extends Controller {
 			unset($this->session->data['voucher']);
 			unset($this->session->data['vouchers']);
 			unset($this->session->data['totals']);
+
+				if (!empty($this->session->data['multishipping'])) { unset($this->session->data['multishipping']); }
+			
+			unset($this->session->data['api_id']);
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -102,6 +106,9 @@ class ControllerCheckoutSuccess extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+
+		$data['error_telephone_invalid'] = $this->language->get('error_telephone_invalid');
+			
 		$this->response->setOutput($this->load->view('common/success', $data));
 	}
 }

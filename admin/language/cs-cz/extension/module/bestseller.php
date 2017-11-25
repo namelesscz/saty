@@ -1,5 +1,5 @@
 <?php //Copyright: opencart.cz
-$_['heading_title']                               = 'Nejvíce prodávané';
+$_['heading_title']                               = 'Nejprodávanější';
 $_['text_extension']                              = 'Rozšíření';
 $_['text_success']                                = 'Úspěch: Byl upraven modul Nejvíce prodávané!';
 $_['text_edit']                                   = 'Upravit modul Nejvíce prodávané';
