@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<code>credit_invoice_disable_comments</code>
+    <name>Invoice + Credit Invoice (disable customer comments)</name>
+    <version>2.3.0.2</version>
+    <author>Dymago</author>
+	<link>http://www.dymago.eu</link>
+
+	<file path="admin/view/template/sale/order_invoice.tpl">
+        <operation info="do not display customer comments in invoice">
+            <search><![CDATA[
+				<?php if ($order['comment']) { ?>
+            ]]></search>
+            <add position="after" trim="false" offset="1"><![CDATA[
+            <table style="display:none;">
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/view/template/sale/order_creditinvoice.tpl">
+        <operation info="do not display customer comments in credit invoice">
+            <search><![CDATA[
+				<?php if ($order['comment']) { ?>
+            ]]></search>
+            <add position="after" trim="false" offset="1"><![CDATA[
+            <table style="display:none;">
+            ]]></add>
+        </operation>
+    </file>
+</modification>

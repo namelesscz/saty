@@ -1,0 +1,1087 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<code>credit_invoice</code>
+    <name>Credit Invoice (Print, Restock, Company Details)</name>
+    <version>2.3.0.2</version>
+    <author>Yvonne | Dymago</author>
+	<link>http://www.dymago.eu</link>
+
+<!-- company details -->
+	<file path="admin/controller/setting/setting.php">
+        <operation>
+            <search><![CDATA[
+				$data['entry_address'] = $this->language->get('entry_address');
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+				$data['entry_btwnr'] = $this->language->get('entry_btwnr');
+				$data['entry_kvknr'] = $this->language->get('entry_kvknr');
+				$data['entry_iban'] = $this->language->get('entry_iban');
+				$data['entry_bic'] = $this->language->get('entry_bic');
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				if (isset($this->error['address'])) {
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+		if (isset($this->error['btwnr'])) {
+			$data['error_btwnr'] = $this->error['btwnr'];
+		} else {
+			$data['error_btwnr'] = '';
+		}
+
+		if (isset($this->error['iban'])) {
+			$data['error_iban'] = $this->error['iban'];
+		} else {
+			$data['error_iban'] = '';
+		}
+
+		if (isset($this->error['bic'])) {
+			$data['error_bic'] = $this->error['bic'];
+		} else {
+			$data['error_bic'] = '';
+		}
+
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				if (isset($this->request->post['config_address'])) {
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+		if (isset($this->request->post['config_btwnr'])) {
+			$data['config_btwnr'] = $this->request->post['config_btwnr'];
+		} else {
+			$data['config_btwnr'] = $this->config->get('config_btwnr');
+		}
+
+		if (isset($this->request->post['config_kvknr'])) {
+			$data['config_kvknr'] = $this->request->post['config_kvknr'];
+		} else {
+			$data['config_kvknr'] = $this->config->get('config_kvknr');
+		}
+
+		if (isset($this->request->post['config_iban'])) {
+			$data['config_iban'] = $this->request->post['config_iban'];
+		} else {
+			$data['config_iban'] = $this->config->get('config_iban');
+		}
+
+		if (isset($this->request->post['config_bic'])) {
+			$data['config_bic'] = $this->request->post['config_bic'];
+		} else {
+			$data['config_bic'] = $this->config->get('config_bic');
+		}
+
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				if ((utf8_strlen($this->request->post['config_address'])
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+		if (!$this->request->post['config_btwnr']) {
+			$this->error['btwnr'] = $this->language->get('error_btwnr');
+		}
+
+		if (!$this->request->post['config_iban']) {
+			$this->error['iban'] = $this->language->get('error_iban');
+		}
+
+		if (!$this->request->post['config_bic']) {
+			$this->error['bic'] = $this->language->get('error_bic');
+		}
+
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/controller/setting/store.php">
+        <operation>
+            <search><![CDATA[
+				$data['entry_address'] = $this->language->get('entry_address');
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+				$data['entry_btwnr'] = $this->language->get('entry_btwnr');
+				$data['entry_kvknr'] = $this->language->get('entry_kvknr');
+				$data['entry_iban'] = $this->language->get('entry_iban');
+				$data['entry_bic'] = $this->language->get('entry_bic');
+            ]]></add>
+        </operation>
+       <operation>
+            <search><![CDATA[
+				if (isset($this->error['address'])) {
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+		if (isset($this->error['btwnr'])) {
+			$data['error_btwnr'] = $this->error['btwnr'];
+		} else {
+			$data['error_btwnr'] = '';
+		}
+
+		if (isset($this->error['iban'])) {
+			$data['error_iban'] = $this->error['iban'];
+		} else {
+			$data['error_iban'] = '';
+		}
+
+		if (isset($this->error['bic'])) {
+			$data['error_bic'] = $this->error['bic'];
+		} else {
+			$data['error_bic'] = '';
+		}
+
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				if (isset($this->request->post['config_address'])) {
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+		if (isset($this->request->post['config_btwnr'])) {
+			$data['config_btwnr'] = $this->request->post['config_btwnr'];
+		} elseif (isset($store_info['config_btwnr'])) {
+			$data['config_btwnr'] = $store_info['config_btwnr'];
+		} else {
+			$data['config_btwnr'] = '';
+		}
+
+		if (isset($this->request->post['config_kvknr'])) {
+			$data['config_kvknr'] = $this->request->post['config_kvknr'];
+		} elseif (isset($store_info['config_kvknr'])) {
+			$data['config_kvknr'] = $store_info['config_kvknr'];
+		} else {
+			$data['config_kvknr'] = '';
+		}
+
+		if (isset($this->request->post['config_iban'])) {
+			$data['config_iban'] = $this->request->post['config_iban'];
+		} elseif (isset($store_info['config_iban'])) {
+			$data['config_iban'] = $store_info['config_iban'];
+		} else {
+			$data['config_iban'] = '';
+		}
+
+		if (isset($this->request->post['config_bic'])) {
+			$data['config_bic'] = $this->request->post['config_bic'];
+		} elseif (isset($store_info['config_btwnr'])) {
+			$data['config_bic'] = $store_info['config_bic'];
+		} else {
+			$data['config_bic'] = '';
+		}
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				if ((utf8_strlen($this->request->post['config_address'])
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+		if (!$this->request->post['config_btwnr']) {
+			$this->error['btwnr'] = $this->language->get('error_btwnr');
+		}
+
+		if (!$this->request->post['config_iban']) {
+			$this->error['iban'] = $this->language->get('error_iban');
+		}
+
+		if (!$this->request->post['config_bic']) {
+			$this->error['bic'] = $this->language->get('error_bic');
+		}
+
+            ]]></add>
+        </operation>
+    </file>
+
+	<file path="admin/language/en-gb/setting/setting.php">
+        <operation>
+            <search><![CDATA[
+			// Text
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+// Entry Company info
+$_['entry_btwnr'] = 'VAT number';
+$_['entry_kvknr'] = 'Company ID';
+$_['entry_iban'] = 'IBAN';
+$_['entry_bic'] = 'BIC/SWIFT';
+// Error Company info
+$_['error_btwnr'] = 'Vat is required!';
+$_['error_iban'] = 'IBAN is required!';
+$_['error_bic'] = 'BIC/SWIFT is required!';
+
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/language/en-gb/setting/store.php">
+        <operation>
+            <search><![CDATA[
+			// Text
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+// Entry Company info
+$_['entry_btwnr'] = 'VAT number';
+$_['entry_kvknr'] = 'Company ID';
+$_['entry_iban'] = 'IBAN';
+$_['entry_bic'] = 'BIC/SWIFT';
+// Error Company info
+$_['error_btwnr'] = 'Vat is required!';
+$_['error_iban'] = 'IBAN is required!';
+$_['error_bic'] = 'BIC/SWIFT is required!';
+
+            ]]></add>
+        </operation>
+    </file>
+
+	<file path="admin/language/nl-nl/setting/setting.php">
+        <operation>
+            <search><![CDATA[
+			// Text
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+// Entry Company info
+$_['entry_btwnr'] = 'Btw-nummer';
+$_['entry_kvknr'] = 'KvK nummer';
+$_['entry_iban'] = 'IBAN';
+$_['entry_bic'] = 'BIC';
+// Error Company info
+$_['error_btwnr'] = 'Btw-nummer is verplicht!';
+$_['error_iban'] = 'IBAN is verplicht!';
+$_['error_bic'] = 'BIC is verplicht!';
+
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/language/nl-nl/setting/store.php">
+        <operation>
+            <search><![CDATA[
+			// Text
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+// Entry Company info
+$_['entry_btwnr'] = 'Btw-nummer';
+$_['entry_kvknr'] = 'KvK nummer';
+$_['entry_iban'] = 'IBAN';
+$_['entry_bic'] = 'BIC';
+// Error Company info
+$_['error_btwnr'] = 'Btw-nummer is verplicht!';
+$_['error_iban'] = 'IBAN is verplicht!';
+$_['error_bic'] = 'BIC is verplicht!';
+
+            ]]></add>
+        </operation>
+    </file>
+	
+	<file path="admin/view/template/setting/setting.tpl">
+        <operation>
+            <search><![CDATA[
+			<label class="col-sm-2 control-label" for="input-address">
+			]]></search>
+            <add position="before" offset="1"><![CDATA[
+
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-btwnr"><?php echo $entry_btwnr; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_btwnr" value="<?php echo $config_btwnr; ?>" placeholder="<?php echo $entry_btwnr; ?>" id="input-btwnr" class="form-control" />
+                  <?php if ($error_btwnr) { ?>
+                  <div class="text-danger"><?php echo $error_btwnr; ?></div>
+                  <?php } ?>
+               </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-kvknr"><?php echo $entry_kvknr; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_kvknr" value="<?php echo $config_kvknr; ?>" placeholder="<?php echo $entry_kvknr; ?>" id="input-kvknr" class="form-control" />
+               </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-iban"><?php echo $entry_iban; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_iban" value="<?php echo $config_iban; ?>" placeholder="<?php echo $entry_iban; ?>" id="input-iban" class="form-control" />
+                  <?php if ($error_iban) { ?>
+                  <div class="text-danger"><?php echo $error_iban; ?></div>
+                  <?php } ?>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-bic"><?php echo $entry_bic; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_bic" value="<?php echo $config_bic; ?>" placeholder="<?php echo $entry_bic; ?>" id="input-bic" class="form-control" />
+                  <?php if ($error_bic) { ?>
+                  <div class="text-danger"><?php echo $error_bic; ?></div>
+                  <?php } ?>
+                </div>
+              </div>
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/view/template/setting/store_form.tpl">
+        <operation>
+            <search><![CDATA[
+			<label class="col-sm-2 control-label" for="input-address">
+			]]></search>
+            <add position="before" offset="1"><![CDATA[
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-btwnr"><?php echo $entry_btwnr; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_btwnr" value="<?php echo $config_btwnr; ?>" placeholder="<?php echo $entry_btwnr; ?>" id="input-btwnr" class="form-control" />
+                  <?php if ($error_btwnr) { ?>
+                  <div class="text-danger"><?php echo $error_btwnr; ?></div>
+                  <?php } ?>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-kvknr"><?php echo $entry_kvknr; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_kvknr" value="<?php echo $config_kvknr; ?>" placeholder="<?php echo $entry_kvknr; ?>" id="input-kvknr" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-iban"><?php echo $entry_iban; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_iban" value="<?php echo $config_iban; ?>" placeholder="<?php echo $entry_iban; ?>" id="input-iban" class="form-control" />
+                  <?php if ($error_iban) { ?>
+                  <div class="text-danger"><?php echo $error_iban; ?></div>
+                  <?php } ?>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-bic"><?php echo $entry_bic; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_bic" value="<?php echo $config_bic; ?>" placeholder="<?php echo $entry_bic; ?>" id="input-bic" class="form-control" />
+                   <?php if ($error_bic) { ?>
+                  <div class="text-danger"><?php echo $error_bic; ?></div>
+                  <?php } ?>
+               </div>
+              </div>
+            ]]></add>
+        </operation>
+    </file>
+
+<!-- Orders and Invoices -->
+	<file path="admin/controller/sale/order.php">
+        <operation>
+            <search><![CDATA[
+				$data['text_invoice'] = $this->language->get('text_invoice');
+			]]></search>
+            <add position="after"><![CDATA[
+				$data['text_btwnr'] = $this->language->get('text_btwnr');
+				$data['text_kvknr'] = $this->language->get('text_kvknr');
+				$data['text_iban'] = $this->language->get('text_iban');
+				$data['text_bic'] = $this->language->get('text_bic');
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				$store_address = $store_info['config_address'];
+			]]></search>
+            <add position="after" index="1,2"><![CDATA[
+				$store_btwnr = $store_info['config_btwnr'];
+				$store_kvknr = $store_info['config_kvknr'];
+				$store_iban = $store_info['config_iban'];
+				$store_bic = $store_info['config_bic'];
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				$store_address = $this->config->get('config_address');
+			]]></search>
+            <add position="after" index="1,2"><![CDATA[
+				$store_btwnr = $this->config->get('config_btwnr');
+				$store_kvknr = $this->config->get('config_kvknr');
+				$store_iban = $this->config->get('config_iban');
+				$store_bic = $this->config->get('config_bic');
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				'store_address'    => nl2br($store_address),
+			]]></search>
+            <add position="after" index="1,2"><![CDATA[
+				'store_btwnr'      => $store_btwnr,
+				'store_kvknr'      => $store_kvknr,
+				'store_iban'       => $store_iban,
+				'store_bic'        => $store_bic,
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search><![CDATA[
+				$data['invoice'] = $this->url->link('sale/order/invoice', 'token=' . $this->session->data['token'], true);
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+				$data['creditinvoice'] = $this->url->link('sale/order/creditinvoice', 'token=' . $this->session->data['token'], true);
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				$data['button_invoice_print'] = $this->language->get('button_invoice_print');
+            ]]></search>
+            <add position="after" trim="false"><![CDATA[
+			$data['button_creditinvoice_print'] = $this->language->get('button_creditinvoice_print');
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				$data['text_store'] = $this->language->get('text_store');
+            ]]></search>
+            <add position="after" trim="false"><![CDATA[
+			$data['text_creditinvoice'] = $this->language->get('text_creditinvoice');
+			$data['text_creditinvoice_no'] = $this->language->get('text_creditinvoice_no');
+			$data['text_fororder'] = $this->language->get('text_fororder');
+			$data['text_creditinvoice_date'] = $this->language->get('text_creditinvoice_date');
+			$data['text_restock_info'] = $this->language->get('text_restock_info');
+			$data['text_restocked'] = $this->language->get('text_restocked');
+			$data['text_btwnr'] = $this->language->get('text_btwnr');
+			$data['text_kvknr'] = $this->language->get('text_kvknr');
+			$data['text_iban'] = $this->language->get('text_iban');
+			$data['text_bic'] = $this->language->get('text_bic');
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				$data['button_invoice_print'] = $this->language->get('button_invoice_print');
+            ]]></search>
+            <add position="after" trim="false"><![CDATA[
+				$data['button_creditinvoice_print'] = $this->language->get('button_creditinvoice_print');
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				$data['invoice'] = $this->url->link('sale/order/invoice', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], true);
+            ]]></search>
+            <add position="before" trim="false"><![CDATA[
+			$data['creditinvoice'] = $this->url->link('sale/order/creditinvoice', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], true);			
+	
+			if ($order_info['creditinvoice_no']) {
+				$data['creditinvoice_no'] = 'CR-' . date('Y') . '-00' . $order_info['creditinvoice_no'];
+			} else {
+				$data['creditinvoice_no'] = '';
+			}
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				public function createInvoiceNo() {
+            ]]></search>
+            <add position="before" trim="false"><![CDATA[
+	public function createCreditinvoiceNo() {
+		$this->load->language('sale/order');
+
+		$json = array();
+
+		if (!$this->user->hasPermission('modify', 'sale/order')) {
+			$json['error'] = $this->language->get('error_permission');
+		} elseif (isset($this->request->get['order_id'])) {
+			if (isset($this->request->get['order_id'])) {
+				$order_id = $this->request->get['order_id'];
+			} else {
+				$order_id = 0;
+			}
+
+			$this->load->model('sale/order');
+
+			$creditinvoice_no = $this->model_sale_order->createCreditinvoiceNo($order_id);
+
+			if ($creditinvoice_no) {
+				$json['creditinvoice_no'] = $creditinvoice_no;
+			} else {
+				$json['error'] = $this->language->get('error_action');
+			}
+		}
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}
+
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				public function invoice() {
+            ]]></search>
+            <add position="before" trim="false"><![CDATA[
+	public function creditinvoice() {
+		$this->load->language('sale/order');
+
+		$data['title'] = $this->language->get('text_creditinvoice');
+
+		if ($this->request->server['HTTPS']) {
+			$data['base'] = HTTPS_SERVER;
+		} else {
+			$data['base'] = HTTP_SERVER;
+		}
+
+		$data['direction'] = $this->language->get('direction');
+		$data['lang'] = $this->language->get('code');
+
+		$data['text_invoice'] = $this->language->get('text_invoice');
+		$data['text_creditinvoice'] = $this->language->get('text_creditinvoice');
+		$data['text_fororder'] = $this->language->get('text_fororder');
+		$data['text_order_detail'] = $this->language->get('text_order_detail');
+		$data['text_order_id'] = $this->language->get('text_order_id');
+		$data['text_invoice_no'] = $this->language->get('text_invoice_no');
+		$data['text_creditinvoice_no'] = $this->language->get('text_creditinvoice_no');
+		$data['text_creditinvoice_date'] = $this->language->get('text_creditinvoice_date');
+		$data['text_invoice_date'] = $this->language->get('text_invoice_date');
+		$data['text_date_added'] = $this->language->get('text_date_added');
+		$data['text_telephone'] = $this->language->get('text_telephone');
+		$data['text_fax'] = $this->language->get('text_fax');
+		$data['text_email'] = $this->language->get('text_email');
+		$data['text_website'] = $this->language->get('text_website');
+		$data['text_payment_address'] = $this->language->get('text_payment_address');
+		$data['text_shipping_address'] = $this->language->get('text_shipping_address');
+		$data['text_payment_method'] = $this->language->get('text_payment_method');
+		$data['text_shipping_method'] = $this->language->get('text_shipping_method');
+		$data['text_comment'] = $this->language->get('text_comment');
+		$data['text_btwnr'] = $this->language->get('text_btwnr');
+		$data['text_kvknr'] = $this->language->get('text_kvknr');
+		$data['text_iban'] = $this->language->get('text_iban');
+		$data['text_bic'] = $this->language->get('text_bic');
+
+		$data['column_product'] = $this->language->get('column_product');
+		$data['column_model'] = $this->language->get('column_model');
+		$data['column_quantity'] = $this->language->get('column_quantity');
+		$data['column_price'] = $this->language->get('column_price');
+		$data['column_total'] = $this->language->get('column_total');
+		$data['column_comment'] = $this->language->get('column_comment');
+
+		$this->load->model('sale/order');
+
+		$this->load->model('setting/setting');
+
+		$data['orders'] = array();
+
+		$orders = array();
+
+		if (isset($this->request->post['selected'])) {
+			$orders = $this->request->post['selected'];
+		} elseif (isset($this->request->get['order_id'])) {
+			$orders[] = $this->request->get['order_id'];
+		}
+
+		foreach ($orders as $order_id) {
+			$order_info = $this->model_sale_order->getOrder($order_id);
+
+			if ($order_info) {
+				$store_info = $this->model_setting_setting->getSetting('config', $order_info['store_id']);
+
+				if ($store_info) {
+					$store_address = $store_info['config_address'];
+					$store_email = $store_info['config_email'];
+					$store_telephone = $store_info['config_telephone'];
+					$store_fax = $store_info['config_fax'];
+					$store_btwnr = $store_info['config_btwnr'];
+					$store_kvknr = $store_info['config_kvknr'];
+					$store_iban = $store_info['config_iban'];
+					$store_bic = $store_info['config_bic'];
+				} else {
+					$store_address = $this->config->get('config_address');
+					$store_email = $this->config->get('config_email');
+					$store_telephone = $this->config->get('config_telephone');
+					$store_fax = $this->config->get('config_fax');
+					$store_btwnr = $this->config->get('config_btwnr');
+					$store_kvknr = $this->config->get('config_kvknr');
+					$store_iban = $this->config->get('config_iban');
+					$store_bic = $this->config->get('config_bic');
+				}
+
+				if ($order_info['invoice_no']) {
+					$invoice_no = $order_info['invoice_prefix'] . $order_info['invoice_no'];
+				} else {
+					$invoice_no = '';
+				}
+
+				if ($order_info['creditinvoice_no']) {
+					$creditinvoice_no = 'CR-' . date('Y') . '-00' . $order_info['creditinvoice_no'];
+				} else {
+					$creditinvoice_no = '';
+				}
+
+				if ($order_info['payment_address_format']) {
+					$format = $order_info['payment_address_format'];
+				} else {
+					$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+				}
+
+				$find = array(
+					'{firstname}',
+					'{lastname}',
+					'{company}',
+					'{address_1}',
+					'{address_2}',
+					'{city}',
+					'{postcode}',
+					'{zone}',
+					'{zone_code}',
+					'{country}'
+				);
+
+				$replace = array(
+					'firstname' => $order_info['payment_firstname'],
+					'lastname'  => $order_info['payment_lastname'],
+					'company'   => $order_info['payment_company'],
+					'address_1' => $order_info['payment_address_1'],
+					'address_2' => $order_info['payment_address_2'],
+					'city'      => $order_info['payment_city'],
+					'postcode'  => $order_info['payment_postcode'],
+					'zone'      => $order_info['payment_zone'],
+					'zone_code' => $order_info['payment_zone_code'],
+					'country'   => $order_info['payment_country']
+				);
+
+				$payment_address = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+
+				if ($order_info['shipping_address_format']) {
+					$format = $order_info['shipping_address_format'];
+				} else {
+					$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+				}
+
+				$find = array(
+					'{firstname}',
+					'{lastname}',
+					'{company}',
+					'{address_1}',
+					'{address_2}',
+					'{city}',
+					'{postcode}',
+					'{zone}',
+					'{zone_code}',
+					'{country}'
+				);
+
+				$replace = array(
+					'firstname' => $order_info['shipping_firstname'],
+					'lastname'  => $order_info['shipping_lastname'],
+					'company'   => $order_info['shipping_company'],
+					'address_1' => $order_info['shipping_address_1'],
+					'address_2' => $order_info['shipping_address_2'],
+					'city'      => $order_info['shipping_city'],
+					'postcode'  => $order_info['shipping_postcode'],
+					'zone'      => $order_info['shipping_zone'],
+					'zone_code' => $order_info['shipping_zone_code'],
+					'country'   => $order_info['shipping_country']
+				);
+
+				$shipping_address = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+
+				$this->load->model('tool/upload');
+
+				$product_data = array();
+
+				$products = $this->model_sale_order->getOrderProducts($order_id);
+
+				foreach ($products as $product) {
+					$option_data = array();
+
+					$options = $this->model_sale_order->getOrderOptions($order_id, $product['order_product_id']);
+
+					foreach ($options as $option) {
+						if ($option['type'] != 'file') {
+							$value = $option['value'];
+						} else {
+							$upload_info = $this->model_tool_upload->getUploadByCode($option['value']);
+
+							if ($upload_info) {
+								$value = $upload_info['name'];
+							} else {
+								$value = '';
+							}
+						}
+
+						$option_data[] = array(
+							'name'  => $option['name'],
+							'value' => $value
+						);
+					}
+
+					$product_data[] = array(
+						'name'     => $product['name'],
+						'model'    => $product['model'],
+						'option'   => $option_data,
+						'quantity' => $product['quantity'],
+						'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+						'total'    => $this->currency->format(-$product['total'] - ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value'])
+					);
+				}
+
+				$voucher_data = array();
+
+				$vouchers = $this->model_sale_order->getOrderVouchers($order_id);
+
+				foreach ($vouchers as $voucher) {
+					$voucher_data[] = array(
+						'description' => $voucher['description'],
+						'amount'      => $this->currency->format(-$voucher['amount'], $order_info['currency_code'], $order_info['currency_value'])
+					);
+				}
+
+				$total_data = array();
+
+				$totals = $this->model_sale_order->getOrderTotals($order_id);
+
+				foreach ($totals as $total) {
+					$total_data[] = array(
+						'title' => $total['title'],
+						'text'  => $this->currency->format(-$total['value'], $order_info['currency_code'], $order_info['currency_value']),
+					);
+				}
+				
+				$data['orders'][] = array(
+					'store_logo'	     => $order_info['store_url'] . 'image/' . $store_logo,
+					'order_id'	         => $order_id,
+					'invoice_no'         => $invoice_no,
+					'creditinvoice_no'   => $creditinvoice_no,
+					'date_modified'      => date($this->language->get('date_format_short'), strtotime($order_info['date_modified'])),
+					'store_name'         => $order_info['store_name'],
+					'store_url'          => rtrim($order_info['store_url'], '/'),
+					'store_address'      => nl2br($store_address),
+					'store_email'        => $store_email,
+					'store_telephone'    => $store_telephone,
+					'store_fax'          => $store_fax,
+					'store_btwnr'        => $store_btwnr,
+					'store_kvknr'        => $store_kvknr,
+					'store_iban'         => $store_iban,
+					'store_bic'          => $store_bic,
+					'email'              => $order_info['email'],
+					'telephone'          => $order_info['telephone'],
+					'shipping_address'   => $shipping_address,
+					'shipping_method'    => $order_info['shipping_method'],
+					'payment_address'    => $payment_address,
+					'payment_method'     => $order_info['payment_method'],
+					'product'            => $product_data,
+					'voucher'            => $voucher_data,
+					'total'              => $total_data,
+					'comment'            => nl2br($order_info['comment'])
+				);
+			}
+		}
+
+		$this->response->setOutput($this->load->view('sale/order_creditinvoice.tpl', $data));
+	}
+
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				$data['text_payment_method'] = $this->language->get('text_payment_method');
+            ]]></search>
+            <add position="after" trim="false"><![CDATA[
+		$data['text_creditinvoice'] = $this->language->get('text_creditinvoice');
+		$data['text_fororder'] = $this->language->get('text_fororder');
+		$data['text_creditinvoice_no'] = $this->language->get('text_creditinvoice_no');
+		$data['text_creditinvoice_date'] = $this->language->get('text_creditinvoice_date');
+		$data['text_creditinvoice_email'] = $this->language->get('text_creditinvoice_email');
+		$data['text_creditinvoice_webshop'] = $this->language->get('text_creditinvoice_webshop');
+		$data['text_creditinvoice_to'] = $this->language->get('text_creditinvoice_to');
+		$data['text_shipped_to'] = $this->language->get('text_shipped_to');
+
+		$this->load->model('tool/image');
+		if (isset($store_info['config_logo']) && file_exists(DIR_IMAGE . $store_info['config_logo']) && is_file(DIR_IMAGE . $store_info['config_logo'])) {
+			$data['logo'] = $this->model_tool_image->resize($store_info['config_logo'], 100, 100);		
+		} else {
+			$data['logo'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		}
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				$store_fax = $store_info['config_fax'];
+            ]]></search>
+            <add position="after" trim="false"><![CDATA[
+				$store_logo = $store_info['config_logo'];
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				$store_fax = $this->config->get('config_fax');
+            ]]></search>
+            <add position="after" trim="false"><![CDATA[
+				$store_logo = $this->config->get('config_logo');
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				'order_id'	       => $order_id,
+            ]]></search>
+            <add position="before" trim="false"><![CDATA[
+				'store_logo'	     => $order_info['store_url'] . 'image/' . $store_logo,
+            ]]></add>
+        </operation>
+    </file>
+
+	<file path="admin/language/en-gb/sale/order.php">
+        <operation>
+            <search><![CDATA[// Text]]></search>
+            <add position="before" trim="false"><![CDATA[
+// Creditinvoice by dymago
+$_['button_creditinvoice_print'] = 'Print Credit Invoice';
+$_['text_restock_info'] = 'First generate a Credit Invoice number.<br />After that, change the order status to "Credit Invoice" to restock your products.';
+$_['text_restocked'] = 'The Credit Invoice number is generated.<br />Check if the Order Status is set to "Credit Invoice" to restock your products.';
+$_['text_creditinvoice'] = 'Credit Invoice';
+$_['text_fororder'] = 'Proforma Invoice - Order:';
+$_['text_creditinvoice_no'] = 'Credit Invoice No:';
+$_['text_creditinvoice_date'] = 'Credit Invoice Date:';
+$_['text_creditinvoice_email'] = 'E-Mail:';
+$_['text_creditinvoice_webshop'] = 'Web Site:';
+$_['text_creditinvoice_to'] = 'Invoice Address';
+$_['text_shipped_to'] = 'Shipped to';
+$_['text_btwnr'] = 'VAT';
+$_['text_kvknr'] = 'Company ID';
+$_['text_iban'] = 'IBAN';
+$_['text_bic'] = 'BIC/SWIFT';
+$_['column_comment'] = 'Comment';
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/language/nl-nl/sale/order.php">
+        <operation>
+            <search><![CDATA[// Text]]></search>
+            <add position="before" trim="false"><![CDATA[
+// Creditinvoice by dymago
+$_['button_creditinvoice_print'] = 'Creditfactuur printen';
+$_['text_restock_info'] = 'Genereer eerst een Creditfactuur nummer.<br />Verander daarna de bestelstatus naar "Creditfactuur" om de producten terug in voorraad te plaatsen.';
+$_['text_restocked'] = 'Het creditfactuur nummer is aangemaakt.<br />Controleer of de bestelstatus op "Creditfactuur" staat zodat de voorraad wordt bijgewerkt.';
+$_['text_creditinvoice'] = 'Creditfactuur';
+$_['text_fororder'] = 'Proforma factuur - bestelling:';
+$_['text_creditinvoice_no'] = 'Creditfactuur nummer:';
+$_['text_creditinvoice_date'] = 'Creditfactuur datum:';
+$_['text_creditinvoice_email'] = 'E-mailadres:';
+$_['text_creditinvoice_webshop'] = 'Website:';
+$_['text_creditinvoice_to'] = 'Factuuradres';
+$_['text_shipped_to'] = 'Verzendadres';
+$_['text_btwnr'] = 'Btw';
+$_['text_kvknr'] = 'Kvk';
+$_['text_iban'] = 'IBAN';
+$_['text_bic'] = 'BIC';
+$_['column_comment'] = 'Commentaar';
+            ]]></add>
+        </operation>
+    </file>
+
+	<file path="admin/model/sale/order.php">
+        <operation>
+            <search><![CDATA[
+				'invoice_no'              => $order_query->row['invoice_no'],
+            ]]></search>
+            <add position="after" trim="false"><![CDATA[
+				'creditinvoice_no'        => $order_query->row['creditinvoice_no'],
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				public function createInvoiceNo($order_id) {
+            ]]></search>
+            <add position="before" trim="false"><![CDATA[
+	public function createCreditinvoiceNo($order_id) {
+		$order_info = $this->getOrder($order_id);
+
+		if ($order_info && !$order_info['creditinvoice_no']) {
+			$query = $this->db->query("SELECT MAX(creditinvoice_no) AS creditinvoice_no FROM `" . DB_PREFIX . "order` WHERE invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "'");
+
+			if ($query->row['creditinvoice_no']) {
+				$creditinvoice_no = $query->row['creditinvoice_no'] + 1;
+			} else {
+				$creditinvoice_no = 1;
+			}
+
+			$this->db->query("UPDATE `" . DB_PREFIX . "order` SET creditinvoice_no = '" . (int)$creditinvoice_no . "', invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "' WHERE order_id = '" . (int)$order_id . "'");
+
+			return $data['text_creditinvoice_prefix'] = "CR-" . date('Y') . '-00' . $creditinvoice_no;
+		}
+		
+		if ($order_info['order_status_id'] != 20 && $data['order_status_id'] == '20') {
+			$product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");		
+			foreach($product_query->rows as $product) {
+				$this->db->query("UPDATE `" . DB_PREFIX . "product` SET quantity = (quantity + " . (int)$product['quantity'] . ") WHERE product_id = '" . (int)$product['product_id'] . "' AND subtract = '1'");
+				
+				$option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
+
+				foreach ($option_query->rows as $option) {
+					$this->db->query("UPDATE " . DB_PREFIX . "product_option_value SET quantity = (quantity + " . (int)$product['quantity'] . ") WHERE product_option_value_id = '" . (int)$option['product_option_value_id'] . "' AND subtract = '1'");
+				}
+			}
+		}
+	}
+            ]]></add>
+        </operation>
+    </file>
+
+	<file path="admin/view/template/sale/order_info.tpl">
+        <operation>
+            <search><![CDATA[
+				<div class="pull-right">
+            ]]></search>
+            <add position="replace" trim="false"><![CDATA[
+				<?php if ($creditinvoice_no) { ?><div class="pull-right"><a href="<?php echo $creditinvoice; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_creditinvoice_print; ?>" class="btn btn-danger"><i class="fa fa-print"></i></a> <?php } else { ?><div class="pull-right"><?php } ?>
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				<td><?php echo $text_reward; ?></td>
+            ]]></search>
+            <add position="before" trim="false"><![CDATA[
+              <tr>
+                <td><?php echo $text_creditinvoice; ?></td>
+                <td id="creditinvoice" class="text-right"><?php echo $creditinvoice_no; ?></td>
+                <td style="width: 1%;" class="text-center"><?php if (!$creditinvoice_no) { ?>
+                  <button id="button-creditinvoice" data-loading-text="<?php echo $text_loading; ?>" data-toggle="tooltip" title="<?php echo $button_generate; ?>" class="btn btn-success btn-xs"><i class="fa fa-cog"></i></button>
+                  <?php } else { ?>
+                  <button disabled="disabled" class="btn btn-success btn-xs"><i class="fa fa-refresh"></i></button>
+                  <?php } ?></td>
+              </tr>
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				<form class="form-horizontal">
+            ]]></search>
+            <add position="after" trim="false"><![CDATA[
+                <?php if ($creditinvoice_no) { ?>
+                 <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-creditinvoice_no"><?php echo $text_creditinvoice; ?></label>
+                  <div class="col-sm-10">
+					<?php echo $text_restocked; ?>
+                  </div>
+                 </div>
+                 <?php } else { ?>
+				 <div class="form-group">
+				  <label class="col-sm-2 control-label"><?php echo $text_creditinvoice; ?></label>
+				  <div class="col-sm-10"><?php echo $text_restock_info; ?></div>
+				 </div>
+                <?php } ?>
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				$(document).delegate('#button-reward-add', 'click', function() {
+            ]]></search>
+            <add position="before" trim="false"><![CDATA[
+$(document).delegate('#button-creditinvoice', 'click', function() {
+	$.ajax({
+		url: 'index.php?route=sale/order/createcreditinvoiceno&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
+		dataType: 'json',
+		beforeSend: function() {
+			$('#button-creditinvoice').button('loading');
+		},
+		complete: function() {
+			$('#button-creditinvoice').button('reset');
+		},
+		success: function(json) {
+			$('.alert').remove();
+
+			if (json['error']) {
+				$('#content > .container-fluid').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+			}
+
+			if (json['creditinvoice_no']) {
+				$('#creditinvoice').html(json['creditinvoice_no']);
+
+				$('#button-creditinvoice').replaceWith('<button disabled="disabled" class="btn btn-success btn-xs"><i class="fa fa-cog"></i></button>');
+			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+            ]]></add>
+        </operation>
+    </file>
+
+	<file path="admin/view/template/sale/order_list.tpl">
+        <operation>
+            <search><![CDATA[
+				<button type="submit" id="button-invoice" form="form-order" formaction="<?php echo $invoice; ?>" formtarget="_blank" data-toggle="tooltip" title="<?php echo $button_invoice_print; ?>" class="btn btn-info"><i class="fa fa-print"></i></button>
+            ]]></search>
+            <add position="after" trim="false"><![CDATA[
+				<button type="submit" id="button-creditinvoice" form="form-order" formaction="<?php echo $creditinvoice; ?>" formtarget="_blank" data-toggle="tooltip" title="<?php echo $button_creditinvoice_print; ?>" class="btn btn-danger"><i class="fa fa-print"></i></button>
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				$('input[name^=\'selected\']').on('change', function() {
+            ]]></search>
+            <add position="before" trim="false"><![CDATA[
+$('input[name^=\'selected\']').on('change', function() {
+	$('#button-creditinvoice').prop('disabled', true);
+	var selected = $('input[name^=\'selected\']:checked');
+	if (selected.length) {
+		$('#button-creditinvoice').prop('disabled', false);
+	}
+});
+            ]]></add>
+        </operation>
+    </file>
+
+	<file path="admin/view/template/sale/order_invoice.tpl">
+        <operation>
+            <search><![CDATA[
+				<link type="text/css" href="view/stylesheet/stylesheet.css" rel="stylesheet" media="all" />
+            ]]></search>
+            <add position="after" trim="false"><![CDATA[
+				<link type="text/css" href="view/stylesheet/invoices.css" rel="stylesheet" media="all" />
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				<td style="width: 50%;">
+            ]]></search>
+            <add position="replace" trim="false"><![CDATA[
+            <td style="width: 50%; vertical-align:top;">
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				<?php echo $order['order_id']; ?><br />
+            ]]></search>
+            <add position="after" trim="false"><![CDATA[
+            <br />
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				<h1><?php echo $text_invoice; ?> #<?php echo $order['order_id']; ?></h1>
+            ]]></search>
+            <add position="replace" trim="false"><![CDATA[
+            <div class="top invlogo"><img src="<?php echo $order['store_logo']; ?>" height="50px"/></div>
+			<h1>
+			<?php if ($order['invoice_no']) { ?>
+			<?php echo $text_invoice; ?>
+			<?php } else { ?>
+			<?php echo $text_fororder; ?>#<?php echo $order['order_id']; ?>
+			<?php } ?>
+			</h1>
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				<b><?php echo $text_telephone; ?></b> <?php echo $order['store_telephone']; ?><br />
+			]]></search>
+            <add position="before"><![CDATA[
+            <?php if ($order['store_btwnr']) { ?><b><?php echo $text_btwnr; ?></b> <?php echo $order['store_btwnr']; ?><br /><?php } ?>
+            <?php if ($order['store_kvknr']) { ?><b><?php echo $text_kvknr; ?></b> <?php echo $order['store_kvknr']; ?><br /><?php } ?>
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				<td colspan="2"><?php echo $text_order_detail; ?></td>
+            ]]></search>
+            <add position="replace" trim="false"><![CDATA[
+            <td colspan="2" style="display:none"><?php echo $text_order_detail; ?></td>
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				<?php if ($order['comment']) { ?>
+            ]]></search>
+            <add position="after" trim="false" offset="14"><![CDATA[
+    <table id="bottom" class="table">
+      <tbody>
+        <tr>
+          <td><?php echo $order['store_name']; ?> | <?php if ($order['store_btwnr']) { ?><?php echo $text_btwnr; ?>: <?php echo $order['store_btwnr']; ?> | <?php } ?><?php if ($order['store_kvknr']) { ?><?php echo $text_kvknr; ?>: <?php echo $order['store_kvknr']; ?> | <?php } ?><?php if ($order['store_iban']) { ?><?php echo $text_iban; ?>: <?php echo $order['store_iban']; ?> | <?php } ?><?php if ($order['store_bic']) { ?><?php echo $text_bic; ?>: <?php echo $order['store_bic']; ?><?php } ?></td>
+        </tr>
+      </tbody>
+    </table>
+            ]]></add>
+        </operation>
+    </file>
+</modification>

@@ -1,0 +1,28 @@
+/* Creditinvoice by Dymago - opencart@dymago.nl */
+h1 {
+	text-transform: uppercase;
+	color: #CCCCCC;
+	text-align: right;
+	font-size: 24px;
+	font-weight: normal;
+}
+.top {
+	padding-bottom: 12px;
+	margin-top: 0px;
+	margin-bottom: 15px;
+}
+.invlogo {
+	float: left;
+	display: inline-block;
+}
+#bottom {
+	width: 100%;
+	position: fixed;
+	bottom: 4px;
+	text-align:center;
+	font-size:9px;
+	color: #CCCCCC;
+	padding-top: 15px;
+	border-top: 1px solid #CDDDDD;
+}
+.crcolor {color:#FF0000;}

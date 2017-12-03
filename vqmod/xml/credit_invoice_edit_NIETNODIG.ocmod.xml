@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<code>credit_invoice_edit</code>
+    <name>Credit Invoice (edit company info)</name>
+    <version>2.3.0.2</version>
+    <author>Dymago</author>
+	<link>http://www.dymago.eu</link>
+	<file path="admin/language/en-gb/sale/order.php">
+        <operation>
+            <search><![CDATA[
+				// Text
+            ]]></search>
+            <add position="before" trim="false"><![CDATA[
+// Creditinvoice by dymago
+$_['text_creditinvoice_prefix'] = 'CREDITINV-';
+$_['text_company_details'] = 'ADD YOUR COMPANY DETAILS HERE: Companynaam | CoC no: | VAT no: ... | BANKNAME and IBAN no: ... | BIC/SWIFT: ...';
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/language/nl-nl/sale/order.php">
+        <operation>
+            <search><![CDATA[
+				// Text
+            ]]></search>
+            <add position="before" trim="false"><![CDATA[
+// Creditinvoice by dymago
+$_['text_creditinvoice_prefix'] = 'CREDITFACT-';
+$_['text_company_details'] = 'ZET HIER JE BEDRIJFSGEGEVENS NEER: Bedrijfsnaam | KvK nr: ... | BTW nr: ... | BANK en IBAN: ... | BIC: ...';
+            ]]></add>
+        </operation>
+    </file>
+</modification>

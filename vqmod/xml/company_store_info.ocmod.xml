@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<code>company_store_info</code>
+    <name>Company Store Info</name>
+    <version>2.3.0.2</version>
+    <author>Dymago</author>
+	<link>http://www.dymago.eu</link>
+	<file path="admin/controller/setting/setting.php">
+        <operation>
+            <search><![CDATA[
+				$data['entry_address'] = $this->language->get('entry_address');
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+				$data['entry_btwnr'] = $this->language->get('entry_btwnr');
+				$data['entry_kvknr'] = $this->language->get('entry_kvknr');
+				$data['entry_iban'] = $this->language->get('entry_iban');
+				$data['entry_bic'] = $this->language->get('entry_bic');
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				if (isset($this->error['address'])) {
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+		if (isset($this->error['btwnr'])) {
+			$data['error_btwnr'] = $this->error['btwnr'];
+		} else {
+			$data['error_btwnr'] = '';
+		}
+
+		if (isset($this->error['iban'])) {
+			$data['error_iban'] = $this->error['iban'];
+		} else {
+			$data['error_iban'] = '';
+		}
+
+		if (isset($this->error['bic'])) {
+			$data['error_bic'] = $this->error['bic'];
+		} else {
+			$data['error_bic'] = '';
+		}
+
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				if (isset($this->request->post['config_address'])) {
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+		if (isset($this->request->post['config_btwnr'])) {
+			$data['config_btwnr'] = $this->request->post['config_btwnr'];
+		} else {
+			$data['config_btwnr'] = $this->config->get('config_btwnr');
+		}
+
+		if (isset($this->request->post['config_kvknr'])) {
+			$data['config_kvknr'] = $this->request->post['config_kvknr'];
+		} else {
+			$data['config_kvknr'] = $this->config->get('config_kvknr');
+		}
+
+		if (isset($this->request->post['config_iban'])) {
+			$data['config_iban'] = $this->request->post['config_iban'];
+		} else {
+			$data['config_iban'] = $this->config->get('config_iban');
+		}
+
+		if (isset($this->request->post['config_bic'])) {
+			$data['config_bic'] = $this->request->post['config_bic'];
+		} else {
+			$data['config_bic'] = $this->config->get('config_bic');
+		}
+
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				if ((utf8_strlen($this->request->post['config_address'])
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+		if (!$this->request->post['config_btwnr']) {
+			$this->error['btwnr'] = $this->language->get('error_btwnr');
+		}
+
+		if (!$this->request->post['config_iban']) {
+			$this->error['iban'] = $this->language->get('error_iban');
+		}
+
+		if (!$this->request->post['config_bic']) {
+			$this->error['bic'] = $this->language->get('error_bic');
+		}
+
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/controller/setting/store.php">
+        <operation>
+            <search><![CDATA[
+				$data['entry_address'] = $this->language->get('entry_address');
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+				$data['entry_btwnr'] = $this->language->get('entry_btwnr');
+				$data['entry_kvknr'] = $this->language->get('entry_kvknr');
+				$data['entry_iban'] = $this->language->get('entry_iban');
+				$data['entry_bic'] = $this->language->get('entry_bic');
+            ]]></add>
+        </operation>
+       <operation>
+            <search><![CDATA[
+				if (isset($this->error['address'])) {
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+		if (isset($this->error['btwnr'])) {
+			$data['error_btwnr'] = $this->error['btwnr'];
+		} else {
+			$data['error_btwnr'] = '';
+		}
+
+		if (isset($this->error['iban'])) {
+			$data['error_iban'] = $this->error['iban'];
+		} else {
+			$data['error_iban'] = '';
+		}
+
+		if (isset($this->error['bic'])) {
+			$data['error_bic'] = $this->error['bic'];
+		} else {
+			$data['error_bic'] = '';
+		}
+
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				if (isset($this->request->post['config_address'])) {
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+		if (isset($this->request->post['config_btwnr'])) {
+			$data['config_btwnr'] = $this->request->post['config_btwnr'];
+		} elseif (isset($store_info['config_btwnr'])) {
+			$data['config_btwnr'] = $store_info['config_btwnr'];
+		} else {
+			$data['config_btwnr'] = '';
+		}
+
+		if (isset($this->request->post['config_kvknr'])) {
+			$data['config_kvknr'] = $this->request->post['config_kvknr'];
+		} elseif (isset($store_info['config_kvknr'])) {
+			$data['config_kvknr'] = $store_info['config_kvknr'];
+		} else {
+			$data['config_kvknr'] = '';
+		}
+
+		if (isset($this->request->post['config_iban'])) {
+			$data['config_iban'] = $this->request->post['config_iban'];
+		} elseif (isset($store_info['config_iban'])) {
+			$data['config_iban'] = $store_info['config_iban'];
+		} else {
+			$data['config_iban'] = '';
+		}
+
+		if (isset($this->request->post['config_bic'])) {
+			$data['config_bic'] = $this->request->post['config_bic'];
+		} elseif (isset($store_info['config_btwnr'])) {
+			$data['config_bic'] = $store_info['config_bic'];
+		} else {
+			$data['config_bic'] = '';
+		}
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				if ((utf8_strlen($this->request->post['config_address'])
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+		if (!$this->request->post['config_btwnr']) {
+			$this->error['btwnr'] = $this->language->get('error_btwnr');
+		}
+
+		if (!$this->request->post['config_iban']) {
+			$this->error['iban'] = $this->language->get('error_iban');
+		}
+
+		if (!$this->request->post['config_bic']) {
+			$this->error['bic'] = $this->language->get('error_bic');
+		}
+
+            ]]></add>
+        </operation>
+    </file>
+
+	<file path="admin/language/en-gb/setting/setting.php">
+        <operation>
+            <search><![CDATA[
+			// Text
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+// Entry Company info
+$_['entry_btwnr'] = 'VAT number';
+$_['entry_kvknr'] = 'Company ID';
+$_['entry_iban'] = 'IBAN';
+$_['entry_bic'] = 'BIC/SWIFT';
+// Error Company info
+$_['error_btwnr'] = 'Vat is required!';
+$_['error_iban'] = 'IBAN is required!';
+$_['error_bic'] = 'BIC/SWIFT is required!';
+
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/language/en-gb/setting/store.php">
+        <operation>
+            <search><![CDATA[
+			// Text
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+// Entry Company info
+$_['entry_btwnr'] = 'VAT number';
+$_['entry_kvknr'] = 'Company ID';
+$_['entry_iban'] = 'IBAN';
+$_['entry_bic'] = 'BIC/SWIFT';
+// Error Company info
+$_['error_btwnr'] = 'Vat is required!';
+$_['error_iban'] = 'IBAN is required!';
+$_['error_bic'] = 'BIC/SWIFT is required!';
+
+            ]]></add>
+        </operation>
+    </file>
+
+	<file path="admin/language/nl-nl/setting/setting.php">
+        <operation>
+            <search><![CDATA[
+			// Text
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+// Entry Company info
+$_['entry_btwnr'] = 'Btw-nummer';
+$_['entry_kvknr'] = 'Kvk-nummer';
+$_['entry_iban'] = 'IBAN';
+$_['entry_bic'] = 'BIC';
+// Error Company info
+$_['error_btwnr'] = 'Btw-nummer is verplicht!';
+$_['error_iban'] = 'IBAN is verplicht!';
+$_['error_bic'] = 'BIC is verplicht!';
+
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/language/nl-nl/setting/store.php">
+        <operation>
+            <search><![CDATA[
+			// Text
+			]]></search>
+            <add position="before" trim="false"><![CDATA[
+// Entry Company info
+$_['entry_btwnr'] = 'Btw-nummer';
+$_['entry_kvknr'] = 'Kvk-nummer';
+$_['entry_iban'] = 'IBAN';
+$_['entry_bic'] = 'BIC';
+// Error Company info
+$_['error_btwnr'] = 'Btw-nummer is verplicht!';
+$_['error_iban'] = 'IBAN is verplicht!';
+$_['error_bic'] = 'BIC is verplicht!';
+
+            ]]></add>
+        </operation>
+    </file>
+	
+	<file path="admin/view/template/setting/setting.tpl">
+        <operation>
+            <search><![CDATA[
+			<label class="col-sm-2 control-label" for="input-address">
+			]]></search>
+            <add position="before" offset="1"><![CDATA[
+
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-btwnr"><?php echo $entry_btwnr; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_btwnr" value="<?php echo $config_btwnr; ?>" placeholder="<?php echo $entry_btwnr; ?>" id="input-btwnr" class="form-control" />
+                  <?php if ($error_btwnr) { ?>
+                  <div class="text-danger"><?php echo $error_btwnr; ?></div>
+                  <?php } ?>
+               </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-kvknr"><?php echo $entry_kvknr; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_kvknr" value="<?php echo $config_kvknr; ?>" placeholder="<?php echo $entry_kvknr; ?>" id="input-kvknr" class="form-control" />
+               </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-iban"><?php echo $entry_iban; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_iban" value="<?php echo $config_iban; ?>" placeholder="<?php echo $entry_iban; ?>" id="input-iban" class="form-control" />
+                  <?php if ($error_iban) { ?>
+                  <div class="text-danger"><?php echo $error_iban; ?></div>
+                  <?php } ?>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-bic"><?php echo $entry_bic; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_bic" value="<?php echo $config_bic; ?>" placeholder="<?php echo $entry_bic; ?>" id="input-bic" class="form-control" />
+                  <?php if ($error_bic) { ?>
+                  <div class="text-danger"><?php echo $error_bic; ?></div>
+                  <?php } ?>
+                </div>
+              </div>
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/view/template/setting/store_form.tpl">
+        <operation>
+            <search><![CDATA[
+			<label class="col-sm-2 control-label" for="input-address">
+			]]></search>
+            <add position="before" offset="1"><![CDATA[
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-btwnr"><?php echo $entry_btwnr; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_btwnr" value="<?php echo $config_btwnr; ?>" placeholder="<?php echo $entry_btwnr; ?>" id="input-btwnr" class="form-control" />
+                  <?php if ($error_btwnr) { ?>
+                  <div class="text-danger"><?php echo $error_btwnr; ?></div>
+                  <?php } ?>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-kvknr"><?php echo $entry_kvknr; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_kvknr" value="<?php echo $config_kvknr; ?>" placeholder="<?php echo $entry_kvknr; ?>" id="input-kvknr" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-iban"><?php echo $entry_iban; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_iban" value="<?php echo $config_iban; ?>" placeholder="<?php echo $entry_iban; ?>" id="input-iban" class="form-control" />
+                  <?php if ($error_iban) { ?>
+                  <div class="text-danger"><?php echo $error_iban; ?></div>
+                  <?php } ?>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-bic"><?php echo $entry_bic; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_bic" value="<?php echo $config_bic; ?>" placeholder="<?php echo $entry_bic; ?>" id="input-bic" class="form-control" />
+                   <?php if ($error_bic) { ?>
+                  <div class="text-danger"><?php echo $error_bic; ?></div>
+                  <?php } ?>
+               </div>
+              </div>
+            ]]></add>
+        </operation>
+    </file>
+
+	<file path="admin/controller/sale/order.php">
+        <operation>
+            <search><![CDATA[
+				$data['text_invoice'] = $this->language->get('text_invoice');
+			]]></search>
+            <add position="after"><![CDATA[
+				$data['text_btwnr'] = $this->language->get('text_btwnr');
+				$data['text_kvknr'] = $this->language->get('text_kvknr');
+				$data['text_iban'] = $this->language->get('text_iban');
+				$data['text_bic'] = $this->language->get('text_bic');
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				$store_address = $store_info['config_address'];
+			]]></search>
+            <add position="after" index="1,2"><![CDATA[
+				$store_btwnr = $store_info['config_btwnr'];
+				$store_kvknr = $store_info['config_kvknr'];
+				$store_iban = $store_info['config_iban'];
+				$store_bic = $store_info['config_bic'];
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				$store_address = $this->config->get('config_address');
+			]]></search>
+            <add position="after" index="1,2"><![CDATA[
+				$store_btwnr = $this->config->get('config_btwnr');
+				$store_kvknr = $this->config->get('config_kvknr');
+				$store_iban = $this->config->get('config_iban');
+				$store_bic = $this->config->get('config_bic');
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				'store_address'    => nl2br($store_address),
+			]]></search>
+            <add position="after" index="1,2"><![CDATA[
+				'store_btwnr'      => $store_btwnr,
+				'store_kvknr'      => $store_kvknr,
+				'store_iban'       => $store_iban,
+				'store_bic'        => $store_bic,
+            ]]></add>
+        </operation>
+    </file>
+
+	<file path="admin/language/en-gb/sale/order.php">
+        <operation>
+            <search><![CDATA[
+			// Text
+			]]></search>
+            <add position="after"><![CDATA[
+$_['text_btwnr'] = 'VAT';
+$_['text_kvknr'] = 'Company ID';
+$_['text_iban'] = 'IBAN';
+$_['text_bic'] = 'BIC/SWIFT';
+            ]]></add>
+        </operation>
+    </file>
+	<file path="admin/language/nl-nl/sale/order.php">
+        <operation>
+            <search><![CDATA[
+			// Text
+			]]></search>
+            <add position="after"><![CDATA[
+$_['text_btwnr'] = 'Btw';
+$_['text_kvknr'] = 'Kvk';
+$_['text_iban'] = 'IBAN';
+$_['text_bic'] = 'BIC';
+            ]]></add>
+        </operation>
+    </file>
+
+	<file path="admin/view/template/sale/order_invoice.tpl">
+        <operation>
+            <search><![CDATA[
+				<b><?php echo $text_telephone; ?></b> <?php echo $order['store_telephone']; ?><br />
+			]]></search>
+            <add position="before"><![CDATA[
+				<?php if ($order['store_btwnr']) { ?><b><?php echo $text_btwnr; ?></b> <?php echo $order['store_btwnr']; ?><br /><?php } ?>
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+				<?php if ($order['comment']) { ?>
+            ]]></search>
+            <add position="after" trim="false" offset="14"><![CDATA[
+           <div id="bottom">
+     <?php echo $order['store_name']; ?> | 
+     <?php if ($order['store_btwnr']) { ?><?php echo $text_btwnr; ?>: <?php echo $order['store_btwnr']; ?> | <?php } ?>
+     <?php if ($order['store_kvknr']) { ?><?php echo $text_kvknr; ?>: <?php echo $order['store_kvknr']; ?> | <?php } ?>
+     <?php if ($order['store_iban']) { ?><?php echo $text_iban; ?>: <?php echo $order['store_iban']; ?> | <?php } ?>
+     <?php if ($order['store_bic']) { ?><?php echo $text_bic; ?>: <?php echo $order['store_bic']; ?><?php } ?>
+		   </div>
+            ]]></add>
+        </operation>
+    </file>
+
+<!--// end store info //-->
+</modification>
