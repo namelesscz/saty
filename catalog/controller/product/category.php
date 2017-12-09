@@ -349,7 +349,11 @@ class ControllerProductCategory extends Controller {
 			$pagination->total = $product_total;
 			$pagination->page = $page;
 			$pagination->limit = $limit;
-			$pagination->url = $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url . '&page={page}');
+			$pagination->url = $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url . '&page={page}')
+				.(isset($filter_data['filter_filter'])? '&filter='.$filter_data['filter_filter'] : '')
+				.(isset($filter_data['filter_size'])? '&filter_size='.$filter_data['filter_size'] : '')
+				.(isset($filter_data['filter_availability'])? '&filter_availability='.$filter_data['filter_availability'] : '');
+;
 
 			$data['pagination'] = $pagination->render();
 

@@ -127,14 +127,28 @@ class ModelCatalogProduct extends Model {
 				}
 				$sql .= " AND pf.attribute_id IN (" . implode(',', $implode) . ")";
 			}
-			if (isset($data['filter_size'])){
-				$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value WHERE option_value_id IN ('.$data['filter_size'].'))';
-				#$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value pov JOIN '.DB_PREFIX.'option_value_description ovd ON pov.option_value_id=ovd.option_value_id  WHERE language_id='.(int)$this->config->get('config_language_id') .' AND name like "'.$size.'%")';
-			}
-			if (isset($data['filter_availability'])) {
-				$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value WHERE option_value_id IN ('.$data['filter_availability'].'))';
+			$filter_options = array();
+			$filter_by_option = false;
+			if (isset($data['filter_size']) && isset($data['filter_availability']) ){
+				$filter_by_option= true;
+				$filter_options = array_intersect( explode(',',$data['filter_size']),explode(',',$data['filter_availability']));
+			} else if (isset($data['filter_size'])) {
+				$filter_by_option= true;
+				$filter_options = explode(',',$data['filter_size']);
+			} else if (isset($data['filter_availability'])) {
+				$filter_by_option= true;
+				$filter_options = explode(',',$data['filter_availability']);
 			}
 
+			if ($filter_by_option == true)
+			{
+				if (count ($filter_options)) {
+					$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value WHERE option_value_id IN ('.implode(',',$filter_options).'))';
+				#$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value pov JOIN '.DB_PREFIX.'option_value_description ovd ON pov.option_value_id=ovd.option_value_id  WHERE language_id='.(int)$this->config->get('config_language_id') .' AND name like "'.$size.'%")';
+				} else {
+					$sql .= 'AND 0';
+				}
+			}
 
 		}
 
@@ -198,7 +212,7 @@ class ModelCatalogProduct extends Model {
 
 		$sql .= " GROUP BY p.product_id";
 		if (!empty($data['filter_filter'])) {
-			$sql .= ' HAVING count(distinct pf.attribute_id) = '.count($implode);
+			$sql .= ' HAVING count(distinct pf.attribute_id) = '.count( explode(',', $data['filter_filter']));
 		}
 
 		$sort_data = array(
@@ -468,7 +482,7 @@ class ModelCatalogProduct extends Model {
 			}
 
 			if (!empty($data['filter_filter'])) {
-				$sql .= " LEFT JOIN " . DB_PREFIX . "product_filter pf ON (p2c.product_id = pf.product_id) LEFT JOIN " . DB_PREFIX . "product p ON (pf.product_id = p.product_id)";
+				$sql .= " LEFT JOIN " . DB_PREFIX . "product_attribute pf ON (p2c.product_id = pf.product_id) LEFT JOIN " . DB_PREFIX . "product p ON (pf.product_id = p.product_id)";
 			} else {
 				$sql .= " LEFT JOIN " . DB_PREFIX . "product p ON (p2c.product_id = p.product_id)";
 			}
@@ -494,9 +508,32 @@ class ModelCatalogProduct extends Model {
 					$implode[] = (int)$filter_id;
 				}
 
-				$sql .= " AND pf.filter_id IN (" . implode(',', $implode) . ")";
+				$sql .= " AND pf.attribute_id IN (" . implode(',', $implode) . ")"; #" AND count(distinct pf.attribute_id) = ".count($implode);
 			}
 		}
+			$filter_options = array();
+			$filter_by_option = false;
+			if (isset($data['filter_size']) && isset($data['filter_availability']) ){
+				$filter_by_option= true;
+				$filter_options = array_intersect( explode(',',$data['filter_size']),explode(',',$data['filter_availability']));
+			} else if (isset($data['filter_size'])) {
+				$filter_by_option= true;
+				$filter_options = explode(',',$data['filter_size']);
+			} else if (isset($data['filter_availability'])) {
+				$filter_by_option= true;
+				$filter_options = explode(',',$data['filter_availability']);
+			}
+
+			if ($filter_by_option == true)
+			{
+				if (count ($filter_options) ){
+					$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value WHERE option_value_id IN ('.implode(',',$filter_options).'))';
+				#$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value pov JOIN '.DB_PREFIX.'option_value_description ovd ON pov.option_value_id=ovd.option_value_id  WHERE language_id='.(int)$this->config->get('config_language_id') .' AND name like "'.$size.'%")';
+				} else {
+					$sql .= 'AND 0';
+				}
+			}
+
 
 		if (!empty($data['filter_name']) || !empty($data['filter_tag'])) {
 			$sql .= " AND (";
@@ -552,6 +589,10 @@ class ModelCatalogProduct extends Model {
 
 		if (!empty($data['filter_manufacturer_id'])) {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
+		}
+
+		if (!empty($data['filter_filter'])) {
+			$sql .= " GROUP BY p.product_id HAVING count(distinct pf.attribute_id)=".count(explode(',',$data['filter_filter']));
 		}
 
 		$query = $this->db->query($sql);
