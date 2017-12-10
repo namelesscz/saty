@@ -56,7 +56,7 @@ $('#button-confirm').on('click', function() {
 			});
 		}
 
-		twistoError(errors.length ? errors.join('<br>') : '<?php echo $text_error_server; ?>');
+		twistoError('<?php echo $text_error_server; ?>');
 	});
 });
 

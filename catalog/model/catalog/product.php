@@ -143,7 +143,7 @@ class ModelCatalogProduct extends Model {
 			if ($filter_by_option == true)
 			{
 				if (count ($filter_options)) {
-					$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value WHERE option_value_id IN ('.implode(',',$filter_options).'))';
+					$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value WHERE option_value_id IN ('.implode(',',$filter_options).') AND (( quantity > 0 AND subtract = 1) OR subtract =0 ) )';
 				#$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value pov JOIN '.DB_PREFIX.'option_value_description ovd ON pov.option_value_id=ovd.option_value_id  WHERE language_id='.(int)$this->config->get('config_language_id') .' AND name like "'.$size.'%")';
 				} else {
 					$sql .= 'AND 0';
@@ -527,7 +527,7 @@ class ModelCatalogProduct extends Model {
 			if ($filter_by_option == true)
 			{
 				if (count ($filter_options) ){
-					$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value WHERE option_value_id IN ('.implode(',',$filter_options).'))';
+					$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value WHERE option_value_id IN ('.implode(',',$filter_options).') AND (( quantity > 0 AND subtract = 1) OR subtract =0 ) )';
 				#$sql .= ' AND p.product_id IN (SELECT product_id FROM '.DB_PREFIX.'product_option_value pov JOIN '.DB_PREFIX.'option_value_description ovd ON pov.option_value_id=ovd.option_value_id  WHERE language_id='.(int)$this->config->get('config_language_id') .' AND name like "'.$size.'%")';
 				} else {
 					$sql .= 'AND 0';
