@@ -1,0 +1,28 @@
+---------- Date: 2017-12-13 17:52:55 ~ IP : 127.0.0.1 ----------
+REQUEST URI : /admin/index.php?route=extension/extension&token=VlA8cbcj4RzeRh7cCstwXj1YA6n6CWbS
+MOD DETAILS:
+   modFile   : D:\no_backup\www\saty_new_dev\vqmod/xml/company_store_info.ocmod.xml
+   id        : 
+   version   : 2.3.0.2
+   vqmver    : 
+   author    : Dymago
+VQModObject::parseMods - Could not resolve path for [admin/language/nl-nl/setting/setting.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/nl-nl/setting/store.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/nl-nl/sale/order.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/nl-nl/setting/setting.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/nl-nl/setting/store.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/nl-nl/sale/order.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/nl-nl/setting/setting.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/nl-nl/setting/store.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/nl-nl/sale/order.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/language/nl-nl/sale/order.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/controller/svea/success.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/controller/svea/checkout.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/controller/onepagecheckout/ordersuccess.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/controller/checkout/simplecheckout.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/controller/onepagecheckout/checkout.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/controller/onepagecheckout/ordersuccess.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [system/library/weight.php] (SKIPPED)
+----------------------------------------------------------------------
+
+

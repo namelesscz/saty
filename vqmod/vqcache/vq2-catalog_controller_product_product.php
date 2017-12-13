@@ -3,6 +3,16 @@ class ControllerProductProduct extends Controller {
 	private $error = array();
 
 	public function index() {
+
+	if ($this->config->get('config_remarketing_manager_cart_button')!='') {
+		$cart_button_id = $this->config->get('config_remarketing_manager_cart_button');
+		if (substr($cart_button_id, 0, 1) === '#' || substr($cart_button_id, 0, 1) === '.')
+			$cart_button_id = '#'.$cart_button_id;
+		$data['config_remarketing_manager_cart_button'] = $cart_button_id;
+	} else {
+		$data['config_remarketing_manager_cart_button'] = '#button-cart';
+	}
+
 		$this->load->language('product/product');
 
 		$data['breadcrumbs'] = array();
@@ -339,6 +349,38 @@ class ControllerProductProduct extends Controller {
 				);
 			}
 
+
+	$remarketing_price='';
+	$remarketing_id_1 = '';
+	$remarketing_id_2 = '';
+	if ($this->config->get('config_remarketing_manager_google_id1')=='product_id')
+		$remarketing_id_1 = $data['product_id'];
+	else
+		$remarketing_id_1 = str_replace(',','',$data['model']);
+	if ($this->config->get('config_remarketing_manager_google_id2')=='product_id')
+		$remarketing_id_2 = $data['product_id'];
+	elseif ($this->config->get('config_remarketing_manager_google_id2')=='model')
+		$remarketing_id_2 = str_replace(',','',$data['model']);
+	if ($remarketing_id_1==$remarketing_id_2)
+		$remarketing_id_2='';
+	if ((float)$product_info['special']) {
+		$remarketing_price = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'],'',false);
+	} elseif(($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
+		$remarketing_price = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')),$this->session->data['currency'],'',false);
+	} else {
+		$remarketing_price = '0';
+	}
+	$this->model_catalog_category->setGoogleTag($remarketing_id_1,$remarketing_id_2,$remarketing_price,"product","offerdetail","'","'");
+
+	$product_title=str_replace('&quot;', '',str_replace('&apos;', '',str_replace('"', '',str_replace("'", "",$data['heading_title']))));
+	$facebook_remarketing_id = '';
+	if ($this->config->get('config_remarketing_manager_facebook_id')=='product_id')
+		$facebook_remarketing_id = $data['product_id'];
+	else
+		$facebook_remarketing_id = str_replace(',','',$data['model']);
+	$facebook_remarketing_id ="'".$facebook_remarketing_id."'";
+	$this->model_catalog_category->setFacebookPixel($facebook_remarketing_id,$remarketing_price,"ViewContent",$product_title,"product","");
+
 			$data['options'] = array();
 
 			foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) {
@@ -363,6 +405,38 @@ class ControllerProductProduct extends Controller {
 						);
 					}
 				}
+
+
+	$remarketing_price='';
+	$remarketing_id_1 = '';
+	$remarketing_id_2 = '';
+	if ($this->config->get('config_remarketing_manager_google_id1')=='product_id')
+		$remarketing_id_1 = $data['product_id'];
+	else
+		$remarketing_id_1 = str_replace(',','',$data['model']);
+	if ($this->config->get('config_remarketing_manager_google_id2')=='product_id')
+		$remarketing_id_2 = $data['product_id'];
+	elseif ($this->config->get('config_remarketing_manager_google_id2')=='model')
+		$remarketing_id_2 = str_replace(',','',$data['model']);
+	if ($remarketing_id_1==$remarketing_id_2)
+		$remarketing_id_2='';
+	if ((float)$product_info['special']) {
+		$remarketing_price = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'],'',false);
+	} elseif(($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
+		$remarketing_price = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')),$this->session->data['currency'],'',false);
+	} else {
+		$remarketing_price = '0';
+	}
+	$this->model_catalog_category->setGoogleTag($remarketing_id_1,$remarketing_id_2,$remarketing_price,"product","offerdetail","'","'");
+
+	$product_title=str_replace('&quot;', '',str_replace('&apos;', '',str_replace('"', '',str_replace("'", "",$data['heading_title']))));
+	$facebook_remarketing_id = '';
+	if ($this->config->get('config_remarketing_manager_facebook_id')=='product_id')
+		$facebook_remarketing_id = $data['product_id'];
+	else
+		$facebook_remarketing_id = str_replace(',','',$data['model']);
+	$facebook_remarketing_id ="'".$facebook_remarketing_id."'";
+	$this->model_catalog_category->setFacebookPixel($facebook_remarketing_id,$remarketing_price,"ViewContent",$product_title,"product","");
 
 				$data['options'][] = array(
 					'product_option_id'    => $option['product_option_id'],

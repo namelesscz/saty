@@ -126,3 +126,9 @@
 2017-11-12 15:57:56 - PHP Notice:  Indirect modification of overloaded property ControllerQuickCheckoutCheckout::$sesssion has no effect in D:\_data\www\saty_new_dev\catalog\controller\quickcheckout\checkout.php on line 212
 2017-11-12 15:57:56 - PHP Warning:  Creating default object from empty value in D:\_data\www\saty_new_dev\catalog\controller\quickcheckout\checkout.php on line 212
 2017-11-12 16:19:56 - PHP Warning:  Illegal string offset 'code' in D:\_data\www\saty_new_dev\catalog\model\extension\payment\multishipping_cod.php on line 15
+2017-11-16 13:03:10 - PHP Warning:  array_merge(): Argument #1 is not an array in D:\no_backup\www\saty_new_dev\admin\controller\extension\payment\twisto.php on line 32
+2017-11-16 13:03:12 - PHP Warning:  array_merge(): Argument #1 is not an array in D:\no_backup\www\saty_new_dev\admin\controller\extension\payment\twisto.php on line 32
+2017-11-16 15:40:56 - PHP Warning:  array_merge(): Argument #1 is not an array in D:\no_backup\www\saty_new_dev\admin\controller\extension\payment\twisto.php on line 32
+2017-11-16 15:40:56 - PHP Warning:  array_merge(): Argument #1 is not an array in D:\no_backup\www\saty_new_dev\admin\controller\extension\payment\twisto.php on line 32
+2017-11-16 19:37:22 - PHP Notice:  Undefined index: stock_status_id in D:\no_backup\www\saty_new_dev\vqmod\vqcache\vq2-catalog_controller_product_product.php on line 254
+2017-12-09 18:47:35 - PHP Notice:  Undefined index: total in D:\no_backup\www\saty_new_dev\vqmod\vqcache\vq2-catalog_model_catalog_product.php on line 602

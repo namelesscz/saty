@@ -4,8 +4,8 @@ define('HTTP_SERVER', 'http://'.$_SERVER['HTTP_HOST'].'/admin/');
 define('HTTP_CATALOG', 'http://'.$_SERVER['HTTP_HOST'].'/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://'.$_SERVER['HTTP_HOST'].'/admin/');
-define('HTTPS_CATALOG', 'http://'.$_SERVER['HTTP_HOST'].'/');
+define('HTTPS_SERVER', 'https://'.$_SERVER['HTTP_HOST'].'/admin/');
+define('HTTPS_CATALOG', 'https://'.$_SERVER['HTTP_HOST'].'/');
 
 // DIR
 define('DIR_APPLICATION', 'd:/no_backup/www/saty_new_dev/admin/');

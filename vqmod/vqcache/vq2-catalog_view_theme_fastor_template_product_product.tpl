@@ -478,7 +478,7 @@ include('catalog/view/theme/'.$config->get($config->get('config_theme') . '_dire
 			        </div>
 			        
 			        <div class="links clearfix">
-			        	<a onclick="wishlist.add('<?php echo $product_id; ?>');"><?php if($theme_options->get( 'add_to_wishlist_text', $config->get( 'config_language_id' ) ) != '') { echo $theme_options->get( 'add_to_wishlist_text', $config->get( 'config_language_id' ) ); } else { echo 'Add to wishlist'; } ?></a>
+			        	<a onclick="<?php if (isset($product['product_id'])) $wishlist_product_id=$product['product_id']; else $wishlist_product_id=$product_id; ?>addButtonChecker.AddToWishlist('<?php echo $wishlist_product_id; ?>');wishlist.add('<?php echo $product_id; ?>');"><?php if($theme_options->get( 'add_to_wishlist_text', $config->get( 'config_language_id' ) ) != '') { echo $theme_options->get( 'add_to_wishlist_text', $config->get( 'config_language_id' ) ); } else { echo 'Add to wishlist'; } ?></a>
 			        	<a onclick="compare.add('<?php echo $product_id; ?>');"><?php if($theme_options->get( 'add_to_compare_text', $config->get( 'config_language_id' ) ) != '') { echo $theme_options->get( 'add_to_compare_text', $config->get( 'config_language_id' ) ); } else { echo 'Add to compare'; } ?></a>
 			        </div>
 			         

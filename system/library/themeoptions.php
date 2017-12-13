@@ -131,7 +131,7 @@ class ThemeOptions {
   		if($result) {
   		     $date_end = false;
   		     $db = $registry->get('db');
-  		     $query = $db->query("SELECT date_end FROM " . DB_PREFIX . "product_special WHERE product_id='" . $product_id . "'");
+  		     $query = $db->query("SELECT date_end FROM " . DB_PREFIX . "product_special WHERE product_id='" . $product_id . "' AND ((date_start = '0000-00-00' OR date_start < NOW()) AND (date_end = '0000-00-00' OR date_end > NOW())) ORDER BY priority ASC, price ASC LIMIT 1");
   		     if ($query->num_rows) {
   		          $date_end = $query->row['date_end'];
   		     }
