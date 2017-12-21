@@ -22,6 +22,16 @@ class ControllerCatalogProduct extends Controller {
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_catalog_product->addProduct($this->request->post);
 
+	$this->load->model('feed/google_merchant_center');
+	if (isset($this->request->get['product_id']) && isset($this->request->post['google_merchant_product_gender']) && isset($this->request->post['google_merchant_product_age_group'])) {
+		if (isset($this->request->post['google_merchant_product_color'])){
+			$this->model_feed_google_merchant_center->saveProduct($this->request->get['product_id'],$this->request->post['google_merchant_product_gender'],$this->request->post['google_merchant_product_age_group'],$this->request->post['google_merchant_product_color']);
+		} else {
+			$this->model_feed_google_merchant_center->saveProduct($this->request->get['product_id'],$this->request->post['google_merchant_product_gender'],$this->request->post['google_merchant_product_age_group'],'');
+		}
+	}
+
+
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$url = '';
@@ -74,6 +84,16 @@ class ControllerCatalogProduct extends Controller {
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
 
+	$this->load->model('feed/google_merchant_center');
+	if (isset($this->request->get['product_id']) && isset($this->request->post['google_merchant_product_gender']) && isset($this->request->post['google_merchant_product_age_group'])) {
+		if (isset($this->request->post['google_merchant_product_color'])){
+			$this->model_feed_google_merchant_center->saveProduct($this->request->get['product_id'],$this->request->post['google_merchant_product_gender'],$this->request->post['google_merchant_product_age_group'],$this->request->post['google_merchant_product_color']);
+		} else {
+			$this->model_feed_google_merchant_center->saveProduct($this->request->get['product_id'],$this->request->post['google_merchant_product_gender'],$this->request->post['google_merchant_product_age_group'],'');
+		}
+	}
+
+
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$url = '';
@@ -117,6 +137,9 @@ class ControllerCatalogProduct extends Controller {
 	}
 
 	public function delete() {
+
+	$this->load->model('feed/google_merchant_center');
+
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -126,6 +149,7 @@ class ControllerCatalogProduct extends Controller {
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $product_id) {
 				$this->model_catalog_product->deleteProduct($product_id);
+$this->model_feed_google_merchant_center->removeProduct($product_id);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -1311,6 +1335,41 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$data['product_layout'] = array();
 		}
+
+
+	$this->load->model('feed/google_merchant_center');
+	$this->language->load('feed/google_merchant_center');
+
+	$data['entry_google_merchant_age_group'] = $this->language->get('entry_google_merchant_age_group');
+	$data['entry_google_merchant_gender'] = $this->language->get('entry_google_merchant_gender');
+	$data['entry_google_merchant_color'] = $this->language->get('entry_google_merchant_color');
+	$data['help_google_merchant_color'] = $this->language->get('help_google_merchant_color');
+
+	$data['tab_taxonomy'] = $this->language->get('tab_taxonomy');
+	$data['google_age_group'] = array('adult','kids','toddler','infant','newborn');
+	$data['google_gender'] = array('unisex','male','female');
+
+	if (isset($this->request->post['google_merchant_center_status'])) {
+		$data['google_merchant_center_status'] = $this->request->post['google_merchant_center_status'];
+	} else {
+		$data['google_merchant_center_status'] = $this->config->get('google_merchant_center_status');
+	}
+
+	if (isset($this->request->post['google_merchant_center_attribute'])) {
+		$data['google_merchant_center_attribute'] = $this->request->post['google_merchant_center_attribute'];
+	} else {
+		$data['google_merchant_center_attribute'] = $this->config->get('google_merchant_center_attribute');
+	}
+
+	$data['google_merchant_product'] = array();
+	$google_taxonomy_product;
+	if (isset($this->request->get['product_id'])) {
+		$google_taxonomy_product = $this->model_feed_google_merchant_center->getProduct($this->request->get['product_id']);
+	}
+	else{
+		$google_taxonomy_product = $this->model_feed_google_merchant_center->getProduct("");
+	}
+	$data['google_merchant_product'] = $google_taxonomy_product;
 
 		$this->load->model('design/layout');
 

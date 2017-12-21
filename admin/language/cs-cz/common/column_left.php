@@ -100,3 +100,4 @@ $_['text_paypal_search']                          = 'Hledat';
 $_['text_complete_status']                        = 'Dokončené objednávky';
 $_['text_processing_status']                      = 'Nedokončené objednávky';
 $_['text_other_status']                           = 'Jiný stav';
+$_['text_stock_update']                           = 'Změna skladu';

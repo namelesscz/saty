@@ -74,7 +74,14 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
-			
+			if ($this->user->hasPermission('access', 'catalog/stock')) {
+				$catalog[] = array(
+					'name'	   => $this->language->get('text_stock_update'),
+					'href'     => $this->url->link('catalog/stock', 'token=' . $this->session->data['token'], true),
+					'children' => array()
+				);
+			}
+
 			// Attributes
 			$attribute = array();
 			
@@ -93,7 +100,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
-			
+
 			if ($attribute) {
 				$catalog[] = array(
 					'name'	   => $this->language->get('text_attribute'),
