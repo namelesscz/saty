@@ -10,6 +10,7 @@ class ControllerCatalogStock extends Controller {
 		$errors      = array();
 		$deltas      = array();
 		$header      = array();
+		$models      = array();
 		$import_file = (defined(DIR_DOWNLOAD)? DIR_DOWNLOAD : getcwd().'/' ).$this->import_file;
 		if (file_exists($import_file)) {
 			$fp = fopen($import_file,'r');
@@ -19,6 +20,8 @@ class ControllerCatalogStock extends Controller {
 					if ($i > 0) {
 						$model = $data[0];
 						if (!$model) { continue; }
+
+						$models[] = $model;
 
 						$local_deltas= array();
 						for ($j=2;$j < (count($data)-1); $j++) {
@@ -44,6 +47,9 @@ class ControllerCatalogStock extends Controller {
 					$i++;
 				}
 				fclose($fp);
+				if (count($models)) {
+					$this->clearOptions($models);
+				}
 			}
 		} else {
 			$errors[] = str_replace('###FILE###', $import_file, $this->language->get('error_stock_file_not_found'));
@@ -79,6 +85,10 @@ class ControllerCatalogStock extends Controller {
 			return $query->row['quantity'];
 		}
 		return 0;
+	}
+
+	private function clearOptions ($models) {
+		$query = $this->db->query('UPDATE '. DB_PREFIX . 'product_option_value SET quantity=0 WHERE option_value_id IN (SELECT option_value_id FROM '. DB_PREFIX . 'option_value_description WHERE language_id=2 AND name LIKE "%kladem") AND product_id NOT IN ( SELECT product_id FROM '. DB_PREFIX . 'product WHERE model IN ("'.implode('","',$models).'") )');
 	}
 
 	private function setQuantityForProduct ($model, $quantity) {
